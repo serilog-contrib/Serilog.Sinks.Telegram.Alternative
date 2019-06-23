@@ -46,6 +46,9 @@ The project can be found on [nuget](https://www.nuget.org/packages/HaemmerElectr
 # Further information
 This sink is basically the same as https://github.com/oxozle/serilog-sinks-telegram but is maintained and provides badging of events.
 
+You need to get a bot API token following https://core.telegram.org/api#bot-api.
+
+
 Change history
 --------------
 
