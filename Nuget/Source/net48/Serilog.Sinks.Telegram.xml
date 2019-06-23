@@ -1,0 +1,247 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Serilog.Sinks.Telegram</name>
+    </assembly>
+    <members>
+        <member name="T:Serilog.LoggerConfigurationTelegramExtensions">
+            <summary>
+            Provides extension methods on <see cref="T:Serilog.Configuration.LoggerSinkConfiguration"/>.
+            </summary>
+        </member>
+        <member name="M:Serilog.LoggerConfigurationTelegramExtensions.Telegram(Serilog.Configuration.LoggerSinkConfiguration,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.TimeSpan},System.IFormatProvider,Serilog.Events.LogEventLevel)">
+            <summary>
+            <see cref="T:Serilog.Configuration.LoggerSinkConfiguration"/> extension that provides configuration chaining.
+            <example>
+                new LoggerConfiguration()
+                    .MinimumLevel.Verbose()
+                    .WriteTo.Telegram("botToken", "chatId")
+                    .CreateLogger();
+            </example>
+            </summary>
+            <param name="loggerSinkConfiguration">Instance of <see cref="T:Serilog.Configuration.LoggerSinkConfiguration"/> object.</param>
+            <param name="botToken">The Telegram bot token.</param>
+            <param name="chatId">The Telegram chat id.</param>
+            <param name="batchSizeLimit">The maximum number of events to post in a single batch; defaults to 1 if
+            not provided i.e. no batching by default.</param>
+            <param name="period">The time to wait between checking for event batches; defaults to 1 sec if not
+            provided.</param>
+            <param name="formatProvider">The format provider used for formatting the message.</param>
+            <param name="restrictedToMinimumLevel"><see cref="T:Serilog.Events.LogEventLevel"/> value that specifies minimum logging
+            level that will be allowed to be logged.</param>
+            <returns>Instance of <see cref="T:Serilog.LoggerConfiguration"/> object.</returns>
+        </member>
+        <member name="M:Serilog.LoggerConfigurationTelegramExtensions.Telegram(Serilog.Configuration.LoggerSinkConfiguration,Serilog.Sinks.Telegram.TelegramSinkOptions,Serilog.Events.LogEventLevel)">
+            <summary>
+            <see cref="T:Serilog.Configuration.LoggerSinkConfiguration"/> extension that provides configuration chaining.
+            </summary>
+            <param name="loggerSinkConfiguration">Instance of <see cref="T:Serilog.Configuration.LoggerSinkConfiguration"/> object.</param>
+            <param name="telegramSinkOptions">The Telegram sink options object.</param>
+            <param name="restrictedToMinimumLevel"><see cref="T:Serilog.Events.LogEventLevel"/> value that specifies minimum logging
+            level that will be allowed to be logged.</param>
+            <returns>Instance of <see cref="T:Serilog.LoggerConfiguration"/> object.</returns>
+        </member>
+        <member name="T:Serilog.Sinks.Telegram.ExtendedLogEvent">
+            <summary>
+            Added a new class to store the first and last occurance timestamps.
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.Telegram.ExtendedLogEvent.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Serilog.Sinks.Telegram.ExtendedLogEvent"/> class.
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.Telegram.ExtendedLogEvent.#ctor(System.DateTime,System.DateTime,Serilog.Events.LogEvent)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Serilog.Sinks.Telegram.ExtendedLogEvent"/> class.
+            </summary>
+            <param name="firstOccurance">The first occurance.</param>
+            <param name="lastOccurance">The last occurance.</param>
+            <param name="logEvent">The log event.</param>
+        </member>
+        <member name="P:Serilog.Sinks.Telegram.ExtendedLogEvent.LogEvent">
+            <summary>
+            Gets or sets the log event.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.Telegram.ExtendedLogEvent.FirstOccurance">
+            <summary>
+            Gets or sets the first occurance.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.Telegram.ExtendedLogEvent.LastOccurance">
+            <summary>
+            Gets or sets the last occurance.
+            </summary>
+        </member>
+        <member name="T:Serilog.Sinks.Telegram.TelegramClient">
+            <summary>
+            The client to post to Telegram.
+            </summary>
+        </member>
+        <member name="F:Serilog.Sinks.Telegram.TelegramClient._apiUrl">
+            <summary>
+            The API URL.
+            </summary>
+        </member>
+        <member name="F:Serilog.Sinks.Telegram.TelegramClient._httpClient">
+            <summary>
+            The HTTP client.
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.Telegram.TelegramClient.#ctor(System.String,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Serilog.Sinks.Telegram.TelegramClient"/> class.
+            </summary>
+            <param name="botToken">The Telegram bot token.</param>
+            <param name="timeoutSeconds">The timeout seconds.</param>
+            <exception cref="T:System.ArgumentException">Thrown if the bot token is null or empty.</exception>
+        </member>
+        <member name="M:Serilog.Sinks.Telegram.TelegramClient.PostMessageAsync(Serilog.Sinks.Telegram.TelegramMessage,System.String)">
+            <summary>
+            Posts the <see cref="T:Serilog.Sinks.Telegram.TelegramMessage"/>asynchronous.
+            </summary>
+            <param name="message">The message.</param>
+            <param name="chatId">The chat identifier.</param>
+            <returns>A <see cref="T:System.Net.Http.HttpResponseMessage"/>.</returns>
+        </member>
+        <member name="T:Serilog.Sinks.Telegram.TelegramMessage">
+            <summary>
+            The telegram message.
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.Telegram.TelegramMessage.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Serilog.Sinks.Telegram.TelegramMessage"/> class.
+            </summary>
+            <param name="text">The text.</param>
+        </member>
+        <member name="P:Serilog.Sinks.Telegram.TelegramMessage.Text">
+            <summary>
+            Gets the text.
+            </summary>
+        </member>
+        <member name="T:Serilog.Sinks.Telegram.TelegramSink">
+            <summary>
+            Implements <see cref="T:Serilog.Sinks.PeriodicBatching.PeriodicBatchingSink"/> and provides means needed for sending Serilog log events to Telegram.
+            </summary>
+        </member>
+        <member name="F:Serilog.Sinks.Telegram.TelegramSink.Client">
+            <summary>
+            The client.
+            </summary>
+        </member>
+        <member name="F:Serilog.Sinks.Telegram.TelegramSink._options">
+            <summary>
+            The options.
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.Telegram.TelegramSink.#ctor(Serilog.Sinks.Telegram.TelegramSinkOptions)">
+            <summary>
+            Initializes new instance of <see cref="T:Serilog.Sinks.Telegram.TelegramSink"/>.
+            </summary>
+            <param name="options">Telegram options object.</param>
+        </member>
+        <member name="M:Serilog.Sinks.Telegram.TelegramSink.EmitBatchAsync(System.Collections.Generic.IEnumerable{Serilog.Events.LogEvent})">
+            <inheritdoc cref="T:Serilog.Sinks.PeriodicBatching.PeriodicBatchingSink" />
+            <summary>
+            Emit a batch of log events, running asynchronously.
+            </summary>
+            <param name="events">The events to emit.</param>
+            <returns></returns>
+            <exception cref="T:Serilog.Debugging.LoggingFailedException">Received failed result {result.StatusCode} when posting events to Telegram</exception>
+            <remarks>
+            Override either <see cref="M:Serilog.Sinks.PeriodicBatching.PeriodicBatchingSink.EmitBatch(System.Collections.Generic.IEnumerable{Serilog.Events.LogEvent})" /> or <see cref="M:Serilog.Sinks.PeriodicBatching.PeriodicBatchingSink.EmitBatchAsync(System.Collections.Generic.IEnumerable{Serilog.Events.LogEvent})" />,
+            not both. Overriding EmitBatch() is preferred.
+            </remarks>
+        </member>
+        <member name="M:Serilog.Sinks.Telegram.TelegramSink.Dispose(System.Boolean)">
+            <summary>
+            Free resources held by the sink.
+            </summary>
+            <param name="disposing">If true, called because the object is being disposed; if false,
+            the object is being disposed from the finalizer.</param>
+            <inheritdoc cref="T:Serilog.Sinks.PeriodicBatching.PeriodicBatchingSink"/>
+        </member>
+        <member name="M:Serilog.Sinks.Telegram.TelegramSink.RenderMessage(Serilog.Sinks.Telegram.ExtendedLogEvent)">
+            <summary>
+            Renders the message.
+            </summary>
+            <param name="extLogEvent">The log event.</param>
+            <returns>The rendered message.</returns>
+        </member>
+        <member name="M:Serilog.Sinks.Telegram.TelegramSink.GetEmoji(Serilog.Events.LogEvent)">
+            <summary>
+            Gets the emoji.
+            </summary>
+            <param name="log">The log.</param>
+            <returns>The emoji as <see cref="T:System.String"/>.</returns>
+        </member>
+        <member name="M:Serilog.Sinks.Telegram.TelegramSink.SendMessage(System.String,System.String,Serilog.Sinks.Telegram.TelegramMessage)">
+            <summary>
+            Sends the message.
+            </summary>
+            <param name="token">The token.</param>
+            <param name="chatId">The chat identifier.</param>
+            <param name="message">The message.</param>
+        </member>
+        <member name="T:Serilog.Sinks.Telegram.TelegramSinkOptions">
+            <summary>
+            Container for all Telegram sink configurations.
+            </summary>
+        </member>
+        <member name="F:Serilog.Sinks.Telegram.TelegramSinkOptions.DefaultPeriod">
+            <summary>
+            The default period.
+            </summary>
+        </member>
+        <member name="F:Serilog.Sinks.Telegram.TelegramSinkOptions.DefaultBatchSizeLimit">
+            <summary>
+            The default batch size limit.
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.Telegram.TelegramSinkOptions.#ctor(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.TimeSpan},System.IFormatProvider,Serilog.Events.LogEventLevel)">
+            <summary>
+            Create an instance of the Telegram options container.
+            </summary>
+            <param name="botToken">The Telegram bot token.</param>
+            <param name="chatId">The Telegram chat id.</param>
+            <param name="batchSizeLimit">The maximum number of events to post in a single batch; defaults to 1 if
+            not provided i.e. no batching by default.</param>
+            <param name="period">The time to wait between checking for event batches; defaults to 1 sec if not
+            provided.</param>
+            <param name="formatProvider">The format provider used for formatting the message.</param>
+            <param name="minimumLogEventLevel">The minimum log event level to use.</param>
+        </member>
+        <member name="P:Serilog.Sinks.Telegram.TelegramSinkOptions.BotToken">
+            <summary>
+            The Telegram bot token.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.Telegram.TelegramSinkOptions.ChatId">
+            <summary>
+            The Telegram chat id.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.Telegram.TelegramSinkOptions.BatchSizeLimit">
+            <summary>
+            The maximum number of events to post in a single batch.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.Telegram.TelegramSinkOptions.Period">
+            <summary>
+            The time to wait between checking for event batches.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.Telegram.TelegramSinkOptions.FormatProvider">
+            <summary>
+            The format provider used for formatting the message.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.Telegram.TelegramSinkOptions.MinimumLogEventLevel">
+            <summary>
+            Gets the minimum log event level.
+            </summary>
+        </member>
+    </members>
+</doc>
