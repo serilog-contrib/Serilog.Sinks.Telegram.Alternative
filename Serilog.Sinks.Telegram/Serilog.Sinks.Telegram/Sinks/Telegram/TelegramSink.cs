@@ -113,7 +113,15 @@ namespace Serilog.Sinks.Telegram
         {
             var sb = new StringBuilder();
             sb.AppendLine(value: $"{GetEmoji(log: extLogEvent.LogEvent)} {extLogEvent.LogEvent.RenderMessage()}");
-            sb.AppendLine(value: $"The message occured first on {extLogEvent.FirstOccurance:dd.MM.yyyy HH:mm:sszzz} and last on {extLogEvent.LastOccurance:dd.MM.yyyy HH:mm:sszzz}");
+
+            if (extLogEvent.FirstOccurance != extLogEvent.LastOccurance)
+            {
+                sb.AppendLine(value: $"The message occured first on {extLogEvent.FirstOccurance:dd.MM.yyyy HH:mm:sszzz} and last on {extLogEvent.LastOccurance:dd.MM.yyyy HH:mm:sszzz}");
+            }
+            else
+            {
+                sb.AppendLine(value: $"The message occured on {extLogEvent.FirstOccurance:dd.MM.yyyy HH:mm:sszzz}");
+            }
 
             if (extLogEvent.LogEvent.Exception != null)
             {

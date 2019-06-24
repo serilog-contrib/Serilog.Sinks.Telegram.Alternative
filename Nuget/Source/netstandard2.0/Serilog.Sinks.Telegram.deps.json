@@ -7,7 +7,7 @@
   "targets": {
     ".NETStandard,Version=v2.0": {},
     ".NETStandard,Version=v2.0/": {
-      "Serilog.Sinks.Telegram/1.0.0": {
+      "Serilog.Sinks.Telegram/1.0.0.1": {
         "dependencies": {
           "NETStandard.Library": "2.0.3",
           "Newtonsoft.Json": "12.0.2",
@@ -522,7 +522,7 @@
     }
   },
   "libraries": {
-    "Serilog.Sinks.Telegram/1.0.0": {
+    "Serilog.Sinks.Telegram/1.0.0.1": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

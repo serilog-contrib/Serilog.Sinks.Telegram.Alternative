@@ -10,11 +10,11 @@
     <PackageProjectUrl>https://www.nuget.org/packages/HaemmerElectronics.SeppPenner.Serilog.Sinks.Telegram/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/SeppPenner/Serilog.Sinks.Telegram</RepositoryUrl>
     <PackageLicenseUrl>https://github.com/SeppPenner/Serilog.Sinks.Telegram/blob/master/License.txt</PackageLicenseUrl>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <FileVersion>1.0.0.0</FileVersion>
-    <Version>1.0.0</Version>
+    <AssemblyVersion>1.0.0.1</AssemblyVersion>
+    <FileVersion>1.0.0.1</FileVersion>
+    <Version>1.0.0.1</Version>
     <PackageTags>c# csharp serilog telegram sink logging log</PackageTags>
-    <PackageReleaseNotes>Initial commit.</PackageReleaseNotes>
+    <PackageReleaseNotes>Added option to only show from and to dates when the dates are not equal.</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 

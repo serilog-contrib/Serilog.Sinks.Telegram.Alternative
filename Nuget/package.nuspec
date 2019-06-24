@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>HaemmerElectronics.SeppPenner.Serilog.Sinks.Telegram</id>
-    <version>1.0.0.0</version>
+    <version>1.0.0.1</version>
     <authors>SeppPenner</authors>
     <owners>SeppPenner</owners>
     <projectUrl>https://github.com/SeppPenner/Serilog.Sinks.Telegram/</projectUrl>
@@ -14,6 +14,7 @@
 		The assembly was written and tested in .Net Framework 4.8 and .Net Standard 2.0.
 	</description>
     <releaseNotes>
+	    Version 1.0.0.1 (2019-06-24): Added option to only show from and to dates when the dates are not equal.
 	    Version 1.0.0.0 (2019-06-23): 1.0 release.
 	</releaseNotes>
     <copyright>Copyright © Hämmer Electronics</copyright>
