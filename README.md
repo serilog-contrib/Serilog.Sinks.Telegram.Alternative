@@ -22,6 +22,9 @@ The assembly was written and tested in .Net Framework 4.8 and .Net Standard 2.0.
 * NetFramework 4.7.2
 * NetFramework 4.8
 * NetStandard 2.0
+* NetStandard 2.1
+* NetCore 2.2
+* NetCore 3.0
 
 ## Basic usage:
 
@@ -53,5 +56,6 @@ You need to get a bot API token following https://core.telegram.org/api#bot-api.
 Change history
 --------------
 
+* **Version 1.0.1.0 (2019-11-08)** : Updated nuget packages.
 * **Version 1.0.0.1 (2019-06-24)** : Added option to only show from and to dates when the dates are not equal.
 * **Version 1.0.0.0 (2019-06-23)** : 1.0 release.
