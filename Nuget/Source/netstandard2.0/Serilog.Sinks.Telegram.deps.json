@@ -7,20 +7,20 @@
   "targets": {
     ".NETStandard,Version=v2.0": {},
     ".NETStandard,Version=v2.0/": {
-      "Serilog.Sinks.Telegram/1.0.1": {
+      "Serilog.Sinks.Telegram/1.0.2": {
         "dependencies": {
-          "GitVersionTask": "5.1.2",
+          "GitVersionTask": "5.3.2",
           "NETStandard.Library": "2.0.3",
-          "Newtonsoft.Json": "12.0.2",
+          "Newtonsoft.Json": "12.0.3",
           "Serilog": "2.9.0",
-          "Serilog.Sinks.PeriodicBatching": "2.2.0",
+          "Serilog.Sinks.PeriodicBatching": "2.3.0",
           "System.Net.Http": "4.3.4"
         },
         "runtime": {
           "Serilog.Sinks.Telegram.dll": {}
         }
       },
-      "GitVersionTask/5.1.2": {},
+      "GitVersionTask/5.3.2": {},
       "Microsoft.NETCore.Platforms/1.1.1": {},
       "Microsoft.NETCore.Targets/1.1.0": {},
       "NETStandard.Library/2.0.3": {
@@ -28,11 +28,11 @@
           "Microsoft.NETCore.Platforms": "1.1.1"
         }
       },
-      "Newtonsoft.Json/12.0.2": {
+      "Newtonsoft.Json/12.0.3": {
         "runtime": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "assemblyVersion": "12.0.0.0",
-            "fileVersion": "12.0.2.23222"
+            "fileVersion": "12.0.3.23909"
           }
         }
       },
@@ -86,7 +86,7 @@
           }
         }
       },
-      "Serilog.Sinks.PeriodicBatching/2.2.0": {
+      "Serilog.Sinks.PeriodicBatching/2.3.0": {
         "dependencies": {
           "Serilog": "2.9.0",
           "System.Collections.Concurrent": "4.3.0",
@@ -95,7 +95,7 @@
         "runtime": {
           "lib/netstandard2.0/Serilog.Sinks.PeriodicBatching.dll": {
             "assemblyVersion": "2.0.0.0",
-            "fileVersion": "2.2.0.0"
+            "fileVersion": "2.3.0.0"
           }
         }
       },
@@ -505,17 +505,17 @@
     }
   },
   "libraries": {
-    "Serilog.Sinks.Telegram/1.0.1": {
+    "Serilog.Sinks.Telegram/1.0.2": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "GitVersionTask/5.1.2": {
+    "GitVersionTask/5.3.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-K5iXhB5N+b5DO+jcLgvo5CsQ2UcbAfpXP7Y6tUox0jw/RtgNEH2p5RvPlKS+OSsEVEAY0JV6BUXrtKmQKbp9rA==",
-      "path": "gitversiontask/5.1.2",
-      "hashPath": "gitversiontask.5.1.2.nupkg.sha512"
+      "sha512": "sha512-ead/9JWeNX5OHQ9tRcj5GtIXk8n18/lxkZcm8JLVgXucLD5EDSF0qncBTJowbS35p4bpslJ1Z41H9EPLWRjLNw==",
+      "path": "gitversiontask/5.3.2",
+      "hashPath": "gitversiontask.5.3.2.nupkg.sha512"
     },
     "Microsoft.NETCore.Platforms/1.1.1": {
       "type": "package",
@@ -538,12 +538,12 @@
       "path": "netstandard.library/2.0.3",
       "hashPath": "netstandard.library.2.0.3.nupkg.sha512"
     },
-    "Newtonsoft.Json/12.0.2": {
+    "Newtonsoft.Json/12.0.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-rTK0s2EKlfHsQsH6Yx2smvcTCeyoDNgCW7FEYyV01drPlh2T243PR2DiDXqtC5N4GDm4Ma/lkxfW5a/4793vbA==",
-      "path": "newtonsoft.json/12.0.2",
-      "hashPath": "newtonsoft.json.12.0.2.nupkg.sha512"
+      "sha512": "sha512-6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg==",
+      "path": "newtonsoft.json/12.0.3",
+      "hashPath": "newtonsoft.json.12.0.3.nupkg.sha512"
     },
     "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {
       "type": "package",
@@ -657,12 +657,12 @@
       "path": "serilog/2.9.0",
       "hashPath": "serilog.2.9.0.nupkg.sha512"
     },
-    "Serilog.Sinks.PeriodicBatching/2.2.0": {
+    "Serilog.Sinks.PeriodicBatching/2.3.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-aL7gNYtyd0Xu7e6eqtn16ZSkS1IQI5v+EEcR10MIpqtIC6/c9aQ09/rYC84Yhh2VV1rIbPyWSv3/jv6GTjlnLg==",
-      "path": "serilog.sinks.periodicbatching/2.2.0",
-      "hashPath": "serilog.sinks.periodicbatching.2.2.0.nupkg.sha512"
+      "sha512": "sha512-UYKSjTMTlUY9T3OgzMmLDLD+z0qPfgvq/RvG0rKfyz+O+Zrjw3X/Xpv14J4WMcGVsOjUaR+k8n2MdmqVpJtI6A==",
+      "path": "serilog.sinks.periodicbatching/2.3.0",
+      "hashPath": "serilog.sinks.periodicbatching.2.3.0.nupkg.sha512"
     },
     "System.Collections/4.3.0": {
       "type": "package",
