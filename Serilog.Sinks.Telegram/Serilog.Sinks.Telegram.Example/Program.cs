@@ -1,7 +1,15 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Program.cs" company="Hämmer Electronics">
+// The project is licensed under the MIT license.
+// </copyright>
+// <summary>
+//   A class to test the <see cref="TelegramSink" />.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Serilog.Sinks.Telegram.Example
 {
+    using System;
     using System.Threading;
 
     /// <summary>
@@ -17,7 +25,7 @@ namespace Serilog.Sinks.Telegram.Example
         {
             Console.WriteLine("Testing Serilog.Sinks.Telegram");
             var log = new LoggerConfiguration()
-                .WriteTo.Telegram("123151488:AAgshf4r373rffsdfOfsdzgfwezfzqwfr7zewE", "12345", batchSizeLimit: 3)
+                .WriteTo.Telegram("123151488:AAgshf4r373rffsdfOfsdzgfwezfzqwfr7zewE", "12345", 3)
                 .CreateLogger();
 
             TestDifferentExceptions(log);
@@ -30,7 +38,7 @@ namespace Serilog.Sinks.Telegram.Example
         /// Tests the <see cref="TelegramSink"/> with different exceptions.
         /// </summary>
         /// <param name="log">The log.</param>
-        private static void TestDifferentExceptions(Core.Logger log)
+        private static void TestDifferentExceptions(ILogger log)
         {
             var exception1 = new Exception("test1");
             log.Error(exception1, exception1.Message);
@@ -44,7 +52,7 @@ namespace Serilog.Sinks.Telegram.Example
         /// Tests the <see cref="TelegramSink"/> with the same exceptions.
         /// </summary>
         /// <param name="log">The log.</param>
-        private static void TestSameExceptions(Core.Logger log)
+        private static void TestSameExceptions(ILogger log)
         {
             var exception1 = new Exception("test1");
             log.Error(exception1, exception1.Message);

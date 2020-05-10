@@ -1,11 +1,20 @@
-﻿
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ExtendedLogEvent.cs" company="Hämmer Electronics">
+// The project is licensed under the MIT license.
+// </copyright>
+// <summary>
+//   Added a new class to store the first and last occurrence timestamps.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
 namespace Serilog.Sinks.Telegram
 {
-    using Serilog.Events;
     using System;
 
+    using Serilog.Events;
+
     /// <summary>
-    /// Added a new class to store the first and last occurance timestamps.
+    /// Added a new class to store the first and last occurrence timestamps.
     /// </summary>
     public class ExtendedLogEvent
     {
@@ -19,14 +28,15 @@ namespace Serilog.Sinks.Telegram
         /// <summary>
         /// Initializes a new instance of the <see cref="ExtendedLogEvent"/> class.
         /// </summary>
-        /// <param name="firstOccurance">The first occurance.</param>
-        /// <param name="lastOccurance">The last occurance.</param>
+        /// <param name="firstOccurrence">The first occurrence.</param>
+        /// <param name="lastOccurrence">The last occurrence.</param>
         /// <param name="logEvent">The log event.</param>
-        public ExtendedLogEvent(DateTime firstOccurance, DateTime lastOccurance, LogEvent logEvent)
+        // ReSharper disable once UnusedMember.Global
+        public ExtendedLogEvent(DateTime firstOccurrence, DateTime lastOccurrence, LogEvent logEvent)
         {
-            FirstOccurance = firstOccurance;
-            LastOccurance = lastOccurance;
-            LogEvent = logEvent;
+            this.FirstOccurrence = firstOccurrence;
+            this.LastOccurrence = lastOccurrence;
+            this.LogEvent = logEvent;
         }
 
         /// <summary>
@@ -35,13 +45,13 @@ namespace Serilog.Sinks.Telegram
         public LogEvent LogEvent { get; set; }
 
         /// <summary>
-        /// Gets or sets the first occurance.
+        /// Gets or sets the first occurrence.
         /// </summary>
-        public DateTimeOffset FirstOccurance { get; set; }
+        public DateTimeOffset FirstOccurrence { get; set; }
 
         /// <summary>
-        /// Gets or sets the last occurance.
+        /// Gets or sets the last occurrence.
         /// </summary>
-        public DateTimeOffset LastOccurance { get; set; }
+        public DateTimeOffset LastOccurrence { get; set; }
     }
 }

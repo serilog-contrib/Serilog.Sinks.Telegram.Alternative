@@ -1,10 +1,20 @@
-﻿using Serilog.Configuration;
-using Serilog.Events;
-using Serilog.Sinks.Telegram;
-using System;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="LoggerConfigurationTelegramExtensions.cs" company="Hämmer Electronics">
+// The project is licensed under the MIT license.
+// </copyright>
+// <summary>
+//   Provides extension methods on <see cref="LoggerSinkConfiguration" />.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Serilog
 {
+    using System;
+
+    using Serilog.Configuration;
+    using Serilog.Events;
+    using Serilog.Sinks.Telegram;
+
     /// <summary>
     /// Provides extension methods on <see cref="LoggerSinkConfiguration"/>.
     /// </summary>
@@ -39,9 +49,7 @@ namespace Serilog
             IFormatProvider formatProvider = null,
             LogEventLevel restrictedToMinimumLevel = LevelAlias.Minimum)
         {
-            var telegramSinkOptions = new TelegramSinkOptions(botToken, chatId, batchSizeLimit, period,
-                formatProvider);
-
+            var telegramSinkOptions = new TelegramSinkOptions(botToken, chatId, batchSizeLimit, period, formatProvider);
             return loggerSinkConfiguration.Telegram(telegramSinkOptions, restrictedToMinimumLevel);
         }
 

@@ -1,18 +1,30 @@
-﻿using Serilog.Debugging;
-using Serilog.Events;
-using Serilog.Sinks.PeriodicBatching;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System;
-using System.Text;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="TelegramSink.cs" company="Hämmer Electronics">
+// The project is licensed under the MIT license.
+// </copyright>
+// <summary>
+//   Implements <see cref="PeriodicBatchingSink" /> and provides means needed for sending Serilog log events to Telegram.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Serilog.Sinks.Telegram
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
+    using System.Net.Http;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    using Serilog.Debugging;
+    using Serilog.Events;
+    using Serilog.Sinks.PeriodicBatching;
+
     /// <summary>
     /// Implements <see cref="PeriodicBatchingSink"/> and provides means needed for sending Serilog log events to Telegram.
     /// </summary>
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
     public class TelegramSink : PeriodicBatchingSink
     {
         /// <summary>
@@ -23,16 +35,15 @@ namespace Serilog.Sinks.Telegram
         /// <summary>
         /// The options.
         /// </summary>
-        private readonly TelegramSinkOptions _options;
+        private readonly TelegramSinkOptions options;
 
         /// <summary>
-        /// Initializes new instance of <see cref="TelegramSink"/>.
+        /// Initializes a new instance of the <see cref="TelegramSink"/> class.
         /// </summary>
         /// <param name="options">Telegram options object.</param>
-        public TelegramSink(TelegramSinkOptions options)
-                : base(options.BatchSizeLimit, options.Period)
+        public TelegramSink(TelegramSinkOptions options) : base(options.BatchSizeLimit, options.Period)
         {
-            _options = options;
+            this.options = options;
         }
 
         /// <inheritdoc cref="PeriodicBatchingSink" />
@@ -52,7 +63,7 @@ namespace Serilog.Sinks.Telegram
 
             foreach (var logEvent in events)
             {
-                if (logEvent.Level < _options.MinimumLogEventLevel)
+                if (logEvent.Level < this.options.MinimumLogEventLevel)
                 {
                     continue;
                 }
@@ -65,31 +76,32 @@ namespace Serilog.Sinks.Telegram
                         new ExtendedLogEvent
                             {
                                 LogEvent = logEvent,
-                                FirstOccurance = logEvent.Timestamp,
-                                LastOccurance = logEvent.Timestamp
+                                FirstOccurrence = logEvent.Timestamp,
+                                LastOccurrence = logEvent.Timestamp
                             });
                 }
                 else
                 {
-                    if (foundSameLogEvent.FirstOccurance > logEvent.Timestamp)
+                    if (foundSameLogEvent.FirstOccurrence > logEvent.Timestamp)
                     {
-                        foundSameLogEvent.FirstOccurance = logEvent.Timestamp;
+                        foundSameLogEvent.FirstOccurrence = logEvent.Timestamp;
                     }
-                    else if (foundSameLogEvent.LastOccurance < logEvent.Timestamp)
+                    else if (foundSameLogEvent.LastOccurrence < logEvent.Timestamp)
                     {
-                        foundSameLogEvent.LastOccurance = logEvent.Timestamp;
+                        foundSameLogEvent.LastOccurrence = logEvent.Timestamp;
                     }
                 }
             }
 
-            if (this._options.SendBatchesAsSingleMessages)
+            if (this.options.SendBatchesAsSingleMessages)
             {
+                // ReSharper disable once ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
                 foreach (var extendedLogEvent in messagesToSend)
                 {
-                    var message = this._options.FormatProvider != null
-                                      ? extendedLogEvent.LogEvent.RenderMessage(formatProvider: this._options.FormatProvider)
+                    var message = this.options.FormatProvider != null
+                                      ? extendedLogEvent.LogEvent.RenderMessage(this.options.FormatProvider)
                                       : RenderMessage(extendedLogEvent);
-                    await this.SendMessage(this._options.BotToken, this._options.ChatId, message);
+                    await SendMessage(this.options.BotToken, this.options.ChatId, message);
                 }
             }
             else
@@ -97,10 +109,11 @@ namespace Serilog.Sinks.Telegram
                 var sb = new StringBuilder();
                 var count = 0;
 
+                // ReSharper disable once ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
                 foreach (var extendedLogEvent in messagesToSend)
                 {
-                    var message = this._options.FormatProvider != null
-                                      ? extendedLogEvent.LogEvent.RenderMessage(formatProvider: this._options.FormatProvider)
+                    var message = this.options.FormatProvider != null
+                                      ? extendedLogEvent.LogEvent.RenderMessage(this.options.FormatProvider)
                                       : RenderMessage(extendedLogEvent);
 
                     if (count == messagesToSend.Count)
@@ -117,7 +130,7 @@ namespace Serilog.Sinks.Telegram
                 }
 
                 var messageToSend = sb.ToString();
-                await this.SendMessage(this._options.BotToken, this._options.ChatId, messageToSend);
+                await SendMessage(this.options.BotToken, this.options.ChatId, messageToSend);
             }
         }
 
@@ -138,27 +151,25 @@ namespace Serilog.Sinks.Telegram
         /// </summary>
         /// <param name="extLogEvent">The log event.</param>
         /// <returns>The rendered message.</returns>
-        protected static string RenderMessage(ExtendedLogEvent extLogEvent)
+        private static string RenderMessage(ExtendedLogEvent extLogEvent)
         {
             var sb = new StringBuilder();
-            sb.AppendLine(value: $"{GetEmoji(log: extLogEvent.LogEvent)} {extLogEvent.LogEvent.RenderMessage()}");
+            sb.AppendLine($"{GetEmoji(extLogEvent.LogEvent)} {extLogEvent.LogEvent.RenderMessage()}");
 
-            if (extLogEvent.FirstOccurance != extLogEvent.LastOccurance)
+            sb.AppendLine(
+                extLogEvent.FirstOccurrence != extLogEvent.LastOccurrence
+                    ? $"The message occured first on {extLogEvent.FirstOccurrence:dd.MM.yyyy HH:mm:sszzz} and last on {extLogEvent.LastOccurrence:dd.MM.yyyy HH:mm:sszzz}"
+                    : $"The message occured on {extLogEvent.FirstOccurrence:dd.MM.yyyy HH:mm:sszzz}");
+
+            if (extLogEvent.LogEvent.Exception == null)
             {
-                sb.AppendLine(value: $"The message occured first on {extLogEvent.FirstOccurance:dd.MM.yyyy HH:mm:sszzz} and last on {extLogEvent.LastOccurance:dd.MM.yyyy HH:mm:sszzz}");
-            }
-            else
-            {
-                sb.AppendLine(value: $"The message occured on {extLogEvent.FirstOccurance:dd.MM.yyyy HH:mm:sszzz}");
+                return sb.ToString();
             }
 
-            if (extLogEvent.LogEvent.Exception != null)
-            {
-                sb.AppendLine(value: $"\n*{extLogEvent.LogEvent.Exception.Message}*\n");
-                sb.AppendLine(value: $"Message: `{extLogEvent.LogEvent.Exception.Message}`");
-                sb.AppendLine(value: $"Type: `{extLogEvent.LogEvent.Exception.GetType().Name}`\n");
-                sb.AppendLine(value: $"Stack Trace\n```{extLogEvent.LogEvent.Exception}```");
-            }
+            sb.AppendLine($"\n*{extLogEvent.LogEvent.Exception.Message}*\n");
+            sb.AppendLine($"Message: `{extLogEvent.LogEvent.Exception.Message}`");
+            sb.AppendLine($"Type: `{extLogEvent.LogEvent.Exception.GetType().Name}`\n");
+            sb.AppendLine($"Stack Trace\n```{extLogEvent.LogEvent.Exception}```");
 
             return sb.ToString();
         }
@@ -185,7 +196,7 @@ namespace Serilog.Sinks.Telegram
                 case LogEventLevel.Warning:
                     return "⚠";
                 default:
-                    return "";
+                    return string.Empty;
             }
         }
 
@@ -195,10 +206,11 @@ namespace Serilog.Sinks.Telegram
         /// <param name="token">The token.</param>
         /// <param name="chatId">The chat identifier.</param>
         /// <param name="message">The message.</param>
-        protected async Task SendMessage(string token, string chatId, string message)
+        /// <returns>A <see cref="Task"/> representing any asynchronous operation.</returns>
+        private static async Task SendMessage(string token, string chatId, string message)
         {
             SelfLog.WriteLine($"Trying to send message to chatId '{chatId}': '{message}'.");
-            var client = new TelegramClient(botToken: token, timeoutSeconds: 5);
+            var client = new TelegramClient(token, 5);
             var result = await client.PostMessageAsync(message, chatId);
 
             if (result != null)
