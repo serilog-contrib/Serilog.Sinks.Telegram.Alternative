@@ -5,12 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System;
+using System.Text;
 
 namespace Serilog.Sinks.Telegram
 {
-    using System;
-    using System.Text;
-
     /// <summary>
     /// Implements <see cref="PeriodicBatchingSink"/> and provides means needed for sending Serilog log events to Telegram.
     /// </summary>
@@ -83,12 +82,42 @@ namespace Serilog.Sinks.Telegram
                 }
             }
 
-            foreach (var extendedLogEvent in messagesToSend)
+            if (this._options.SendBatchesAsSingleMessages)
             {
-                var message = this._options.FormatProvider != null
-                                  ? new TelegramMessage(extendedLogEvent.LogEvent.RenderMessage(formatProvider: this._options.FormatProvider))
-                                  : RenderMessage(extendedLogEvent);
-                await this.SendMessage(this._options.BotToken, this._options.ChatId, message);
+                foreach (var extendedLogEvent in messagesToSend)
+                {
+                    var message = this._options.FormatProvider != null
+                                      ? extendedLogEvent.LogEvent.RenderMessage(formatProvider: this._options.FormatProvider)
+                                      : RenderMessage(extendedLogEvent);
+                    await this.SendMessage(this._options.BotToken, this._options.ChatId, message);
+                }
+            }
+            else
+            {
+                var sb = new StringBuilder();
+                var count = 0;
+
+                foreach (var extendedLogEvent in messagesToSend)
+                {
+                    var message = this._options.FormatProvider != null
+                                      ? extendedLogEvent.LogEvent.RenderMessage(formatProvider: this._options.FormatProvider)
+                                      : RenderMessage(extendedLogEvent);
+
+                    if (count == messagesToSend.Count)
+                    {
+                        sb.AppendLine(message);
+                        sb.AppendLine(Environment.NewLine);
+                    }
+                    else
+                    {
+                        sb.AppendLine(message);
+                    }
+
+                    count++;
+                }
+
+                var messageToSend = sb.ToString();
+                await this.SendMessage(this._options.BotToken, this._options.ChatId, messageToSend);
             }
         }
 
@@ -109,7 +138,7 @@ namespace Serilog.Sinks.Telegram
         /// </summary>
         /// <param name="extLogEvent">The log event.</param>
         /// <returns>The rendered message.</returns>
-        protected static TelegramMessage RenderMessage(ExtendedLogEvent extLogEvent)
+        protected static string RenderMessage(ExtendedLogEvent extLogEvent)
         {
             var sb = new StringBuilder();
             sb.AppendLine(value: $"{GetEmoji(log: extLogEvent.LogEvent)} {extLogEvent.LogEvent.RenderMessage()}");
@@ -130,7 +159,8 @@ namespace Serilog.Sinks.Telegram
                 sb.AppendLine(value: $"Type: `{extLogEvent.LogEvent.Exception.GetType().Name}`\n");
                 sb.AppendLine(value: $"Stack Trace\n```{extLogEvent.LogEvent.Exception}```");
             }
-            return new TelegramMessage(text: sb.ToString());
+
+            return sb.ToString();
         }
 
         /// <summary>
@@ -165,7 +195,7 @@ namespace Serilog.Sinks.Telegram
         /// <param name="token">The token.</param>
         /// <param name="chatId">The chat identifier.</param>
         /// <param name="message">The message.</param>
-        protected async Task SendMessage(string token, string chatId, TelegramMessage message)
+        protected async Task SendMessage(string token, string chatId, string message)
         {
             SelfLog.WriteLine($"Trying to send message to chatId '{chatId}': '{message}'.");
             var client = new TelegramClient(botToken: token, timeoutSeconds: 5);

@@ -39,14 +39,14 @@
         }
 
         /// <summary>
-        /// Posts the <see cref="TelegramMessage"/>asynchronous.
+        /// Posts the message asynchronous.
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="chatId">The chat identifier.</param>
         /// <returns>A <see cref="HttpResponseMessage"/>.</returns>
-        public async Task<HttpResponseMessage> PostMessageAsync(TelegramMessage message, string chatId)
+        public async Task<HttpResponseMessage> PostMessageAsync(string message, string chatId)
         {
-            var payload = new { chat_id = chatId, text = message.Text, parse_mode = "markdown" };
+            var payload = new { chat_id = chatId, text = message, parse_mode = "markdown" };
             var json = JsonConvert.SerializeObject(value: payload);
             var response = await _httpClient.PostAsync(
                                requestUri: _apiUrl,

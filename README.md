@@ -15,7 +15,6 @@ The assembly was written and tested in .Net Framework 4.8 and .Net Standard 2.0.
 [![Gitter](https://badges.gitter.im/Serilog-Sinks-Telegram/community.svg)](https://gitter.im/Serilog-Sinks-Telegram/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 ## Available for
-* NetFramework 4.5
 * NetFramework 4.6
 * NetFramework 4.6.2
 * NetFramework 4.7
@@ -23,8 +22,13 @@ The assembly was written and tested in .Net Framework 4.8 and .Net Standard 2.0.
 * NetFramework 4.8
 * NetStandard 2.0
 * NetStandard 2.1
-* NetCore 2.2
+* NetCore 2.1
 * NetCore 3.0
+* NetCore 3.1
+
+## Net Core and Net Framework latest and LTS versions
+* https://dotnet.microsoft.com/download/dotnet-framework
+* https://dotnet.microsoft.com/download/dotnet-core
 
 ## Basic usage:
 
@@ -46,6 +50,7 @@ The project can be found on [nuget](https://www.nuget.org/packages/HaemmerElectr
 |formatProvider|The `IFormatProvider` to use. Supplies culture-specific formatting information. Check https://docs.microsoft.com/en-us/dotnet/api/system.iformatprovider?view=netframework-4.8.|`new CultureInfo("de-DE")`|`null`|
 |batchSizeLimit|The maximum number of events to include in a single batch.|`batchSizeLimit: 40`|`30`|
 |restrictedToMinimumLevel|The minimum level of the logging.|`restrictedToMinimumLevel: LogEventLevel.Verbose`|`LogEventLevel.Verbose`|
+|sendBatchesAsSingleMessages|A value indicating whether the batches are sent as single messages or as one block of messages.|`false`|`true`|
 
 # Further information
 This sink is basically the same as https://github.com/oxozle/serilog-sinks-telegram but is maintained and provides badging of events.
@@ -56,6 +61,7 @@ You need to get a bot API token following https://core.telegram.org/api#bot-api.
 Change history
 --------------
 
+* **Version 1.0.2.0 (2020-05-10)** : Updated nuget packages, fixed bug with queueing.
 * **Version 1.0.1.0 (2019-11-08)** : Updated nuget packages.
 * **Version 1.0.0.1 (2019-06-24)** : Added option to only show from and to dates when the dates are not equal.
 * **Version 1.0.0.0 (2019-06-23)** : 1.0 release.

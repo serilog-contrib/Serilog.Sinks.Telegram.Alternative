@@ -1,9 +1,8 @@
 using System;
+using Serilog.Events;
 
 namespace Serilog.Sinks.Telegram
 {
-    using Serilog.Events;
-
     /// <summary>
     /// Container for all Telegram sink configurations.
     /// </summary>
@@ -30,8 +29,9 @@ namespace Serilog.Sinks.Telegram
         /// provided.</param>
         /// <param name="formatProvider">The format provider used for formatting the message.</param>
         /// <param name="minimumLogEventLevel">The minimum log event level to use.</param>
+        /// <param name="sendBatchesAsSingleMessages">A value indicating whether the batches are sent as single messages or as one block of messages.</param>
         public TelegramSinkOptions(string botToken, string chatId, int? batchSizeLimit = null,
-            TimeSpan? period = null, IFormatProvider formatProvider = null, LogEventLevel minimumLogEventLevel = LogEventLevel.Verbose)
+            TimeSpan? period = null, IFormatProvider formatProvider = null, LogEventLevel minimumLogEventLevel = LogEventLevel.Verbose, bool? sendBatchesAsSingleMessages = true)
         {
             if (botToken == null)
             {
@@ -49,30 +49,31 @@ namespace Serilog.Sinks.Telegram
             this.Period = period ?? DefaultPeriod;
             this.FormatProvider = formatProvider;
             this.MinimumLogEventLevel = minimumLogEventLevel;
+            this.SendBatchesAsSingleMessages = sendBatchesAsSingleMessages ?? true;
         }
 
         /// <summary>
-        /// The Telegram bot token.
+        /// Gets the Telegram bot token.
         /// </summary>
         public string BotToken { get; }
 
         /// <summary>
-        /// The Telegram chat id.
+        /// Gets the Telegram chat id.
         /// </summary>
         public string ChatId { get; }
 
         /// <summary>
-        /// The maximum number of events to post in a single batch.
+        /// Gets the maximum number of events to post in a single batch.
         /// </summary>
         public int BatchSizeLimit { get; }
 
         /// <summary>
-        /// The time to wait between checking for event batches.
+        /// Gets the time to wait between checking for event batches.
         /// </summary>
         public TimeSpan Period { get; }
 
         /// <summary>
-        /// The format provider used for formatting the message.
+        /// Gets the format provider used for formatting the message.
         /// </summary>
         public IFormatProvider FormatProvider { get; }
 
@@ -80,5 +81,10 @@ namespace Serilog.Sinks.Telegram
         /// Gets the minimum log event level.
         /// </summary>
         public LogEventLevel MinimumLogEventLevel { get; }
+
+        /// <summary>
+        /// Gets a value indicating whether the batches are sent as single messages or as one block of messages.
+        /// </summary>
+        public bool SendBatchesAsSingleMessages { get; }
     }
 }
