@@ -73,12 +73,6 @@
 		<dependency id="System.Net.Http" version="4.3.4" />
 		<dependency id="Serilog.Sinks.PeriodicBatching" version="2.3.0" />
       </group>
-	  <group targetFramework="netcoreapp3.0">
-		<dependency id="Newtonsoft.Json" version="12.0.3" />
-		<dependency id="Serilog" version="2.9.0" />
-		<dependency id="System.Net.Http" version="4.3.4" />
-		<dependency id="Serilog.Sinks.PeriodicBatching" version="2.3.0" />
-      </group>
 	  <group targetFramework="netcoreapp3.1">
 		<dependency id="Newtonsoft.Json" version="12.0.3" />
 		<dependency id="Serilog" version="2.9.0" />
@@ -98,7 +92,6 @@
 	  <file src="Source\netstandard2.0\**" target="lib\netstandard2.0" />
 	  <file src="Source\netstandard2.1\**" target="lib\netstandard2.1" />
 	  <file src="Source\netcoreapp2.1\**" target="lib\netcoreapp2.1" />
-	  <file src="Source\netcoreapp3.0\**" target="lib\netcoreapp3.0" />
 	  <file src="Source\netcoreapp3.1\**" target="lib\netcoreapp3.1" />
 	  <file src="..\Icon.png" target="images\" />
    </files>
