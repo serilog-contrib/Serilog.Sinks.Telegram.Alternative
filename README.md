@@ -51,6 +51,29 @@ The project can be found on [nuget](https://www.nuget.org/packages/HaemmerElectr
 |restrictedToMinimumLevel|The minimum level of the logging.|`restrictedToMinimumLevel: LogEventLevel.Verbose`|`LogEventLevel.Verbose`|
 |sendBatchesAsSingleMessages|A value indicating whether the batches are sent as single messages or as one block of messages.|`false`|`true`|
 
+## Configuration via JSON options
+
+```json
+{
+    "Serilog": {
+        "Using": [ "Serilog.Sinks.Telegram" ],
+        "MinimumLevel": {
+            "Default": "Warning"
+        },
+        "WriteTo": [
+            {
+                "Name": "Telegram",
+                "Args": {
+                    "botToken": "123151488:AAgshf4r373rffsdfOfsdzgfwezfzqwfr7zewE",
+                    "chatId": "12345",
+                    "minimumLevel": "Warning"
+                }
+            }
+        ]
+    }
+}
+```
+
 # Further information
 This sink is basically the same as https://github.com/oxozle/serilog-sinks-telegram but is maintained and provides badging of events.
 
