@@ -1,0 +1,53 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net46;net462;net47;net472;net48;netstandard2.0;netstandard2.1;netcoreapp2.1;netcoreapp3.0;netcoreapp3.1;</TargetFrameworks>
+    <AssemblyName>Serilog.Sinks.Telegram</AssemblyName>
+    <RootNamespace>Serilog</RootNamespace>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageId>HaemmerElectronics.SeppPenner.Serilog.Sinks.Telegram</PackageId>
+    <Authors>SeppPenner</Authors>
+    <Company>Hämmer Electronics</Company>
+    <Copyright>Copyright © Hämmer Electronics</Copyright>
+    <Description>Serilog.Sinks.Telegram is a library to save logging information from https://github.com/serilog/serilog to https://core.telegram.org/bots. The assembly was written and tested in .Net Framework 4.8 and .Net Standard 2.0.</Description>
+    <PackageTags>c# csharp serilog telegram sink logging log</PackageTags>
+    <PackageProjectUrl>https://www.nuget.org/packages/HaemmerElectronics.SeppPenner.Serilog.Sinks.Telegram/</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/SeppPenner/Serilog.Sinks.Telegram</RepositoryUrl>
+    <PackageIcon>Icon.png</PackageIcon>
+    <RepositoryType>Github</RepositoryType>
+    <PackageReleaseNotes>Version 1.0.3.0 (2020-06-05): Updated nuget packages, adjusted build to Visual Studio, moved changelog to extra file.</PackageReleaseNotes>
+    <PackageLicenseFile>License.txt</PackageLicenseFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GitVersionTask" Version="5.3.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Serilog" Version="2.9.0" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
+    <PackageReference Include="Serilog.Sinks.PeriodicBatching" Version="2.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\Icon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\..\License.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\..\Changelog.md">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>

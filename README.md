@@ -79,11 +79,7 @@ This sink is basically the same as https://github.com/oxozle/serilog-sinks-teleg
 
 You need to get a bot API token following https://core.telegram.org/api#bot-api.
 
-
 Change history
 --------------
 
-* **Version 1.0.2.0 (2020-05-10)** : Updated nuget packages, fixed bug with queueing.
-* **Version 1.0.1.0 (2019-11-08)** : Updated nuget packages.
-* **Version 1.0.0.1 (2019-06-24)** : Added option to only show from and to dates when the dates are not equal.
-* **Version 1.0.0.0 (2019-06-23)** : 1.0 release.
+See the [Changelog](https://github.com/SeppPenner/Serilog.Sinks.Telegram/blob/master/Changelog.md).
