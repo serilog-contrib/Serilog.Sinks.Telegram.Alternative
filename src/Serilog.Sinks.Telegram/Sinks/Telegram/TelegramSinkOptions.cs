@@ -40,7 +40,8 @@ namespace Serilog.Sinks.Telegram
         /// <param name="formatProvider">The format provider used for formatting the message.</param>
         /// <param name="minimumLogEventLevel">The minimum log event level to use.</param>
         /// <param name="sendBatchesAsSingleMessages">A value indicating whether the batches are sent as single messages or as one block of messages.</param>
-        public TelegramSinkOptions(string botToken, string chatId, int? batchSizeLimit = null, TimeSpan? period = null, IFormatProvider formatProvider = null, LogEventLevel minimumLogEventLevel = LogEventLevel.Verbose, bool? includeStackTrace = true, bool ? sendBatchesAsSingleMessages = true)
+        /// <param name="includeStackTrace">A value indicating whether the stack trace should be shown or not.</param>
+        public TelegramSinkOptions(string botToken, string chatId, int? batchSizeLimit = null, TimeSpan? period = null, IFormatProvider formatProvider = null, LogEventLevel minimumLogEventLevel = LogEventLevel.Verbose, bool? sendBatchesAsSingleMessages = true, bool? includeStackTrace = true)
         {
             if (botToken == null)
             {
@@ -98,8 +99,8 @@ namespace Serilog.Sinks.Telegram
         public bool SendBatchesAsSingleMessages { get; }
 
         /// <summary>
-		/// Gets whether stack traces should be sent with messages.
-		/// </summary>
-		public bool IncludeStackTrace { get; }
+        /// Gets a value indicating whether the stack trace should be shown or not.
+        /// </summary>
+        public bool IncludeStackTrace { get; }
     }
 }

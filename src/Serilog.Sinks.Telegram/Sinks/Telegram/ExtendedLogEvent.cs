@@ -31,6 +31,7 @@ namespace Serilog.Sinks.Telegram
         /// <param name="firstOccurrence">The first occurrence.</param>
         /// <param name="lastOccurrence">The last occurrence.</param>
         /// <param name="logEvent">The log event.</param>
+        /// <param name="includeStackTrace">A value indicating whether the stack trace should be shown or not.</param>
         // ReSharper disable once UnusedMember.Global
         public ExtendedLogEvent(DateTime firstOccurrence, DateTime lastOccurrence, LogEvent logEvent, bool? includeStackTrace = true)
         {
@@ -56,7 +57,7 @@ namespace Serilog.Sinks.Telegram
         public DateTimeOffset LastOccurrence { get; set; }
 
         /// <summary>
-        /// Whether stack traces are included.
+        /// Gets or sets a value indicating whether the stack trace should be shown or not.
         /// </summary>
         public bool IncludeStackTrace { get; set; }
     }

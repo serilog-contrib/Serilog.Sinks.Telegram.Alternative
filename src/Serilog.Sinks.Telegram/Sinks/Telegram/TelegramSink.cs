@@ -78,7 +78,7 @@ namespace Serilog.Sinks.Telegram
                                 LogEvent = logEvent,
                                 FirstOccurrence = logEvent.Timestamp,
                                 LastOccurrence = logEvent.Timestamp,
-                                IncludeStackTrace = options.IncludeStackTrace
+                                IncludeStackTrace = this.options.IncludeStackTrace
                             });
                 }
                 else
@@ -159,8 +159,8 @@ namespace Serilog.Sinks.Telegram
 
             sb.AppendLine(
                 extLogEvent.FirstOccurrence != extLogEvent.LastOccurrence
-                    ? $"The message occured first on {extLogEvent.FirstOccurrence:dd.MM.yyyy HH:mm:sszzz} and last on {extLogEvent.LastOccurrence:dd.MM.yyyy HH:mm:sszzz}"
-                    : $"The message occured on {extLogEvent.FirstOccurrence:dd.MM.yyyy HH:mm:sszzz}");
+                    ? $"The message occurred first on {extLogEvent.FirstOccurrence:dd.MM.yyyy HH:mm:sszzz} and last on {extLogEvent.LastOccurrence:dd.MM.yyyy HH:mm:sszzz}"
+                    : $"The message occurred on {extLogEvent.FirstOccurrence:dd.MM.yyyy HH:mm:sszzz}");
 
             if (extLogEvent.LogEvent.Exception == null)
             {
@@ -185,23 +185,16 @@ namespace Serilog.Sinks.Telegram
         /// <returns>The emoji as <see cref="string"/>.</returns>
         private static string GetEmoji(LogEvent log)
         {
-            switch (log.Level)
+            return log.Level switch
             {
-                case LogEventLevel.Debug:
-                    return "👉";
-                case LogEventLevel.Error:
-                    return "❗";
-                case LogEventLevel.Fatal:
-                    return "‼";
-                case LogEventLevel.Information:
-                    return "ℹ";
-                case LogEventLevel.Verbose:
-                    return "⚡";
-                case LogEventLevel.Warning:
-                    return "⚠";
-                default:
-                    return string.Empty;
-            }
+                LogEventLevel.Debug => "👉",
+                LogEventLevel.Error => "❗",
+                LogEventLevel.Fatal => "‼",
+                LogEventLevel.Information => "ℹ",
+                LogEventLevel.Verbose => "⚡",
+                LogEventLevel.Warning => "⚠",
+                _ => string.Empty
+            };
         }
 
         /// <summary>
