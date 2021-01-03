@@ -32,11 +32,12 @@ namespace Serilog.Sinks.Telegram
         /// <param name="lastOccurrence">The last occurrence.</param>
         /// <param name="logEvent">The log event.</param>
         // ReSharper disable once UnusedMember.Global
-        public ExtendedLogEvent(DateTime firstOccurrence, DateTime lastOccurrence, LogEvent logEvent)
+        public ExtendedLogEvent(DateTime firstOccurrence, DateTime lastOccurrence, LogEvent logEvent, bool? includeStackTrace = true)
         {
             this.FirstOccurrence = firstOccurrence;
             this.LastOccurrence = lastOccurrence;
             this.LogEvent = logEvent;
+            this.IncludeStackTrace = includeStackTrace ?? true;
         }
 
         /// <summary>
@@ -53,5 +54,10 @@ namespace Serilog.Sinks.Telegram
         /// Gets or sets the last occurrence.
         /// </summary>
         public DateTimeOffset LastOccurrence { get; set; }
+
+        /// <summary>
+        /// Whether stack traces are included.
+        /// </summary>
+        public bool IncludeStackTrace { get; set; }
     }
 }

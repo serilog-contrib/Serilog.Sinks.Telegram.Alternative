@@ -77,7 +77,8 @@ namespace Serilog.Sinks.Telegram
                             {
                                 LogEvent = logEvent,
                                 FirstOccurrence = logEvent.Timestamp,
-                                LastOccurrence = logEvent.Timestamp
+                                LastOccurrence = logEvent.Timestamp,
+                                IncludeStackTrace = options.IncludeStackTrace
                             });
                 }
                 else
@@ -169,7 +170,10 @@ namespace Serilog.Sinks.Telegram
             sb.AppendLine($"\n*{extLogEvent.LogEvent.Exception.Message}*\n");
             sb.AppendLine($"Message: `{extLogEvent.LogEvent.Exception.Message}`");
             sb.AppendLine($"Type: `{extLogEvent.LogEvent.Exception.GetType().Name}`\n");
-            sb.AppendLine($"Stack Trace\n```{extLogEvent.LogEvent.Exception}```");
+            if (extLogEvent.IncludeStackTrace)
+            {
+                sb.AppendLine($"Stack Trace\n```{extLogEvent.LogEvent.Exception}```");
+            }
 
             return sb.ToString();
         }
