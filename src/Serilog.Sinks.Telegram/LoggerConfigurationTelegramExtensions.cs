@@ -39,6 +39,7 @@ namespace Serilog
         /// <param name="formatProvider">The format provider used for formatting the message.</param>
         /// <param name="restrictedToMinimumLevel"><see cref="LogEventLevel"/> value that specifies minimum logging
         /// level that will be allowed to be logged.</param>
+        /// <param name="sendBatchesAsSingleMessages">A value indicating whether the batches are sent as single messages or as one block of messages.</param>
         /// <param name="includeStackTrace">Whether stack traces should be included</param>
         /// <returns>Instance of <see cref="LoggerConfiguration"/> object.</returns>
         public static LoggerConfiguration Telegram(
@@ -49,9 +50,10 @@ namespace Serilog
             TimeSpan? period = null,
             IFormatProvider formatProvider = null,
             LogEventLevel restrictedToMinimumLevel = LevelAlias.Minimum,
+            bool? sendBatchesAsSingleMessages = true,
             bool? includeStackTrace = true)
         {
-            var telegramSinkOptions = new TelegramSinkOptions(botToken, chatId, batchSizeLimit, period, formatProvider, includeStackTrace: includeStackTrace);
+            var telegramSinkOptions = new TelegramSinkOptions(botToken, chatId, batchSizeLimit, period, formatProvider, restrictedToMinimumLevel, sendBatchesAsSingleMessages, includeStackTrace);
             return loggerSinkConfiguration.Telegram(telegramSinkOptions, restrictedToMinimumLevel);
         }
 

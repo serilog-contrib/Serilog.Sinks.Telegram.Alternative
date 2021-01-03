@@ -16,7 +16,7 @@
     <RepositoryUrl>https://github.com/SeppPenner/Serilog.Sinks.Telegram</RepositoryUrl>
     <PackageIcon>Icon.png</PackageIcon>
     <RepositoryType>Github</RepositoryType>
-    <PackageReleaseNotes>Version 1.0.5.0 (2021-01-03): Updated nuget packages, added option to exclude stack traces (Thanks to @jessicah), added support for .Net 5.0.</PackageReleaseNotes>
+    <PackageReleaseNotes>Version 1.0.6.0 (2021-01-03): Added missing configuration option in the sink.</PackageReleaseNotes>
     <PackageLicenseFile>License.txt</PackageLicenseFile>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
