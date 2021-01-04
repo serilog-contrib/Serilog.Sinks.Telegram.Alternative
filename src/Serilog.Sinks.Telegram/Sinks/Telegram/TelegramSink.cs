@@ -102,7 +102,7 @@ namespace Serilog.Sinks.Telegram
                     var message = this.options.FormatProvider != null
                                       ? extendedLogEvent.LogEvent.RenderMessage(this.options.FormatProvider)
                                       : RenderMessage(extendedLogEvent);
-                    await SendMessage(this.options.BotToken, this.options.ChatId, message);
+                    await this.SendMessage(this.options.BotToken, this.options.ChatId, message);
                 }
             }
             else
@@ -131,7 +131,7 @@ namespace Serilog.Sinks.Telegram
                 }
 
                 var messageToSend = sb.ToString();
-                await SendMessage(this.options.BotToken, this.options.ChatId, messageToSend);
+                await this.SendMessage(this.options.BotToken, this.options.ChatId, messageToSend);
             }
         }
 
@@ -204,15 +204,24 @@ namespace Serilog.Sinks.Telegram
         /// <param name="chatId">The chat identifier.</param>
         /// <param name="message">The message.</param>
         /// <returns>A <see cref="Task"/> representing any asynchronous operation.</returns>
-        private static async Task SendMessage(string token, string chatId, string message)
+        private async Task SendMessage(string token, string chatId, string message)
         {
             SelfLog.WriteLine($"Trying to send message to chatId '{chatId}': '{message}'.");
             var client = new TelegramClient(token, 5);
-            var result = await client.PostMessageAsync(message, chatId);
 
-            if (result != null)
+            try
             {
-                SelfLog.WriteLine($"Message sent to chatId '{chatId}': '{result.StatusCode}'.");
+                var result = await client.PostMessage(message, chatId);
+
+                if (result != null)
+                {
+                    SelfLog.WriteLine($"Message sent to chatId '{chatId}': '{result.StatusCode}'.");
+                }
+            }
+            catch (Exception ex)
+            {
+                SelfLog.WriteLine($"{ex.Message} {ex.StackTrace}");
+                this.options.FailureCallback?.Invoke(ex);
             }
         }
     }

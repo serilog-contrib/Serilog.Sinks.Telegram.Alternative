@@ -53,12 +53,12 @@ namespace Serilog.Sinks.Telegram
         }
 
         /// <summary>
-        /// Posts the message asynchronous.
+        /// Posts the message.
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="chatId">The chat identifier.</param>
         /// <returns>A <see cref="HttpResponseMessage"/>.</returns>
-        public async Task<HttpResponseMessage> PostMessageAsync(string message, string chatId)
+        public async Task<HttpResponseMessage> PostMessage(string message, string chatId)
         {
             var payload = new { chat_id = chatId, text = message, parse_mode = "markdown" };
             var json = JsonConvert.SerializeObject(payload);

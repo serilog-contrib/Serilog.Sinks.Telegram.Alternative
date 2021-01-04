@@ -41,6 +41,7 @@ namespace Serilog.Sinks.Telegram
         /// <param name="minimumLogEventLevel">The minimum log event level to use.</param>
         /// <param name="sendBatchesAsSingleMessages">A value indicating whether the batches are sent as single messages or as one block of messages.</param>
         /// <param name="includeStackTrace">A value indicating whether the stack trace should be shown or not.</param>
+        /// <param name="failureCallback">The failure callback.</param>
         public TelegramSinkOptions(
             string botToken,
             string chatId,
@@ -49,7 +50,8 @@ namespace Serilog.Sinks.Telegram
             IFormatProvider formatProvider = null,
             LogEventLevel minimumLogEventLevel = LogEventLevel.Verbose,
             bool? sendBatchesAsSingleMessages = true,
-            bool? includeStackTrace = true)
+            bool? includeStackTrace = true,
+            Action<Exception> failureCallback = null)
         {
             if (botToken == null)
             {
@@ -69,6 +71,7 @@ namespace Serilog.Sinks.Telegram
             this.MinimumLogEventLevel = minimumLogEventLevel;
             this.SendBatchesAsSingleMessages = sendBatchesAsSingleMessages ?? true;
             this.IncludeStackTrace = includeStackTrace ?? true;
+            this.FailureCallback = failureCallback;
         }
 
         /// <summary>
@@ -110,5 +113,10 @@ namespace Serilog.Sinks.Telegram
         /// Gets a value indicating whether the stack trace should be shown or not.
         /// </summary>
         public bool IncludeStackTrace { get; }
+
+        /// <summary>
+        /// Gets the failure callback.
+        /// </summary>
+        public Action<Exception> FailureCallback { get; }
     }
 }

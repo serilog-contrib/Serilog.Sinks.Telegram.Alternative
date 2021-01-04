@@ -53,6 +53,7 @@ The project can be found on [nuget](https://www.nuget.org/packages/HaemmerElectr
 |restrictedToMinimumLevel|The minimum level of the logging.|`restrictedToMinimumLevel: LogEventLevel.Verbose`|`LogEventLevel.Verbose`|
 |sendBatchesAsSingleMessages|A value indicating whether the batches are sent as single messages or as one block of messages.|`false`|`true`|
 |includeStackTrace|A value indicating whether the stack trace should be shown or not.|`false`|`true`|
+|failureCallback|Adds an option to add a failure callback action.|`failureCallback: e => Console.WriteLine($"Sink error: {e.Message}")`|`null`|
 
 ## Configuration via JSON options
 
@@ -69,7 +70,7 @@ The project can be found on [nuget](https://www.nuget.org/packages/HaemmerElectr
                 "Args": {
                     "botToken": "123151488:AAgshf4r373rffsdfOfsdzgfwezfzqwfr7zewE",
                     "chatId": "12345",
-                    "minimumLevel": "Warning"
+                    "restrictedToMinimumLevel": "Warning"
                 }
             }
         ]

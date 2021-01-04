@@ -16,7 +16,7 @@
     <RepositoryUrl>https://github.com/SeppPenner/Serilog.Sinks.Telegram</RepositoryUrl>
     <PackageIcon>Icon.png</PackageIcon>
     <RepositoryType>Github</RepositoryType>
-    <PackageReleaseNotes>Version 1.0.6.0 (2021-01-03): Added missing configuration option in the sink.</PackageReleaseNotes>
+    <PackageReleaseNotes>Version 1.0.7.0 (2021-01-04): Added failure callback to the sink, updated readme to show the correct use of the minimum level (Thanks to @marce1994), added better test project.</PackageReleaseNotes>
     <PackageLicenseFile>License.txt</PackageLicenseFile>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
