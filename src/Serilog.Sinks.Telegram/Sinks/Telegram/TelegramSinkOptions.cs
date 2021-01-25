@@ -42,15 +42,21 @@ namespace Serilog.Sinks.Telegram
         /// <param name="sendBatchesAsSingleMessages">A value indicating whether the batches are sent as single messages or as one block of messages.</param>
         /// <param name="includeStackTrace">A value indicating whether the stack trace should be shown or not.</param>
         /// <param name="failureCallback">The failure callback.</param>
+        /// <param name="dateFormat">The failure callback.</param>
+        /// <param name="applicationName">Name of the application sending the events in - case multiple apps write to the same channel</param>
+
         public TelegramSinkOptions(
             string botToken,
             string chatId,
+            string dateFormat,
+            string applicationName,
             int? batchSizeLimit = null,
             TimeSpan? period = null,
             IFormatProvider formatProvider = null,
             LogEventLevel minimumLogEventLevel = LogEventLevel.Verbose,
             bool? sendBatchesAsSingleMessages = true,
             bool? includeStackTrace = true,
+
             Action<Exception> failureCallback = null)
         {
             if (botToken == null)
@@ -72,12 +78,23 @@ namespace Serilog.Sinks.Telegram
             this.SendBatchesAsSingleMessages = sendBatchesAsSingleMessages ?? true;
             this.IncludeStackTrace = includeStackTrace ?? true;
             this.FailureCallback = failureCallback;
+            this.DateFormat = dateFormat;
+            this.ApplicationName = applicationName;
         }
 
         /// <summary>
         /// Gets the Telegram bot token.
         /// </summary>
         public string BotToken { get; }
+
+        /// <summary>
+        /// Gets the Application name
+        /// </summary>
+        public string ApplicationName { get; }
+        /// <summary>
+        /// Gets the Telegram date format.
+        /// </summary>
+        public string DateFormat { get; }
 
         /// <summary>
         /// Gets the Telegram chat id.
