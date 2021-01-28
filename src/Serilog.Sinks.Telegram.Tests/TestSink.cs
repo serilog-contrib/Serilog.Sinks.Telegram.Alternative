@@ -37,7 +37,7 @@ namespace Serilog.Sinks.Telegram.Tests
         public void TestDifferentExceptions()
         {
             var logger = new LoggerConfiguration()
-                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId,  3)
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 3)
                 .CreateLogger();
 
             var exception1 = new Exception("test1");

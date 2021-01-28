@@ -151,6 +151,7 @@ namespace Serilog.Sinks.Telegram
         /// Renders the message.
         /// </summary>
         /// <param name="extLogEvent">The log event.</param>
+        /// <param name="options">The options.</param>
         /// <returns>The rendered message.</returns>
         private static string RenderMessage(ExtendedLogEvent extLogEvent, TelegramSinkOptions options)
         {

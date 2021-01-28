@@ -33,6 +33,8 @@ namespace Serilog.Sinks.Telegram
         /// </summary>
         /// <param name="botToken">The Telegram bot token.</param>
         /// <param name="chatId">The Telegram chat id.</param>
+        /// <param name="dateFormat">The date time format showing how the date and time should be formatted.</param>
+        /// <param name="applicationName">The name of the application sending the events in case multiple apps write to the same channel.</param>
         /// <param name="batchSizeLimit">The maximum number of events to post in a single batch; defaults to 1 if
         /// not provided i.e. no batching by default.</param>
         /// <param name="period">The time to wait between checking for event batches; defaults to 1 sec if not
@@ -42,9 +44,6 @@ namespace Serilog.Sinks.Telegram
         /// <param name="sendBatchesAsSingleMessages">A value indicating whether the batches are sent as single messages or as one block of messages.</param>
         /// <param name="includeStackTrace">A value indicating whether the stack trace should be shown or not.</param>
         /// <param name="failureCallback">The failure callback.</param>
-        /// <param name="dateFormat">The failure callback.</param>
-        /// <param name="applicationName">Name of the application sending the events in - case multiple apps write to the same channel</param>
-
         public TelegramSinkOptions(
             string botToken,
             string chatId,
@@ -56,7 +55,6 @@ namespace Serilog.Sinks.Telegram
             LogEventLevel minimumLogEventLevel = LogEventLevel.Verbose,
             bool? sendBatchesAsSingleMessages = true,
             bool? includeStackTrace = true,
-
             Action<Exception> failureCallback = null)
         {
             if (botToken == null)
@@ -88,9 +86,10 @@ namespace Serilog.Sinks.Telegram
         public string BotToken { get; }
 
         /// <summary>
-        /// Gets the Application name
+        /// Gets the Application name.
         /// </summary>
         public string ApplicationName { get; }
+
         /// <summary>
         /// Gets the Telegram date format.
         /// </summary>

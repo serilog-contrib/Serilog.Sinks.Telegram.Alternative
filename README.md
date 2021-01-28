@@ -54,6 +54,8 @@ The project can be found on [nuget](https://www.nuget.org/packages/HaemmerElectr
 |sendBatchesAsSingleMessages|A value indicating whether the batches are sent as single messages or as one block of messages.|`false`|`true`|
 |includeStackTrace|A value indicating whether the stack trace should be shown or not.|`false`|`true`|
 |failureCallback|Adds an option to add a failure callback action.|`failureCallback: e => Console.WriteLine($"Sink error: {e.Message}")`|`null`|
+|dateFormat|The date time format showing how the date and time should be formatted.|`dateFormat: "dd.MM.yyyy HH:mm:ssZ"`|`"dd.MM.yyyy HH:mm:sszzz"`|
+|applicationName|The name of the application sending the events in case multiple apps write to the same channel.|`applicationName: "My App"`|`string.Empty`|
 
 ## Configuration via JSON options
 
@@ -72,7 +74,7 @@ The project can be found on [nuget](https://www.nuget.org/packages/HaemmerElectr
                     "chatId": "12345",
                     "restrictedToMinimumLevel": "Warning",
                     "applicationName": "My App",
-                    "dateFormat": "yyyy-MM-dd  HH:mm:sszzz"
+                    "dateFormat": "yyyy-MM-dd HH:mm:sszzz"
                 }
             }
         ]
