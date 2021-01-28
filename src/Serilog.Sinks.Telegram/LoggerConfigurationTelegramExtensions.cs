@@ -32,6 +32,8 @@ namespace Serilog
         /// <param name="loggerSinkConfiguration">Instance of <see cref="LoggerSinkConfiguration"/> object.</param>
         /// <param name="botToken">The Telegram bot token.</param>
         /// <param name="chatId">The Telegram chat id.</param>
+        /// <param name="dateFormat">How the data/time should be formated by default</param>
+        /// <param name="applicationName">Name of the application sending the events in - case multiple apps write to the same channel</param>
         /// <param name="batchSizeLimit">The maximum number of events to post in a single batch; defaults to 1 if
         /// not provided i.e. no batching by default.</param>
         /// <param name="period">The time to wait between checking for event batches; defaults to 1 sec if not
@@ -51,9 +53,10 @@ namespace Serilog
             IFormatProvider formatProvider = null,
             LogEventLevel restrictedToMinimumLevel = LevelAlias.Minimum,
             bool? sendBatchesAsSingleMessages = true,
-            bool? includeStackTrace = true)
+            bool? includeStackTrace = true, string dateFormat = "dd.MM.yyyy HH:mm:sszzz",
+            string applicationName = "")
         {
-            var telegramSinkOptions = new TelegramSinkOptions(botToken, chatId, batchSizeLimit, period, formatProvider, restrictedToMinimumLevel, sendBatchesAsSingleMessages, includeStackTrace);
+            var telegramSinkOptions = new TelegramSinkOptions(botToken, chatId, dateFormat, applicationName, batchSizeLimit, period, formatProvider, restrictedToMinimumLevel, sendBatchesAsSingleMessages, includeStackTrace);
             return loggerSinkConfiguration.Telegram(telegramSinkOptions, restrictedToMinimumLevel);
         }
 

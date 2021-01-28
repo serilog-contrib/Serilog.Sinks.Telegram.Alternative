@@ -17,9 +17,9 @@ namespace Serilog.Sinks.Telegram
     using System.Text;
     using System.Threading.Tasks;
 
-    using Serilog.Debugging;
-    using Serilog.Events;
-    using Serilog.Sinks.PeriodicBatching;
+    using Debugging;
+    using Events;
+    using PeriodicBatching;
 
     /// <summary>
     /// Implements <see cref="PeriodicBatchingSink"/> and provides means needed for sending Serilog log events to Telegram.
@@ -101,7 +101,7 @@ namespace Serilog.Sinks.Telegram
                 {
                     var message = this.options.FormatProvider != null
                                       ? extendedLogEvent.LogEvent.RenderMessage(this.options.FormatProvider)
-                                      : RenderMessage(extendedLogEvent);
+                                      : RenderMessage(extendedLogEvent, options);
                     await this.SendMessage(this.options.BotToken, this.options.ChatId, message);
                 }
             }
@@ -115,7 +115,7 @@ namespace Serilog.Sinks.Telegram
                 {
                     var message = this.options.FormatProvider != null
                                       ? extendedLogEvent.LogEvent.RenderMessage(this.options.FormatProvider)
-                                      : RenderMessage(extendedLogEvent);
+                                      : RenderMessage(extendedLogEvent, options);
 
                     if (count == messagesToSend.Count)
                     {
@@ -152,15 +152,15 @@ namespace Serilog.Sinks.Telegram
         /// </summary>
         /// <param name="extLogEvent">The log event.</param>
         /// <returns>The rendered message.</returns>
-        private static string RenderMessage(ExtendedLogEvent extLogEvent)
+        private static string RenderMessage(ExtendedLogEvent extLogEvent, TelegramSinkOptions options)
         {
             var sb = new StringBuilder();
             sb.AppendLine($"{GetEmoji(extLogEvent.LogEvent)} {extLogEvent.LogEvent.RenderMessage()}");
-
+            sb.AppendLine(string.Empty);
             sb.AppendLine(
                 extLogEvent.FirstOccurrence != extLogEvent.LastOccurrence
-                    ? $"The message occurred first on {extLogEvent.FirstOccurrence:dd.MM.yyyy HH:mm:sszzz} and last on {extLogEvent.LastOccurrence:dd.MM.yyyy HH:mm:sszzz}"
-                    : $"The message occurred on {extLogEvent.FirstOccurrence:dd.MM.yyyy HH:mm:sszzz}");
+                    ? $"_{options.ApplicationName}: The message occurred first on {extLogEvent.FirstOccurrence.ToString(options.DateFormat)} and last on {extLogEvent.LastOccurrence.ToString(options.DateFormat)}_"
+                    : $"_{options.ApplicationName}: The message occurred on {extLogEvent.FirstOccurrence.ToString(options.DateFormat)}_");
 
             if (extLogEvent.LogEvent.Exception == null)
             {
