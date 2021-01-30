@@ -10,7 +10,7 @@
     <Authors>SeppPenner</Authors>
     <Company>Hämmer Electronics</Company>
     <Copyright>Copyright © Hämmer Electronics</Copyright>
-    <Description>Serilog.Sinks.Telegram is a library to save logging information from https://github.com/serilog/serilog to https://core.telegram.org/bots. The assembly was written and tested in .Net Framework 4.8 and .Net Standard 2.0.</Description>
+    <Description>Serilog.Sinks.Telegram is a library to save logging information from https://github.com/serilog/serilog to https://core.telegram.org/bots.</Description>
     <PackageTags>c# csharp serilog telegram sink logging log</PackageTags>
     <PackageProjectUrl>https://www.nuget.org/packages/HaemmerElectronics.SeppPenner.Serilog.Sinks.Telegram/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/SeppPenner/Serilog.Sinks.Telegram</RepositoryUrl>
