@@ -1,4 +1,4 @@
-## Basic usage:
+## Basic usage
 
 ```csharp
 var logger = new LoggerConfiguration()
@@ -8,7 +8,7 @@ var logger = new LoggerConfiguration()
 
 The project can be found on [nuget](https://www.nuget.org/packages/HaemmerElectronics.SeppPenner.Serilog.Sinks.Telegram/).
 
-## Configuration options:
+## Configuration options
 
 |Parameter|Meaning|Example|Default value|
 |-|-|-|-|

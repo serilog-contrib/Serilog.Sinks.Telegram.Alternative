@@ -31,7 +31,7 @@ The assembly was written and tested in .Net 5.0.
 * https://dotnet.microsoft.com/download/dotnet-core
 * https://dotnet.microsoft.com/download/dotnet/5.0
 
-## Basic usage:
+## Basic usage
 Check out the how to use file [here](https://github.com/SeppPenner/Serilog.Sinks.Telegram/blob/master/HowToUse.md).
 
 ## Install
