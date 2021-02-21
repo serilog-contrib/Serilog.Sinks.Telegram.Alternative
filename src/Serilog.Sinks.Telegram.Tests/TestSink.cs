@@ -48,6 +48,7 @@ namespace Serilog.Sinks.Telegram.Tests
             logger.Error(exception3, exception3.Message);
 
             Thread.Sleep(1000);
+            Log.CloseAndFlush();
         }
 
         /// <summary>
@@ -66,6 +67,7 @@ namespace Serilog.Sinks.Telegram.Tests
             logger.Error(exception1, exception1.Message);
 
             Thread.Sleep(1000);
+            Log.CloseAndFlush();
         }
     }
 }
