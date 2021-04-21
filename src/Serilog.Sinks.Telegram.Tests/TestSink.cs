@@ -69,5 +69,22 @@ namespace Serilog.Sinks.Telegram.Tests
             Thread.Sleep(1000);
             Log.CloseAndFlush();
         }
+
+        /// <summary>
+        /// Tests the sink with an exception with an underscore.
+        /// </summary>
+        [TestMethod]
+        public void TestExceptionWithUnderscore()
+        {
+            var logger = new LoggerConfiguration()
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 3)
+                .CreateLogger();
+
+            var exception1 = new Exception("_Something_");
+            logger.Error(exception1, exception1.Message);
+
+            Thread.Sleep(1000);
+            Log.CloseAndFlush();
+        }
     }
 }
