@@ -37,7 +37,7 @@ namespace Serilog.Sinks.Telegram.Tests
         public void TestDifferentExceptions()
         {
             var logger = new LoggerConfiguration()
-                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 3)
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 1)
                 .CreateLogger();
 
             var exception1 = new Exception("test1");
@@ -58,7 +58,7 @@ namespace Serilog.Sinks.Telegram.Tests
         public void TestSameExceptions()
         {
             var logger = new LoggerConfiguration()
-                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 3)
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 1)
                 .CreateLogger();
 
             var exception1 = new Exception("test1");
@@ -77,7 +77,7 @@ namespace Serilog.Sinks.Telegram.Tests
         public void TestExceptionWithUnderscoreSign()
         {
             var logger = new LoggerConfiguration()
-                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 3)
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 1)
                 .CreateLogger();
 
             var exception1 = new Exception("_Something");
@@ -94,7 +94,7 @@ namespace Serilog.Sinks.Telegram.Tests
         public void TestExceptionWithMultiplySign()
         {
             var logger = new LoggerConfiguration()
-                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 3)
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 1)
                 .CreateLogger();
 
             var exception1 = new Exception("*Something");
@@ -111,7 +111,7 @@ namespace Serilog.Sinks.Telegram.Tests
         public void TestExceptionWithLeftBracketSign()
         {
             var logger = new LoggerConfiguration()
-                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 3)
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 1)
                 .CreateLogger();
 
             var exception1 = new Exception("[Something");
@@ -128,7 +128,7 @@ namespace Serilog.Sinks.Telegram.Tests
         public void TestExceptionWithRightBracketSign()
         {
             var logger = new LoggerConfiguration()
-                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 3)
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 1)
                 .CreateLogger();
 
             var exception1 = new Exception("]Something");
@@ -145,7 +145,7 @@ namespace Serilog.Sinks.Telegram.Tests
         public void TestExceptionWithLeftRoundedBracketSign()
         {
             var logger = new LoggerConfiguration()
-                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 3)
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 1)
                 .CreateLogger();
 
             var exception1 = new Exception("(Something");
@@ -162,7 +162,7 @@ namespace Serilog.Sinks.Telegram.Tests
         public void TestExceptionWithRightRoundedBracketSign()
         {
             var logger = new LoggerConfiguration()
-                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 3)
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 1)
                 .CreateLogger();
 
             var exception1 = new Exception(")Something");
@@ -179,7 +179,7 @@ namespace Serilog.Sinks.Telegram.Tests
         public void TestExceptionWithTildeSign()
         {
             var logger = new LoggerConfiguration()
-                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 3)
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 1)
                 .CreateLogger();
 
             var exception1 = new Exception("~Something");
@@ -196,7 +196,7 @@ namespace Serilog.Sinks.Telegram.Tests
         public void TestExceptionWithCommaSign()
         {
             var logger = new LoggerConfiguration()
-                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 3)
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 1)
                 .CreateLogger();
 
             var exception1 = new Exception("`Something");
@@ -213,7 +213,7 @@ namespace Serilog.Sinks.Telegram.Tests
         public void TestExceptionWithArrowSign()
         {
             var logger = new LoggerConfiguration()
-                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 3)
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 1)
                 .CreateLogger();
 
             var exception1 = new Exception(">Something");
@@ -230,7 +230,7 @@ namespace Serilog.Sinks.Telegram.Tests
         public void TestExceptionWithCross()
         {
             var logger = new LoggerConfiguration()
-                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 3)
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 1)
                 .CreateLogger();
 
             var exception1 = new Exception("#Something");
@@ -247,7 +247,7 @@ namespace Serilog.Sinks.Telegram.Tests
         public void TestExceptionWithPlusSign()
         {
             var logger = new LoggerConfiguration()
-                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 3)
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 1)
                 .CreateLogger();
 
             var exception1 = new Exception("+Something");
@@ -264,7 +264,7 @@ namespace Serilog.Sinks.Telegram.Tests
         public void TestExceptionWithMinusSign()
         {
             var logger = new LoggerConfiguration()
-                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 3)
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 1)
                 .CreateLogger();
 
             var exception1 = new Exception("-Something");
@@ -281,7 +281,7 @@ namespace Serilog.Sinks.Telegram.Tests
         public void TestExceptionWithEqualSign()
         {
             var logger = new LoggerConfiguration()
-                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 3)
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 1)
                 .CreateLogger();
 
             var exception1 = new Exception("=Something");
@@ -298,7 +298,7 @@ namespace Serilog.Sinks.Telegram.Tests
         public void TestExceptionWithSeparatorSign()
         {
             var logger = new LoggerConfiguration()
-                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 3)
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 1)
                 .CreateLogger();
 
             var exception1 = new Exception("|Something");
@@ -315,7 +315,7 @@ namespace Serilog.Sinks.Telegram.Tests
         public void TestExceptionWithLeftCurlyBracketSign()
         {
             var logger = new LoggerConfiguration()
-                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 3)
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 1)
                 .CreateLogger();
 
             var exception1 = new Exception("}Something");
@@ -332,7 +332,7 @@ namespace Serilog.Sinks.Telegram.Tests
         public void TestExceptionWithRightCurlyBracketSign()
         {
             var logger = new LoggerConfiguration()
-                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 3)
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 1)
                 .CreateLogger();
 
             var exception1 = new Exception("{Something");
@@ -349,7 +349,7 @@ namespace Serilog.Sinks.Telegram.Tests
         public void TestExceptionWithDotSign()
         {
             var logger = new LoggerConfiguration()
-                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 3)
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 1)
                 .CreateLogger();
 
             var exception1 = new Exception(".Something");
@@ -366,7 +366,7 @@ namespace Serilog.Sinks.Telegram.Tests
         public void TestExceptionWithQuestionSign()
         {
             var logger = new LoggerConfiguration()
-                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 3)
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 1)
                 .CreateLogger();
 
             var exception1 = new Exception("!Something");
