@@ -60,7 +60,7 @@ namespace Serilog.Sinks.Telegram
         /// <returns>A <see cref="HttpResponseMessage"/>.</returns>
         public async Task<HttpResponseMessage> PostMessage(string message, string chatId)
         {
-            var payload = new { chat_id = chatId, text = message, parse_mode = "MarkdownV2" };
+            var payload = new { chat_id = chatId, text = message, parse_mode = "Markdown" };
             var json = JsonConvert.SerializeObject(payload);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             var response = await this.httpClient.PostAsync(this.apiUrl, content);
