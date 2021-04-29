@@ -71,16 +71,305 @@ namespace Serilog.Sinks.Telegram.Tests
         }
 
         /// <summary>
-        /// Tests the sink with an exception with an underscore.
+        /// Tests the sink with an exception with an underscore sign.
         /// </summary>
         [TestMethod]
-        public void TestExceptionWithUnderscore()
+        public void TestExceptionWithUnderscoreSign()
         {
             var logger = new LoggerConfiguration()
                 .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 3)
                 .CreateLogger();
 
-            var exception1 = new Exception("_Something_");
+            var exception1 = new Exception("_Something");
+            logger.Error(exception1, exception1.Message);
+
+            Thread.Sleep(1000);
+            Log.CloseAndFlush();
+        }
+
+        /// <summary>
+        /// Tests the sink with an exception with a multiply sign.
+        /// </summary>
+        [TestMethod]
+        public void TestExceptionWithMultiplySign()
+        {
+            var logger = new LoggerConfiguration()
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 3)
+                .CreateLogger();
+
+            var exception1 = new Exception("*Something");
+            logger.Error(exception1, exception1.Message);
+
+            Thread.Sleep(1000);
+            Log.CloseAndFlush();
+        }
+
+        /// <summary>
+        /// Tests the sink with an exception with a left brackets sign.
+        /// </summary>
+        [TestMethod]
+        public void TestExceptionWithLeftBracketSign()
+        {
+            var logger = new LoggerConfiguration()
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 3)
+                .CreateLogger();
+
+            var exception1 = new Exception("[Something");
+            logger.Error(exception1, exception1.Message);
+
+            Thread.Sleep(1000);
+            Log.CloseAndFlush();
+        }
+
+        /// <summary>
+        /// Tests the sink with an exception with a right brackets sign.
+        /// </summary>
+        [TestMethod]
+        public void TestExceptionWithRightBracketSign()
+        {
+            var logger = new LoggerConfiguration()
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 3)
+                .CreateLogger();
+
+            var exception1 = new Exception("]Something");
+            logger.Error(exception1, exception1.Message);
+
+            Thread.Sleep(1000);
+            Log.CloseAndFlush();
+        }
+
+        /// <summary>
+        /// Tests the sink with an exception with a left rounded brackets sign.
+        /// </summary>
+        [TestMethod]
+        public void TestExceptionWithLeftRoundedBracketSign()
+        {
+            var logger = new LoggerConfiguration()
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 3)
+                .CreateLogger();
+
+            var exception1 = new Exception("(Something");
+            logger.Error(exception1, exception1.Message);
+
+            Thread.Sleep(1000);
+            Log.CloseAndFlush();
+        }
+
+        /// <summary>
+        /// Tests the sink with an exception with a right rounded brackets sign.
+        /// </summary>
+        [TestMethod]
+        public void TestExceptionWithRightRoundedBracketSign()
+        {
+            var logger = new LoggerConfiguration()
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 3)
+                .CreateLogger();
+
+            var exception1 = new Exception(")Something");
+            logger.Error(exception1, exception1.Message);
+
+            Thread.Sleep(1000);
+            Log.CloseAndFlush();
+        }
+
+        /// <summary>
+        /// Tests the sink with an exception with a tilde sign.
+        /// </summary>
+        [TestMethod]
+        public void TestExceptionWithTildeSign()
+        {
+            var logger = new LoggerConfiguration()
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 3)
+                .CreateLogger();
+
+            var exception1 = new Exception("~Something");
+            logger.Error(exception1, exception1.Message);
+
+            Thread.Sleep(1000);
+            Log.CloseAndFlush();
+        }
+
+        /// <summary>
+        /// Tests the sink with an exception with a comma sign.
+        /// </summary>
+        [TestMethod]
+        public void TestExceptionWithCommaSign()
+        {
+            var logger = new LoggerConfiguration()
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 3)
+                .CreateLogger();
+
+            var exception1 = new Exception("`Something");
+            logger.Error(exception1, exception1.Message);
+
+            Thread.Sleep(1000);
+            Log.CloseAndFlush();
+        }
+
+        /// <summary>
+        /// Tests the sink with an exception with an arrow sign.
+        /// </summary>
+        [TestMethod]
+        public void TestExceptionWithArrowSign()
+        {
+            var logger = new LoggerConfiguration()
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 3)
+                .CreateLogger();
+
+            var exception1 = new Exception(">Something");
+            logger.Error(exception1, exception1.Message);
+
+            Thread.Sleep(1000);
+            Log.CloseAndFlush();
+        }
+
+        /// <summary>
+        /// Tests the sink with an exception with a cross sign.
+        /// </summary>
+        [TestMethod]
+        public void TestExceptionWithCross()
+        {
+            var logger = new LoggerConfiguration()
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 3)
+                .CreateLogger();
+
+            var exception1 = new Exception("#Something");
+            logger.Error(exception1, exception1.Message);
+
+            Thread.Sleep(1000);
+            Log.CloseAndFlush();
+        }
+
+        /// <summary>
+        /// Tests the sink with an exception with a plus sign.
+        /// </summary>
+        [TestMethod]
+        public void TestExceptionWithPlusSign()
+        {
+            var logger = new LoggerConfiguration()
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 3)
+                .CreateLogger();
+
+            var exception1 = new Exception("+Something");
+            logger.Error(exception1, exception1.Message);
+
+            Thread.Sleep(1000);
+            Log.CloseAndFlush();
+        }
+
+        /// <summary>
+        /// Tests the sink with an exception with a minus sign.
+        /// </summary>
+        [TestMethod]
+        public void TestExceptionWithMinusSign()
+        {
+            var logger = new LoggerConfiguration()
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 3)
+                .CreateLogger();
+
+            var exception1 = new Exception("-Something");
+            logger.Error(exception1, exception1.Message);
+
+            Thread.Sleep(1000);
+            Log.CloseAndFlush();
+        }
+
+        /// <summary>
+        /// Tests the sink with an exception with an equal sign.
+        /// </summary>
+        [TestMethod]
+        public void TestExceptionWithEqualSign()
+        {
+            var logger = new LoggerConfiguration()
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 3)
+                .CreateLogger();
+
+            var exception1 = new Exception("=Something");
+            logger.Error(exception1, exception1.Message);
+
+            Thread.Sleep(1000);
+            Log.CloseAndFlush();
+        }
+
+        /// <summary>
+        /// Tests the sink with an exception with a separator sign.
+        /// </summary>
+        [TestMethod]
+        public void TestExceptionWithSeparatorSign()
+        {
+            var logger = new LoggerConfiguration()
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 3)
+                .CreateLogger();
+
+            var exception1 = new Exception("|Something");
+            logger.Error(exception1, exception1.Message);
+
+            Thread.Sleep(1000);
+            Log.CloseAndFlush();
+        }
+
+        /// <summary>
+        /// Tests the sink with an exception with a left curly brackets sign.
+        /// </summary>
+        [TestMethod]
+        public void TestExceptionWithLeftCurlyBracketSign()
+        {
+            var logger = new LoggerConfiguration()
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 3)
+                .CreateLogger();
+
+            var exception1 = new Exception("}Something");
+            logger.Error(exception1, exception1.Message);
+
+            Thread.Sleep(1000);
+            Log.CloseAndFlush();
+        }
+
+        /// <summary>
+        /// Tests the sink with an exception with a right curly brackets sign.
+        /// </summary>
+        [TestMethod]
+        public void TestExceptionWithRightCurlyBracketSign()
+        {
+            var logger = new LoggerConfiguration()
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 3)
+                .CreateLogger();
+
+            var exception1 = new Exception("{Something");
+            logger.Error(exception1, exception1.Message);
+
+            Thread.Sleep(1000);
+            Log.CloseAndFlush();
+        }
+
+        /// <summary>
+        /// Tests the sink with an exception with a dot sign.
+        /// </summary>
+        [TestMethod]
+        public void TestExceptionWithDotSign()
+        {
+            var logger = new LoggerConfiguration()
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 3)
+                .CreateLogger();
+
+            var exception1 = new Exception(".Something");
+            logger.Error(exception1, exception1.Message);
+
+            Thread.Sleep(1000);
+            Log.CloseAndFlush();
+        }
+
+        /// <summary>
+        /// Tests the sink with an exception with a question sign.
+        /// </summary>
+        [TestMethod]
+        public void TestExceptionWithQuestionSign()
+        {
+            var logger = new LoggerConfiguration()
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 3)
+                .CreateLogger();
+
+            var exception1 = new Exception("!Something");
             logger.Error(exception1, exception1.Message);
 
             Thread.Sleep(1000);

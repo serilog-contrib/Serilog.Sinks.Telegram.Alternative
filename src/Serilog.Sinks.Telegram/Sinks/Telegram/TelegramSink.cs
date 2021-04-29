@@ -156,21 +156,28 @@ namespace Serilog.Sinks.Telegram
         private static string RenderMessage(ExtendedLogEvent extLogEvent, TelegramSinkOptions options)
         {
             var sb = new StringBuilder();
-            sb.AppendLine($"{GetEmoji(extLogEvent.LogEvent)} {extLogEvent.LogEvent.RenderMessage()}");
+            var emoji = GetEmoji(extLogEvent.LogEvent);
+            var renderedMessage = EscapeString(extLogEvent.LogEvent.RenderMessage());
+
+            sb.AppendLine($"{emoji} {renderedMessage}");
             sb.AppendLine(string.Empty);
             sb.AppendLine(
                 extLogEvent.FirstOccurrence != extLogEvent.LastOccurrence
                     ? $"_{options.ApplicationName}: The message occurred first on {extLogEvent.FirstOccurrence.ToString(options.DateFormat)} and last on {extLogEvent.LastOccurrence.ToString(options.DateFormat)}_"
                     : $"_{options.ApplicationName}: The message occurred on {extLogEvent.FirstOccurrence.ToString(options.DateFormat)}_");
 
-            if (extLogEvent.LogEvent.Exception == null)
+            if (extLogEvent.LogEvent.Exception is null)
             {
                 return sb.ToString();
             }
 
-            sb.AppendLine($"\n*{extLogEvent.LogEvent.Exception.Message}*\n");
-            sb.AppendLine($"Message: `{extLogEvent.LogEvent.Exception.Message}`");
-            sb.AppendLine($"Type: `{extLogEvent.LogEvent.Exception.GetType().Name}`\n");
+            var message = EscapeString(extLogEvent.LogEvent.Exception.Message);
+            var exceptionType = extLogEvent.LogEvent.Exception.GetType().Name;
+
+            sb.AppendLine($"\n*{message}*\n");
+            sb.AppendLine($"Message: `{message}`");
+            sb.AppendLine($"Type: `{exceptionType}`\n");
+
             if (extLogEvent.IncludeStackTrace)
             {
                 sb.AppendLine($"Stack Trace\n```{extLogEvent.LogEvent.Exception}```");
@@ -196,6 +203,33 @@ namespace Serilog.Sinks.Telegram
                 LogEventLevel.Warning => "⚠",
                 _ => string.Empty
             };
+        }
+
+        /// <summary>
+        /// Escapes all markdown elements in the message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <returns>The escaped message.</returns>
+        private static string EscapeString(string message)
+        {
+            return message.Replace("_", @"\_")
+                .Replace("*", @"\*")
+                .Replace("[", @"\[")
+                .Replace("]", @"\]")
+                .Replace("(", @"\(")
+                .Replace(")", @"\)")
+                .Replace("~", @"\~")
+                .Replace("`", @"\`")
+                .Replace(">", @"\>")
+                .Replace("#", @"\#")
+                .Replace("+", @"\+")
+                .Replace("-", @"\-")
+                .Replace("=", @"\=")
+                .Replace("|", @"\|")
+                .Replace("{", @"\{")
+                .Replace("}", @"\}")
+                .Replace(".", @"\.")
+                .Replace("!", @"\!");
         }
 
         /// <summary>

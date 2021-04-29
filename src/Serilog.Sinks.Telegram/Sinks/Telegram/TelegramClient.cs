@@ -33,7 +33,7 @@ namespace Serilog.Sinks.Telegram
         /// <summary>
         /// The HTTP client.
         /// </summary>
-        private readonly HttpClient httpClient = new HttpClient();
+        private readonly HttpClient httpClient = new ();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TelegramClient"/> class.
@@ -60,7 +60,7 @@ namespace Serilog.Sinks.Telegram
         /// <returns>A <see cref="HttpResponseMessage"/>.</returns>
         public async Task<HttpResponseMessage> PostMessage(string message, string chatId)
         {
-            var payload = new { chat_id = chatId, text = message, parse_mode = "markdown" };
+            var payload = new { chat_id = chatId, text = message, parse_mode = "MarkdownV2" };
             var json = JsonConvert.SerializeObject(payload);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             var response = await this.httpClient.PostAsync(this.apiUrl, content);
