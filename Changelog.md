@@ -1,6 +1,7 @@
 Change history
 --------------
 
+* **Version 1.0.11.0 (2021-05-10)** : Updated nuget packages, moved to HTML formatting as markdown sometimes does strange things when using special chars.
 * **Version 1.0.10.0 (2021-04-21)** : Updated nuget packages, added new test for message that contains a underscore.
 * **Version 1.0.9.0 (2021-02-21)** : Updated nuget packages.
 * **Version 1.0.8.0 (2021-01-28)** : Updated nuget packages, added option to better configure messages (Thanks to @zoinkydoink).
