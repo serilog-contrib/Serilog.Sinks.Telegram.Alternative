@@ -57,11 +57,10 @@ namespace Serilog.Sinks.Telegram
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="chatId">The chat identifier.</param>
-        /// <param name="parserMode">The parser mode.</param>
         /// <returns>A <see cref="HttpResponseMessage"/>.</returns>
-        public async Task<HttpResponseMessage> PostMessage(string message, string chatId, string parserMode)
+        public async Task<HttpResponseMessage> PostMessage(string message, string chatId)
         {
-            var payload = new { chat_id = chatId, text = message, parse_mode = parserMode };
+            var payload = new { chat_id = chatId, text = message, parse_mode = "HTML" };
             var json = JsonConvert.SerializeObject(payload);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             var response = await this.httpClient.PostAsync(this.apiUrl, content);

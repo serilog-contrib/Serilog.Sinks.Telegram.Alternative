@@ -33,11 +33,6 @@ namespace Serilog.Sinks.Telegram
         private static readonly HttpClient Client = new HttpClient();
 
         /// <summary>
-        /// A value indicating whether V2 markdown should be used or not.
-        /// </summary>
-        private static bool UseV2Markdown = false;
-
-        /// <summary>
         /// The options.
         /// </summary>
         private readonly TelegramSinkOptions options;
@@ -162,7 +157,7 @@ namespace Serilog.Sinks.Telegram
         {
             var sb = new StringBuilder();
             var emoji = GetEmoji(extLogEvent.LogEvent);
-            var renderedMessage = EscapeMessageHeading(extLogEvent.LogEvent.RenderMessage());
+            var renderedMessage = extLogEvent.LogEvent.RenderMessage();
 
             sb.AppendLine($"{emoji} {renderedMessage}");
             sb.AppendLine(string.Empty);
@@ -171,15 +166,15 @@ namespace Serilog.Sinks.Telegram
             {
                 sb.AppendLine(
                     extLogEvent.FirstOccurrence != extLogEvent.LastOccurrence
-                        ? $"_The message occurred first on {extLogEvent.FirstOccurrence.ToString(options.DateFormat)} and last on {extLogEvent.LastOccurrence.ToString(options.DateFormat)}_"
-                        : $"_The message occurred on {extLogEvent.FirstOccurrence.ToString(options.DateFormat)}_");
+                        ? $"<i>The message occurred first on {extLogEvent.FirstOccurrence.ToString(options.DateFormat)} and last on {extLogEvent.LastOccurrence.ToString(options.DateFormat)}</i>"
+                        : $"<i>The message occurred on {extLogEvent.FirstOccurrence.ToString(options.DateFormat)}</i>");
             }
             else
             {
                 sb.AppendLine(
                     extLogEvent.FirstOccurrence != extLogEvent.LastOccurrence
-                        ? $"_{options.ApplicationName}: The message occurred first on {extLogEvent.FirstOccurrence.ToString(options.DateFormat)} and last on {extLogEvent.LastOccurrence.ToString(options.DateFormat)}_"
-                        : $"_{options.ApplicationName}: The message occurred on {extLogEvent.FirstOccurrence.ToString(options.DateFormat)}_");
+                        ? $"<i>{options.ApplicationName}: The message occurred first on {extLogEvent.FirstOccurrence.ToString(options.DateFormat)} and last on {extLogEvent.LastOccurrence.ToString(options.DateFormat)}</i>"
+                        : $"<i>{options.ApplicationName}: The message occurred on {extLogEvent.FirstOccurrence.ToString(options.DateFormat)}</i>");
             }
 
             if (extLogEvent.LogEvent.Exception is null)
@@ -189,15 +184,15 @@ namespace Serilog.Sinks.Telegram
 
             var message = extLogEvent.LogEvent.Exception.Message;
             var exceptionType = extLogEvent.LogEvent.Exception.GetType().Name;
-            
-            sb.AppendLine($"\n*{message}*\n");
-            sb.AppendLine($"Message: `{message}`");
-            sb.AppendLine($"Type: `{exceptionType}`\n");
+
+            sb.AppendLine($"\n<strong>{message}</strong>\n");
+            sb.AppendLine($"Message: <code>{message}</code>");
+            sb.AppendLine($"Type: <code>{exceptionType}</code>\n");
 
             if (extLogEvent.IncludeStackTrace)
             {
                 var exception = $"{extLogEvent.LogEvent.Exception}";
-                sb.AppendLine($"Stack Trace\n```{exception}```");
+                sb.AppendLine($"Stack Trace\n<code>{exception}</code>");
             }
 
             return sb.ToString();
@@ -223,73 +218,15 @@ namespace Serilog.Sinks.Telegram
         }
 
         /// <summary>
-        /// Escapes all markdown elements in the message heading.
-        /// </summary>
-        /// <param name="message">The message.</param>
-        /// <returns>The escaped message.</returns>
-        private static string EscapeMessageHeading(string message)
-        {
-            if (UseV2Markdown)
-            {
-                return message.Replace("_", @"\_")
-                    .Replace("*", @"\*")
-                    .Replace("[", @"\[")
-                    .Replace("]", @"\]")
-                    .Replace("(", @"\(")
-                    .Replace(")", @"\)")
-                    .Replace("~", @"\~")
-                    .Replace("`", @"\`")
-                    .Replace(">", @"\>")
-                    .Replace("#", @"\#")
-                    .Replace("+", @"\+")
-                    .Replace("-", @"\-")
-                    .Replace("=", @"\=")
-                    .Replace("|", @"\|")
-                    .Replace("{", @"\{")
-                    .Replace("}", @"\}")
-                    .Replace(".", @"\.")
-                    .Replace("!", @"\!");
-            }
-
-            return message.Replace("_", @"\_")
-                .Replace("*", @"\*")
-                .Replace("[", @"\[")
-                .Replace("`", @"\`");
-        }
-
-        /// <summary>
         /// Escapes all markdown elements in the message.
         /// </summary>
         /// <param name="message">The message.</param>
         /// <returns>The escaped message.</returns>
         private static string EscapeMessage(string message)
         {
-            if (UseV2Markdown)
-            {
-                return message.Replace("_", @"\_")
-                    .Replace("*", @"\*")
-                    .Replace("[", @"\[")
-                    .Replace("]", @"\]")
-                    .Replace("(", @"\(")
-                    .Replace(")", @"\)")
-                    .Replace("~", @"\~")
-                    .Replace("`", @"\`")
-                    .Replace(">", @"\>")
-                    .Replace("#", @"\#")
-                    .Replace("+", @"\+")
-                    .Replace("-", @"\-")
-                    .Replace("=", @"\=")
-                    .Replace("|", @"\|")
-                    .Replace("{", @"\{")
-                    .Replace("}", @"\}")
-                    .Replace(".", @"\.")
-                    .Replace("!", @"\!");
-            }
-
-            return message.Replace("_", @"\_")
-                .Replace("*", @"\*")
-                .Replace("[", @"\[")
-                .Replace("`", @"\`");
+            return message.Replace("<", "&lt;")
+                       .Replace(">", "&gt;")
+                       .Replace("&", "&amp;");
         }
 
         /// <summary>
@@ -306,8 +243,7 @@ namespace Serilog.Sinks.Telegram
 
             try
             {
-                var parserMode = UseV2Markdown ? "MarkdownV2" : "Markdown";
-                var result = await client.PostMessage(message, chatId, parserMode);
+                var result = await client.PostMessage(message, chatId);
 
                 if (result != null)
                 {
