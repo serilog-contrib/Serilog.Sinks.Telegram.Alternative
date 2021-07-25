@@ -157,7 +157,7 @@ namespace Serilog.Sinks.Telegram
         {
             var sb = new StringBuilder();
             var emoji = GetEmoji(extLogEvent.LogEvent);
-            var renderedMessage = extLogEvent.LogEvent.RenderMessage();
+            var renderedMessage = extLogEvent.LogEvent.RenderMessage().HtmlEscape();
 
             sb.AppendLine($"{emoji} {renderedMessage}");
             sb.AppendLine(string.Empty);
@@ -173,8 +173,8 @@ namespace Serilog.Sinks.Telegram
             {
                 sb.AppendLine(
                     extLogEvent.FirstOccurrence != extLogEvent.LastOccurrence
-                        ? $"<i>{options.ApplicationName}: The message occurred first on {extLogEvent.FirstOccurrence.ToString(options.DateFormat)} and last on {extLogEvent.LastOccurrence.ToString(options.DateFormat)}</i>"
-                        : $"<i>{options.ApplicationName}: The message occurred on {extLogEvent.FirstOccurrence.ToString(options.DateFormat)}</i>");
+                        ? $"<i>{options.ApplicationName.HtmlEscape()}: The message occurred first on {extLogEvent.FirstOccurrence.ToString(options.DateFormat)} and last on {extLogEvent.LastOccurrence.ToString(options.DateFormat)}</i>"
+                        : $"<i>{options.ApplicationName.HtmlEscape()}: The message occurred on {extLogEvent.FirstOccurrence.ToString(options.DateFormat)}</i>");
             }
 
             if (extLogEvent.LogEvent.Exception is null)
@@ -191,7 +191,7 @@ namespace Serilog.Sinks.Telegram
 
             if (extLogEvent.IncludeStackTrace)
             {
-                var exception = $"{extLogEvent.LogEvent.Exception}".Replace("<", "&lt;").Replace(">", "&gt;");
+                var exception = $"{extLogEvent.LogEvent.Exception}".HtmlEscape();
                 sb.AppendLine($"Stack Trace\n<code>{exception}</code>");
             }
 
