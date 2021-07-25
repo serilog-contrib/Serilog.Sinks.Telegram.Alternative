@@ -191,7 +191,7 @@ namespace Serilog.Sinks.Telegram
 
             if (extLogEvent.IncludeStackTrace)
             {
-                var exception = $"{extLogEvent.LogEvent.Exception}";
+                var exception = $"{extLogEvent.LogEvent.Exception}".Replace("<", "&lt;").Replace(">", "&gt;");
                 sb.AppendLine($"Stack Trace\n<code>{exception}</code>");
             }
 
