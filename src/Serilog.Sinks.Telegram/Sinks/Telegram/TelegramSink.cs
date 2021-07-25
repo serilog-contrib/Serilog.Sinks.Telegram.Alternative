@@ -182,8 +182,8 @@ namespace Serilog.Sinks.Telegram
                 return sb.ToString();
             }
 
-            var message = extLogEvent.LogEvent.Exception.Message;
-            var exceptionType = extLogEvent.LogEvent.Exception.GetType().Name;
+            var message = extLogEvent.LogEvent.Exception.Message.HtmlEscape();
+            var exceptionType = extLogEvent.LogEvent.Exception.GetType().Name.HtmlEscape();
 
             sb.AppendLine($"\n<strong>{message}</strong>\n");
             sb.AppendLine($"Message: <code>{message}</code>");
@@ -215,18 +215,6 @@ namespace Serilog.Sinks.Telegram
                 LogEventLevel.Warning => "⚠",
                 _ => string.Empty
             };
-        }
-
-        /// <summary>
-        /// Escapes all markdown elements in the message.
-        /// </summary>
-        /// <param name="message">The message.</param>
-        /// <returns>The escaped message.</returns>
-        private static string EscapeMessage(string message)
-        {
-            return message.Replace("<", "&lt;")
-                       .Replace(">", "&gt;")
-                       .Replace("&", "&amp;");
         }
 
         /// <summary>
