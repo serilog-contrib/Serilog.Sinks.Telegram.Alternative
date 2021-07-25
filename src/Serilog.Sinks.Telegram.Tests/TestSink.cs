@@ -375,5 +375,56 @@ namespace Serilog.Sinks.Telegram.Tests
             Thread.Sleep(1000);
             Log.CloseAndFlush();
         }
+
+        /// <summary>
+        /// Tests the sink with an exception with a smaller sign.
+        /// </summary>
+        [TestMethod]
+        public void TestExceptionWithSmallerSign()
+        {
+            var logger = new LoggerConfiguration()
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 1)
+                .CreateLogger();
+
+            var exception1 = new Exception("<Something");
+            logger.Error(exception1, exception1.Message);
+
+            Thread.Sleep(1000);
+            Log.CloseAndFlush();
+        }
+
+        /// <summary>
+        /// Tests the sink with an exception with a bigger sign.
+        /// </summary>
+        [TestMethod]
+        public void TestExceptionWithBiggerSign()
+        {
+            var logger = new LoggerConfiguration()
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 1)
+                .CreateLogger();
+
+            var exception1 = new Exception(">Something");
+            logger.Error(exception1, exception1.Message);
+
+            Thread.Sleep(1000);
+            Log.CloseAndFlush();
+        }
+
+        /// <summary>
+        /// Tests the sink with an exception with an and sign.
+        /// </summary>
+        [TestMethod]
+        public void TestExceptionWithAndSign()
+        {
+            var logger = new LoggerConfiguration()
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 1)
+                .CreateLogger();
+
+            var exception1 = new Exception("&Something");
+            logger.Error(exception1, exception1.Message);
+
+            Thread.Sleep(1000);
+            Log.CloseAndFlush();
+        }
     }
 }
