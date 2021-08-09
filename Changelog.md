@@ -1,6 +1,7 @@
 Change history
 --------------
 
+* **Version 1.0.14.0 (2021-08-09)** : Removed support for soon deprecated NetCore 2.1.
 * **Version 1.0.13.0 (2021-07-25)** : Updated nuget packages, fixed bugs with HTML escaping.
 * **Version 1.0.12.0 (2021-06-04)** : Updated nuget packages.
 * **Version 1.0.11.0 (2021-05-10)** : Updated nuget packages, moved to HTML formatting as markdown sometimes does strange things when using special chars.
