@@ -14,6 +14,8 @@ namespace Serilog.Sinks.Telegram.Tests
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+    using Serilog.Debugging;
+
     /// <summary>
     /// A class to test the <see cref="TelegramSink"/>.
     /// </summary>
@@ -422,6 +424,24 @@ namespace Serilog.Sinks.Telegram.Tests
 
             var exception1 = new Exception("&Something");
             logger.Error(exception1, exception1.Message);
+
+            Thread.Sleep(1000);
+            Log.CloseAndFlush();
+        }
+
+        /// <summary>
+        /// Tests the sink with an exception with an issue that occurred in https://github.com/SeppPenner/Serilog.Sinks.Telegram/issues/10.
+        /// </summary>
+        [TestMethod]
+        // ReSharper disable once StyleCop.SA1650
+        public void TestIssue10Exception()
+        {
+            var logger = new LoggerConfiguration()
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 1)
+                .CreateLogger();
+
+            SelfLog.Enable(Console.WriteLine);
+            logger.Warning("whatever contains {}");
 
             Thread.Sleep(1000);
             Log.CloseAndFlush();

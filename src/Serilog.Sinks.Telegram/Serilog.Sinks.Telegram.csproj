@@ -16,7 +16,7 @@
     <RepositoryUrl>https://github.com/SeppPenner/Serilog.Sinks.Telegram</RepositoryUrl>
     <PackageIcon>Icon.png</PackageIcon>
     <RepositoryType>Github</RepositoryType>
-    <PackageReleaseNotes>Version 1.0.14.0 (2021-08-09): Removed support for soon deprecated NetCore 2.1.</PackageReleaseNotes>
+    <PackageReleaseNotes>Version 1.0.15.0 (2021-08-17): Adjusted sink to ignore issues when writing to Selflog (but throw an error in Selflog itself if a formatting issue occurred), added check for Github issue #10 (Thanks to @nklv)</PackageReleaseNotes>
     <PackageLicenseFile>License.txt</PackageLicenseFile>
     <LangVersion>latest</LangVersion>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>

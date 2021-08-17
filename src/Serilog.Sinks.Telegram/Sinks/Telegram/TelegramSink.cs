@@ -226,7 +226,8 @@ namespace Serilog.Sinks.Telegram
         /// <returns>A <see cref="Task"/> representing any asynchronous operation.</returns>
         private async Task SendMessage(string token, string chatId, string message)
         {
-            SelfLog.WriteLine($"Trying to send message to chatId '{chatId}': '{message}'.");
+            this.TryWriteToSelflog($"Trying to send message to chatId '{chatId}': '{message}'.");
+            
             var client = new TelegramClient(token, 5);
 
             try
@@ -235,8 +236,25 @@ namespace Serilog.Sinks.Telegram
 
                 if (result != null)
                 {
-                    SelfLog.WriteLine($"Message sent to chatId '{chatId}': '{result.StatusCode}'.");
+                    this.TryWriteToSelflog($"Message sent to chatId '{chatId}': '{result.StatusCode}'.");
                 }
+            }
+            catch (Exception ex)
+            {
+                SelfLog.WriteLine($"{ex.Message} {ex.StackTrace}");
+                this.options.FailureCallback?.Invoke(ex);
+            }
+        }
+
+        /// <summary>
+        /// Tries to write to Selflog and throws an exception if a formatting error occurred.
+        /// </summary>
+        /// <param name="messageTemplate">The message template.</param>
+        private void TryWriteToSelflog(string messageTemplate)
+        {
+            try
+            {
+                SelfLog.WriteLine(messageTemplate);
             }
             catch (Exception ex)
             {
