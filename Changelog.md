@@ -1,6 +1,7 @@
 Change history
 --------------
 
+* **Version 1.0.16.0 (2021-08-29)** : Updated nuget packages.
 * **Version 1.0.15.0 (2021-08-17)** : Adjusted sink to ignore issues when writing to Selflog (but throw an error in Selflog itself if a formatting issue occurred), added check for Github issue #10 (Thanks to @nklv).
 * **Version 1.0.14.0 (2021-08-09)** : Removed support for soon deprecated NetCore 2.1.
 * **Version 1.0.13.0 (2021-07-25)** : Updated nuget packages, fixed bugs with HTML escaping.
