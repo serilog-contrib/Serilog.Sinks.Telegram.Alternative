@@ -4,7 +4,7 @@ Serilog.Sinks.Telegram.Alternative
 Serilog.Sinks.Telegram.Alternative is a library to save logging information from [Serilog](https://github.com/serilog/serilog) to [Telegram](https://telegram.org/).
 The assembly was written and tested in .Net 5.0.
 
-[![Build status](https://ci.appveyor.com/api/projects/status/q160mdmc5la3b4u0?svg=true)](https://ci.appveyor.com/project/SeppPenner/serilog-sinks-telegram)
+[![Build status](https://ci.appveyor.com/api/projects/status/h9vda1q684c6yiiy?svg=true)](https://ci.appveyor.com/project/SeppPenner/serilog-sinks-telegram-alternative)
 [![GitHub issues](https://img.shields.io/github/issues/SeppPenner/Serilog.Sinks.Telegram.Alternative.svg)](https://github.com/SeppPenner/Serilog.Sinks.Telegram.Alternative/issues)
 [![GitHub forks](https://img.shields.io/github/forks/SeppPenner/Serilog.Sinks.Telegram.Alternative.svg)](https://github.com/SeppPenner/Serilog.Sinks.Telegram.Alternative/network)
 [![GitHub stars](https://img.shields.io/github/stars/SeppPenner/Serilog.Sinks.Telegram.Alternative.svg)](https://github.com/SeppPenner/Serilog.Sinks.Telegram.Alternative/stargazers)
