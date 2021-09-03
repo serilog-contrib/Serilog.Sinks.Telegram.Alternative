@@ -6,7 +6,7 @@ var logger = new LoggerConfiguration()
     .CreateLogger();
 ```
 
-The project can be found on [nuget](https://www.nuget.org/packages/Serilog.Sinks.Telegram/).
+The project can be found on [nuget](https://www.nuget.org/packages/Serilog.Sinks.Telegram.Alternative/).
 
 ## Configuration options
 
