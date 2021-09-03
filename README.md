@@ -9,8 +9,8 @@ The assembly was written and tested in .Net 5.0.
 [![GitHub forks](https://img.shields.io/github/forks/SeppPenner/Serilog.Sinks.Telegram.svg)](https://github.com/SeppPenner/Serilog.Sinks.Telegram/network)
 [![GitHub stars](https://img.shields.io/github/stars/SeppPenner/Serilog.Sinks.Telegram.svg)](https://github.com/SeppPenner/Serilog.Sinks.Telegram/stargazers)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://raw.githubusercontent.com/SeppPenner/Serilog.Sinks.Telegram/master/License.txt)
-[![Nuget](https://img.shields.io/badge/Serilog.Sinks.Telegram-Nuget-brightgreen.svg)](https://www.nuget.org/packages/HaemmerElectronics.SeppPenner.Serilog.Sinks.Telegram/)
-[![NuGet Downloads](https://img.shields.io/nuget/dt/HaemmerElectronics.SeppPenner.Serilog.Sinks.Telegram.svg)](https://www.nuget.org/packages/HaemmerElectronics.SeppPenner.Serilog.Sinks.Telegram/)
+[![Nuget](https://img.shields.io/badge/Serilog.Sinks.Telegram-Nuget-brightgreen.svg)](https://www.nuget.org/packages/Serilog.Sinks.Telegram/)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/Serilog.Sinks.Telegram.svg)](https://www.nuget.org/packages/Serilog.Sinks.Telegram/)
 [![Known Vulnerabilities](https://snyk.io/test/github/SeppPenner/Serilog.Sinks.Telegram/badge.svg)](https://snyk.io/test/github/SeppPenner/Serilog.Sinks.Telegram)
 [![Gitter](https://badges.gitter.im/Serilog-Sinks-Telegram/community.svg)](https://gitter.im/Serilog-Sinks-Telegram/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
@@ -35,7 +35,7 @@ Check out the how to use file [here](https://github.com/SeppPenner/Serilog.Sinks
 
 ## Install
 ```bash
-dotnet add package HaemmerElectronics.SeppPenner.Serilog.Sinks.Telegram
+dotnet add package Serilog.Sinks.Telegram
 ```
 
 Change history
