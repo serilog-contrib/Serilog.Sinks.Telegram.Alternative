@@ -7,13 +7,13 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageId>Serilog.Sinks.Telegram.Alternative</PackageId>
-    <Authors>SeppPenner</Authors>
+    <Authors>SeppPenner and the Serilog contributors</Authors>
     <Company>SeppPenner and the Serilog contributors</Company>
     <Copyright>Copyright © SeppPenner and the Serilog contributors</Copyright>
     <Description>Serilog.Sinks.Telegram.Alternative is a library to save logging information from https://github.com/serilog/serilog to https://core.telegram.org/bots.</Description>
     <PackageTags>c# csharp serilog telegram sink logging log</PackageTags>
     <PackageProjectUrl>https://www.nuget.org/packages/Serilog.Sinks.Telegram.Alternative/</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/SeppPenner/Serilog.Sinks.Telegram.Alternative</RepositoryUrl>
+    <RepositoryUrl>https://github.com/serilog-contrib/Serilog.Sinks.Telegram.Alternative</RepositoryUrl>
     <PackageIcon>Icon.png</PackageIcon>
     <RepositoryType>Github</RepositoryType>
     <PackageReleaseNotes>Version 1.0.17.0 (2021-09-03): Updated license to fit the new owning repository, updated readme and so on to fit new package name.</PackageReleaseNotes>
