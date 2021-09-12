@@ -13,7 +13,7 @@ namespace Serilog
 
     using Serilog.Configuration;
     using Serilog.Events;
-    using Serilog.Sinks.Telegram;
+    using Serilog.Sinks.Telegram.Alternative;
 
     /// <summary>
     /// Provides extension methods on <see cref="LoggerSinkConfiguration"/>.

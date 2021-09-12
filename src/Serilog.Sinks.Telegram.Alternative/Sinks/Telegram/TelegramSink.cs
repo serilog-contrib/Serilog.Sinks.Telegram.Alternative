@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Serilog.Sinks.Telegram
+namespace Serilog.Sinks.Telegram.Alternative
 {
     using System;
     using System.Collections.Generic;

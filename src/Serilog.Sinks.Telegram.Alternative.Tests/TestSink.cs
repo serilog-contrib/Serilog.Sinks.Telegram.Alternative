@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="TestSink.cs" company="Hämmer Electronics">
+// <copyright file="TestSink.cs" company="Hï¿½mmer Electronics">
 // The project is licensed under the MIT license.
 // </copyright>
 // <summary>
@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Serilog.Sinks.Telegram.Tests
+namespace Serilog.Sinks.Telegram.Alternative.Tests
 {
     using System;
     using System.Threading;

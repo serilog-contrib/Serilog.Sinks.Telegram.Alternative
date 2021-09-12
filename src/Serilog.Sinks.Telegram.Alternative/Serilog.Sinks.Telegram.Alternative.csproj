@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>net46;net462;net47;net472;net48;netstandard2.0;netstandard2.1;netcoreapp3.1;net5.0</TargetFrameworks>
-    <AssemblyName>Serilog.Sinks.Telegram</AssemblyName>
+    <AssemblyName>Serilog.Sinks.Telegram.Alternative</AssemblyName>
     <RootNamespace>Serilog</RootNamespace>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>

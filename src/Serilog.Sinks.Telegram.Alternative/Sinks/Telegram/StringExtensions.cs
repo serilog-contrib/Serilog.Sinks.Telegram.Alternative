@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Serilog.Sinks.Telegram
+namespace Serilog.Sinks.Telegram.Alternative
 {
     /// <summary>
     /// A class containing extension methods for the <see cref="string"/> type.
