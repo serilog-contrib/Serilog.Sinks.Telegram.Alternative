@@ -1,6 +1,7 @@
 Change history
 --------------
 
+* **Version 1.1.0.0 (2021-09-12)** : Added option `useCustomHtmlFormatting` to allow custom HTML formatting for the message and application name, updated NuGet packages.
 * **Version 1.0.17.0 (2021-09-03)** : Updated license to fit the new owning repository, updated readme and so on to fit new package name.
 * **Version 1.0.16.0 (2021-08-29)** : Updated nuget packages.
 * **Version 1.0.15.0 (2021-08-17)** : Adjusted sink to ignore issues when writing to Selflog (but throw an error in Selflog itself if a formatting issue occurred), added check for Github issue #10 (Thanks to @nklv).
