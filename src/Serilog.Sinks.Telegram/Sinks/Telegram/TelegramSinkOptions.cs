@@ -44,6 +44,7 @@ namespace Serilog.Sinks.Telegram
         /// <param name="sendBatchesAsSingleMessages">A value indicating whether the batches are sent as single messages or as one block of messages.</param>
         /// <param name="includeStackTrace">A value indicating whether the stack trace should be shown or not.</param>
         /// <param name="failureCallback">The failure callback.</param>
+        /// <param name="useCustomHtmlFormatting">A value indicating whether custom HTML formatting in the messages could be used. (Use this carefully and only if really needed).</param>
         public TelegramSinkOptions(
             string botToken,
             string chatId,
@@ -55,7 +56,8 @@ namespace Serilog.Sinks.Telegram
             LogEventLevel minimumLogEventLevel = LogEventLevel.Verbose,
             bool? sendBatchesAsSingleMessages = true,
             bool? includeStackTrace = true,
-            Action<Exception> failureCallback = null)
+            Action<Exception> failureCallback = null,
+            bool useCustomHtmlFormatting = false)
         {
             if (botToken == null)
             {
@@ -78,6 +80,7 @@ namespace Serilog.Sinks.Telegram
             this.FailureCallback = failureCallback;
             this.DateFormat = dateFormat;
             this.ApplicationName = applicationName;
+            this.UseCustomHtmlFormatting = useCustomHtmlFormatting;
         }
 
         /// <summary>
@@ -134,5 +137,10 @@ namespace Serilog.Sinks.Telegram
         /// Gets the failure callback.
         /// </summary>
         public Action<Exception> FailureCallback { get; }
+
+        /// <summary>
+        /// Gets a value indicating whether custom HTML formatting in the messages could be used. (Use this carefully and only if really needed).
+        /// </summary>
+        public bool UseCustomHtmlFormatting { get; }
     }
 }

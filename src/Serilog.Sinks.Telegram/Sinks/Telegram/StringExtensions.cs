@@ -18,12 +18,11 @@ namespace Serilog.Sinks.Telegram
         /// Escapes the invalid chars for Telegram to valid HTML encoded ones.
         /// </summary>
         /// <param name="value">The <see cref="string"/> value to escape.</param>
+        /// <param name="shouldEscape">A value indicating whether the value should be escaped or not.</param>
         /// <returns>A new escaped <see cref="string"/>.</returns>
-        public static string HtmlEscape(this string value)
+        public static string HtmlEscape(this string value, bool shouldEscape)
         {
-            return value.Replace("<", "&lt;")
-                .Replace(">", "&gt;")
-                .Replace("&", "&amp;");
+            return shouldEscape ? value.Replace("<", "&lt;").Replace(">", "&gt;").Replace("&", "&amp;") : value;
         }
     }
 }

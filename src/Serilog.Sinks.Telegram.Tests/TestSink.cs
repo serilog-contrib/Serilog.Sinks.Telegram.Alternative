@@ -430,7 +430,7 @@ namespace Serilog.Sinks.Telegram.Tests
         }
 
         /// <summary>
-        /// Tests the sink with an exception with an issue that occurred in https://github.com/SeppPenner/Serilog.Sinks.Telegram/issues/10.
+        /// Tests the sink with an exception with an issue that occurred in https://github.com/serilog-contrib/Serilog.Sinks.Telegram.Alternative/issues/10.
         /// </summary>
         [TestMethod]
         // ReSharper disable once StyleCop.SA1650
@@ -442,6 +442,24 @@ namespace Serilog.Sinks.Telegram.Tests
 
             SelfLog.Enable(Console.WriteLine);
             logger.Warning("whatever contains {}");
+
+            Thread.Sleep(1000);
+            Log.CloseAndFlush();
+        }
+
+        /// <summary>
+        /// Tests the sink with not escaped messages according to https://github.com/serilog-contrib/Serilog.Sinks.Telegram.Alternative/issues/11.
+        /// </summary>
+        [TestMethod]
+        // ReSharper disable once StyleCop.SA1650
+        public void TestNotEscapedMessage()
+        {
+            var logger = new LoggerConfiguration()
+                .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, useCustomHtmlFormatting: true)
+                .CreateLogger();
+
+            SelfLog.Enable(Console.WriteLine);
+            logger.Warning("<b>Some bold message</b>");
 
             Thread.Sleep(1000);
             Log.CloseAndFlush();

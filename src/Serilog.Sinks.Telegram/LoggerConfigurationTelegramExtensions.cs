@@ -43,6 +43,8 @@ namespace Serilog
         /// <param name="includeStackTrace">Whether stack traces should be included or not.</param>
         /// <param name="dateFormat">The date time format showing how the date and time should be formatted.</param>
         /// <param name="applicationName">The name of the application sending the events in case multiple apps write to the same channel.</param>
+        /// <param name="failureCallback">The failure callback.</param>
+        /// <param name="useCustomHtmlFormatting">A value indicating whether custom HTML formatting in the messages could be used. (Use this carefully and only if really needed).</param>
         /// <returns>Instance of <see cref="LoggerConfiguration"/> object.</returns>
         public static LoggerConfiguration Telegram(
             this LoggerSinkConfiguration loggerSinkConfiguration,
@@ -55,9 +57,23 @@ namespace Serilog
             bool? sendBatchesAsSingleMessages = true,
             bool? includeStackTrace = true,
             string dateFormat = "dd.MM.yyyy HH:mm:sszzz",
-            string applicationName = "")
+            string applicationName = "",
+            Action<Exception> failureCallback = null,
+            bool useCustomHtmlFormatting = false)
         {
-            var telegramSinkOptions = new TelegramSinkOptions(botToken, chatId, dateFormat, applicationName, batchSizeLimit, period, formatProvider, restrictedToMinimumLevel, sendBatchesAsSingleMessages, includeStackTrace);
+            var telegramSinkOptions = new TelegramSinkOptions(
+                botToken,
+                chatId,
+                dateFormat,
+                applicationName,
+                batchSizeLimit,
+                period,
+                formatProvider,
+                restrictedToMinimumLevel,
+                sendBatchesAsSingleMessages,
+                includeStackTrace,
+                failureCallback,
+                useCustomHtmlFormatting);
             return loggerSinkConfiguration.Telegram(telegramSinkOptions, restrictedToMinimumLevel);
         }
 
