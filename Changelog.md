@@ -1,6 +1,7 @@
 Change history
 --------------
 
+* **Version 1.1.1.0 (2021-11-04)** : Updated NuGet packages.
 * **Version 1.1.0.0 (2021-09-12)** : Added option `useCustomHtmlFormatting` to allow custom HTML formatting for the message and application name, updated NuGet packages.
 * **Version 1.0.17.0 (2021-09-03)** : Updated license to fit the new owning repository, updated readme and so on to fit new package name.
 * **Version 1.0.16.0 (2021-08-29)** : Updated nuget packages.

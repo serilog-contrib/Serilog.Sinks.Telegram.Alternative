@@ -16,7 +16,7 @@
     <RepositoryUrl>https://github.com/serilog-contrib/Serilog.Sinks.Telegram.Alternative</RepositoryUrl>
     <PackageIcon>Icon.png</PackageIcon>
     <RepositoryType>Github</RepositoryType>
-    <PackageReleaseNotes>Version 1.1.0.0 (2021-09-12): Added option `useCustomHtmlFormatting` to allow custom HTML formatting for the message and application name, updated NuGet packages.</PackageReleaseNotes>
+    <PackageReleaseNotes>Version 1.1.1.0 (2021-11-04): Updated NuGet packages.</PackageReleaseNotes>
     <PackageLicenseFile>License.txt</PackageLicenseFile>
     <LangVersion>latest</LangVersion>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
