@@ -102,7 +102,7 @@ namespace Serilog.Sinks.Telegram.Alternative
                     var message = this.options.FormatProvider != null
                                       ? extendedLogEvent.LogEvent.RenderMessage(this.options.FormatProvider)
                                       : RenderMessage(extendedLogEvent, options);
-                    await this.SendMessage(this.options.BotToken, this.options.ChatId, message);
+                    await this.SendMessage(this.options.BotApiUrl, this.options.BotToken, this.options.ChatId, message);
                 }
             }
             else
@@ -131,7 +131,7 @@ namespace Serilog.Sinks.Telegram.Alternative
                 }
 
                 var messageToSend = sb.ToString();
-                await this.SendMessage(this.options.BotToken, this.options.ChatId, messageToSend);
+                await this.SendMessage(this.options.BotApiUrl, this.options.BotToken, this.options.ChatId, messageToSend);
             }
         }
 
@@ -221,15 +221,16 @@ namespace Serilog.Sinks.Telegram.Alternative
         /// <summary>
         /// Sends the message.
         /// </summary>
+        /// <param name="botApiUrl">The bot API url</param>
         /// <param name="token">The token.</param>
         /// <param name="chatId">The chat identifier.</param>
         /// <param name="message">The message.</param>
         /// <returns>A <see cref="Task"/> representing any asynchronous operation.</returns>
-        private async Task SendMessage(string token, string chatId, string message)
+        private async Task SendMessage(string botApiUrl, string token, string chatId, string message)
         {
             this.TryWriteToSelflog($"Trying to send message to chatId '{chatId}': '{message}'.");
             
-            var client = new TelegramClient(token, 5);
+            var client = new TelegramClient(token, 5, botApiUrl);
 
             try
             {

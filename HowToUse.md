@@ -24,6 +24,7 @@ The project can be found on [nuget](https://www.nuget.org/packages/Serilog.Sinks
 |applicationName|The name of the application sending the events in case multiple apps write to the same channel.|`applicationName: "My App"`|`string.Empty`|
 |failureCallback|Adds an option to add a failure callback action.|`failureCallback: e => Console.WriteLine($"Sink error: {e.Message}")`|`null`|
 |useCustomHtmlFormatting|An option to allow custom HTML formatting inside the message text and the application name (Use only if really needed). Make sure to use the HTML formatting from https://core.telegram.org/bots/api#html-style.|`true`|`false`|
+|botApiUrl|Custom Bot API Url|https://telegram.something.com/bot|
 
 ## Configuration via JSON options
 
@@ -42,7 +43,8 @@ The project can be found on [nuget](https://www.nuget.org/packages/Serilog.Sinks
                     "chatId": "12345",
                     "restrictedToMinimumLevel": "Warning",
                     "applicationName": "My App",
-                    "dateFormat": "yyyy-MM-dd HH:mm:sszzz"
+                    "dateFormat": "yyyy-MM-dd HH:mm:sszzz",
+                    "botApiUrl": "https://telegram.something.com/bot"
                 }
             }
         ]
