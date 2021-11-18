@@ -34,6 +34,16 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "zoinkydoink",
+      "name": "zoinkydoink",
+      "avatar_url": "https://avatars.githubusercontent.com/u/15949978?v=4",
+      "profile": "https://github.com/zoinkydoink",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
