@@ -1,6 +1,6 @@
 Serilog.Sinks.Telegram.Alternative
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 ====================================
 
@@ -58,6 +58,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="http://azhdari.online"><img src="https://avatars.githubusercontent.com/u/410130?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mohammad Azhdari</b></sub></a><br /><a href="https://github.com/serilog-contrib/Serilog.Sinks.Telegram.Alternative/commits?author=azhdari" title="Code">💻</a> <a href="https://github.com/serilog-contrib/Serilog.Sinks.Telegram.Alternative/commits?author=azhdari" title="Documentation">📖</a></td>
     <td align="center"><a href="http://JordyHulck.com"><img src="https://avatars.githubusercontent.com/u/3170510?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jordy Hulck</b></sub></a><br /><a href="https://github.com/serilog-contrib/Serilog.Sinks.Telegram.Alternative/commits?author=Megasware128" title="Code">💻</a> <a href="https://github.com/serilog-contrib/Serilog.Sinks.Telegram.Alternative/commits?author=Megasware128" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/jessicah"><img src="https://avatars.githubusercontent.com/u/274082?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jessica Hamilton</b></sub></a><br /><a href="https://github.com/serilog-contrib/Serilog.Sinks.Telegram.Alternative/commits?author=jessicah" title="Code">💻</a> <a href="https://github.com/serilog-contrib/Serilog.Sinks.Telegram.Alternative/commits?author=jessicah" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/zoinkydoink"><img src="https://avatars.githubusercontent.com/u/15949978?v=4?s=100" width="100px;" alt=""/><br /><sub><b>zoinkydoink</b></sub></a><br /><a href="https://github.com/serilog-contrib/Serilog.Sinks.Telegram.Alternative/commits?author=zoinkydoink" title="Code">💻</a> <a href="https://github.com/serilog-contrib/Serilog.Sinks.Telegram.Alternative/commits?author=zoinkydoink" title="Documentation">📖</a></td>
   </tr>
 </table>
 
