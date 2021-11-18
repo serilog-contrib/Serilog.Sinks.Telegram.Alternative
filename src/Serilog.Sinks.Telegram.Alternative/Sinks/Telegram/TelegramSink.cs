@@ -221,7 +221,7 @@ namespace Serilog.Sinks.Telegram.Alternative
         /// <summary>
         /// Sends the message.
         /// </summary>
-        /// <param name="botApiUrl">The bot API url</param>
+        /// <param name="botApiUrl">The Telegram bot API url</param>
         /// <param name="token">The token.</param>
         /// <param name="chatId">The chat identifier.</param>
         /// <param name="message">The message.</param>

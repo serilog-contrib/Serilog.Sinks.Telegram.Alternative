@@ -21,7 +21,7 @@ namespace Serilog.Sinks.Telegram.Alternative
     public class TelegramClient
     {
         /// <summary>
-        /// Default Value for The Telegram bot API URL.
+        /// The default value for the Telegram bot API url.
         /// </summary>
         private const string DefaultTelegramBotApiUrl = "https://api.telegram.org/bot";
 

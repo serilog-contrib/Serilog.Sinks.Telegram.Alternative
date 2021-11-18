@@ -45,7 +45,7 @@ namespace Serilog.Sinks.Telegram.Alternative
         /// <param name="includeStackTrace">A value indicating whether the stack trace should be shown or not.</param>
         /// <param name="failureCallback">The failure callback.</param>
         /// <param name="useCustomHtmlFormatting">A value indicating whether custom HTML formatting in the messages could be used. (Use this carefully and only if really needed).</param>
-        /// <param name="botApiUrl">The Telegram bot API URL; defaults to https://api.telegram.org/bot</param>
+        /// <param name="botApiUrl">The Telegram bot API url, defaults to https://api.telegram.org/bot.</param>
         public TelegramSinkOptions(
             string botToken,
             string chatId,
@@ -61,12 +61,7 @@ namespace Serilog.Sinks.Telegram.Alternative
             bool useCustomHtmlFormatting = false,
             string botApiUrl = null)
         {
-            if (botToken == null)
-            {
-                throw new ArgumentNullException(nameof(botToken));
-            }
-
-            if (string.IsNullOrEmpty(botToken))
+            if (string.IsNullOrWhiteSpace(botToken))
             {
                 throw new ArgumentException(nameof(botToken));
             }

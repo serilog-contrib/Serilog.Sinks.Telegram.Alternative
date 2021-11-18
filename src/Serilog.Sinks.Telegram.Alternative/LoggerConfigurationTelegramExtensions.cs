@@ -45,7 +45,7 @@ namespace Serilog
         /// <param name="applicationName">The name of the application sending the events in case multiple apps write to the same channel.</param>
         /// <param name="failureCallback">The failure callback.</param>
         /// <param name="useCustomHtmlFormatting">A value indicating whether custom HTML formatting in the messages could be used. (Use this carefully and only if really needed).</param>
-        /// <param name="botApiUrl">The Telegram bot API URL; defaults to https://api.telegram.org/bot</param>
+        /// <param name="botApiUrl">The Telegram bot API url, defaults to https://api.telegram.org/bot.</param>
         /// <returns>Instance of <see cref="LoggerConfiguration"/> object.</returns>
         public static LoggerConfiguration Telegram(
             this LoggerSinkConfiguration loggerSinkConfiguration,
