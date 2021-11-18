@@ -1,0 +1,25 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "azhdari",
+      "name": "Mohammad Azhdari",
+      "avatar_url": "https://avatars.githubusercontent.com/u/410130?v=4",
+      "profile": "http://azhdari.online",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "Serilog.Sinks.Telegram.Alternative",
+  "projectOwner": "serilog-contrib",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
