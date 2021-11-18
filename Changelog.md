@@ -1,6 +1,7 @@
 Change history
 --------------
 
+* **Version 1.1.3.0 (2021-11-18)** : NuGet packages updated, added support for custom bot API urls (Thanks to @azhdari).
 * **Version 1.1.2.0 (2021-11-09)** : NuGet packages updated, added support for Net6.0.
 * **Version 1.1.1.0 (2021-11-04)** : Updated NuGet packages.
 * **Version 1.1.0.0 (2021-09-12)** : Added option `useCustomHtmlFormatting` to allow custom HTML formatting for the message and application name, updated NuGet packages.
