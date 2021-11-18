@@ -49,6 +49,11 @@ namespace Serilog.Sinks.Telegram.Alternative
                 throw new ArgumentException("The bot token mustn't be empty.", nameof(botToken));
             }
 
+            if (string.IsNullOrWhiteSpace(botApiUrl))
+            {
+                botApiUrl = DefaultTelegramBotApiUrl;
+            }
+
             this.apiUrl = new Uri($"{botApiUrl}{botToken}/sendMessage");
             this.httpClient.Timeout = TimeSpan.FromSeconds(timeoutSeconds);
         }
