@@ -24,6 +24,16 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "jessicah",
+      "name": "Jessica Hamilton",
+      "avatar_url": "https://avatars.githubusercontent.com/u/274082?v=4",
+      "profile": "https://github.com/jessicah",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
