@@ -1,6 +1,6 @@
 Serilog.Sinks.Telegram.Alternative
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 ====================================
 
@@ -56,6 +56,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="http://azhdari.online"><img src="https://avatars.githubusercontent.com/u/410130?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mohammad Azhdari</b></sub></a><br /><a href="https://github.com/serilog-contrib/Serilog.Sinks.Telegram.Alternative/commits?author=azhdari" title="Code">💻</a> <a href="https://github.com/serilog-contrib/Serilog.Sinks.Telegram.Alternative/commits?author=azhdari" title="Documentation">📖</a></td>
+    <td align="center"><a href="http://JordyHulck.com"><img src="https://avatars.githubusercontent.com/u/3170510?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jordy Hulck</b></sub></a><br /><a href="https://github.com/serilog-contrib/Serilog.Sinks.Telegram.Alternative/commits?author=Megasware128" title="Code">💻</a> <a href="https://github.com/serilog-contrib/Serilog.Sinks.Telegram.Alternative/commits?author=Megasware128" title="Documentation">📖</a></td>
   </tr>
 </table>
 
