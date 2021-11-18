@@ -14,6 +14,16 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "Megasware128",
+      "name": "Jordy Hulck",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3170510?v=4",
+      "profile": "http://JordyHulck.com",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
