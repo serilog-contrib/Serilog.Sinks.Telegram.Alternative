@@ -30,7 +30,7 @@ namespace Serilog.Sinks.Telegram.Alternative
         /// <summary>
         /// The client.
         /// </summary>
-        private static readonly HttpClient Client = new HttpClient();
+        private static readonly HttpClient Client = new();
 
         /// <summary>
         /// The options.
@@ -166,12 +166,12 @@ namespace Serilog.Sinks.Telegram.Alternative
             if (!string.IsNullOrWhiteSpace(options.ApplicationName) ||
                 !string.IsNullOrWhiteSpace(options.DateFormat))
             {
-                string appNamePart = options.ApplicationName == null 
-                    ? "" 
+                string appNamePart = string.IsNullOrWhiteSpace(options.ApplicationName)
+                    ? string.Empty 
                     : $"{options.ApplicationName.HtmlEscape(shouldEscape)}: ";
 
-                string datePart = options.DateFormat == null 
-                    ? "" 
+                string datePart = string.IsNullOrWhiteSpace(options.DateFormat)
+                    ? string.Empty
                     : extLogEvent.FirstOccurrence != extLogEvent.LastOccurrence
                         ? $"The message occurred first on {extLogEvent.FirstOccurrence.ToString(options.DateFormat)} and last on {extLogEvent.LastOccurrence.ToString(options.DateFormat)}"
                         : $"The message occurred on {extLogEvent.FirstOccurrence.ToString(options.DateFormat)}</i>";
