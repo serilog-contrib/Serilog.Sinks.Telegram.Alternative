@@ -174,7 +174,7 @@ namespace Serilog.Sinks.Telegram.Alternative
                     ? string.Empty
                     : extLogEvent.FirstOccurrence != extLogEvent.LastOccurrence
                         ? $"The message occurred first on {extLogEvent.FirstOccurrence.ToString(options.DateFormat)} and last on {extLogEvent.LastOccurrence.ToString(options.DateFormat)}"
-                        : $"The message occurred on {extLogEvent.FirstOccurrence.ToString(options.DateFormat)}</i>";
+                        : $"The message occurred on {extLogEvent.FirstOccurrence.ToString(options.DateFormat)}";
 
                 sb.AppendLine($"<i>{appNamePart}{datePart}</i>");
             }
