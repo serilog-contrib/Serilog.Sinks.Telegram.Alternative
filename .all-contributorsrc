@@ -72,6 +72,16 @@
         "projectManagement",
         "test"
       ]
+    },
+    {
+      "login": "nebula2",
+      "name": "Jack",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5841525?v=4",
+      "profile": "https://fistelmann.de/",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
