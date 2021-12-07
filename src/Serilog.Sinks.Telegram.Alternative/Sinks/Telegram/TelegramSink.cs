@@ -166,7 +166,7 @@ namespace Serilog.Sinks.Telegram.Alternative
             if (!string.IsNullOrWhiteSpace(options.ApplicationName) ||
                 !string.IsNullOrWhiteSpace(options.DateFormat))
             {
-                string appNamePart = string.IsNullOrWhiteSpace(options.ApplicationName)
+                string applicationNamePart = string.IsNullOrWhiteSpace(options.ApplicationName)
                     ? string.Empty 
                     : $"{options.ApplicationName.HtmlEscape(shouldEscape)}: ";
 
@@ -176,7 +176,7 @@ namespace Serilog.Sinks.Telegram.Alternative
                         ? $"The message occurred first on {extLogEvent.FirstOccurrence.ToString(options.DateFormat)} and last on {extLogEvent.LastOccurrence.ToString(options.DateFormat)}"
                         : $"The message occurred on {extLogEvent.FirstOccurrence.ToString(options.DateFormat)}";
 
-                sb.AppendLine($"<i>{appNamePart}{datePart}</i>");
+                sb.AppendLine($"<i>{applicationNamePart}{datePart}</i>");
             }
 
             if (extLogEvent.LogEvent.Exception is null)
