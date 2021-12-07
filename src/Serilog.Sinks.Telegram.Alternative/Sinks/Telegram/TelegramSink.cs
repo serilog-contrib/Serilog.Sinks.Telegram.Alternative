@@ -163,19 +163,20 @@ namespace Serilog.Sinks.Telegram.Alternative
             sb.AppendLine($"{emoji} {renderedMessage}");
             sb.AppendLine(string.Empty);
 
-            if (string.IsNullOrWhiteSpace(options.ApplicationName))
+            if (!string.IsNullOrWhiteSpace(options.ApplicationName) ||
+                !string.IsNullOrWhiteSpace(options.DateFormat))
             {
-                sb.AppendLine(
-                    extLogEvent.FirstOccurrence != extLogEvent.LastOccurrence
-                        ? $"<i>The message occurred first on {extLogEvent.FirstOccurrence.ToString(options.DateFormat)} and last on {extLogEvent.LastOccurrence.ToString(options.DateFormat)}</i>"
-                        : $"<i>The message occurred on {extLogEvent.FirstOccurrence.ToString(options.DateFormat)}</i>");
-            }
-            else
-            {
-                sb.AppendLine(
-                    extLogEvent.FirstOccurrence != extLogEvent.LastOccurrence
-                        ? $"<i>{options.ApplicationName.HtmlEscape(shouldEscape)}: The message occurred first on {extLogEvent.FirstOccurrence.ToString(options.DateFormat)} and last on {extLogEvent.LastOccurrence.ToString(options.DateFormat)}</i>"
-                        : $"<i>{options.ApplicationName.HtmlEscape(shouldEscape)}: The message occurred on {extLogEvent.FirstOccurrence.ToString(options.DateFormat)}</i>");
+                string appNamePart = options.ApplicationName == null 
+                    ? "" 
+                    : $"{options.ApplicationName.HtmlEscape(shouldEscape)}: ";
+
+                string datePart = options.DateFormat == null 
+                    ? "" 
+                    : extLogEvent.FirstOccurrence != extLogEvent.LastOccurrence
+                        ? $"The message occurred first on {extLogEvent.FirstOccurrence.ToString(options.DateFormat)} and last on {extLogEvent.LastOccurrence.ToString(options.DateFormat)}"
+                        : $"The message occurred on {extLogEvent.FirstOccurrence.ToString(options.DateFormat)}</i>";
+
+                sb.AppendLine($"<i>{appNamePart}{datePart}</i>");
             }
 
             if (extLogEvent.LogEvent.Exception is null)
