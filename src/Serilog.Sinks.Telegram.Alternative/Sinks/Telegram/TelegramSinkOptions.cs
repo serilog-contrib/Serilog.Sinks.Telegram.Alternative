@@ -59,7 +59,8 @@ namespace Serilog.Sinks.Telegram.Alternative
             bool? includeStackTrace = true,
             Action<Exception> failureCallback = null,
             bool useCustomHtmlFormatting = false,
-            string botApiUrl = null)
+            string botApiUrl = null,
+            string outputTemplate = null)
         {
             if (string.IsNullOrWhiteSpace(botToken))
             {
@@ -79,6 +80,7 @@ namespace Serilog.Sinks.Telegram.Alternative
             this.ApplicationName = applicationName;
             this.UseCustomHtmlFormatting = useCustomHtmlFormatting;
             this.BotApiUrl = botApiUrl;
+            this.OutputTemplate = outputTemplate;
         }
 
         /// <summary>
@@ -145,5 +147,15 @@ namespace Serilog.Sinks.Telegram.Alternative
         /// Gets a value indicating whether custom HTML formatting in the messages could be used. (Use this carefully and only if really needed).
         /// </summary>
         public bool UseCustomHtmlFormatting { get; }
+
+        /// <summary>
+        /// Gets a value whether or not string literals should be escaped.
+        /// </summary>
+        public bool ShouldEscape => !UseCustomHtmlFormatting;
+
+        /// <summary>
+        /// Get the output template.
+        /// </summary>
+        public string OutputTemplate { get; set; }
     }
 }
