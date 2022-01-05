@@ -8,7 +8,7 @@ var logger = new LoggerConfiguration()
 
 The project can be found on [nuget](https://www.nuget.org/packages/Serilog.Sinks.Telegram.Alternative/).
 
-## Configuration options#
+## Configuration options
 
 |Parameter|Meaning|Example|Default value|
 |-|-|-|-|
