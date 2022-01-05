@@ -162,19 +162,20 @@ namespace Serilog.Sinks.Telegram.Alternative
             sb.AppendLine($"{emoji} {renderedMessage}");
             sb.AppendLine(string.Empty);
 
-            if (string.IsNullOrWhiteSpace(options.ApplicationName))
+            if (!string.IsNullOrWhiteSpace(options.ApplicationName) ||
+                !string.IsNullOrWhiteSpace(options.DateFormat))
             {
-                sb.AppendLine(
-                    extLogEvent.FirstOccurrence != extLogEvent.LastOccurrence
-                        ? $"<i>The message occurred first on {extLogEvent.FirstOccurrence.ToString(options.DateFormat)} and last on {extLogEvent.LastOccurrence.ToString(options.DateFormat)}</i>"
-                        : $"<i>The message occurred on {extLogEvent.FirstOccurrence.ToString(options.DateFormat)}</i>");
-            }
-            else
-            {
-                sb.AppendLine(
-                    extLogEvent.FirstOccurrence != extLogEvent.LastOccurrence
-                        ? $"<i>{Escape(options, options.ApplicationName)}: The message occurred first on {extLogEvent.FirstOccurrence.ToString(options.DateFormat)} and last on {extLogEvent.LastOccurrence.ToString(options.DateFormat)}</i>"
-                        : $"<i>{Escape(options, options.ApplicationName)}: The message occurred on {extLogEvent.FirstOccurrence.ToString(options.DateFormat)}</i>");
+                string applicationNamePart = string.IsNullOrWhiteSpace(options.ApplicationName)
+                    ? string.Empty
+                    : $"{Escape(options, options.ApplicationName)}: ";
+
+                string datePart = string.IsNullOrWhiteSpace(options.DateFormat)
+                    ? string.Empty
+                    : extLogEvent.FirstOccurrence != extLogEvent.LastOccurrence
+                        ? $"The message occurred first on {extLogEvent.FirstOccurrence.ToString(options.DateFormat)} and last on {extLogEvent.LastOccurrence.ToString(options.DateFormat)}"
+                        : $"The message occurred on {extLogEvent.FirstOccurrence.ToString(options.DateFormat)}";
+
+                sb.AppendLine($"<i>{applicationNamePart}{datePart}</i>");
             }
 
             if (extLogEvent.LogEvent.Exception is null)
@@ -191,7 +192,7 @@ namespace Serilog.Sinks.Telegram.Alternative
 
             if (extLogEvent.IncludeStackTrace)
             {
-                var exception = Escape(options, "{extLogEvent.LogEvent.Exception}");
+                var exception = Escape(options, $"{extLogEvent.LogEvent.Exception}");
                 sb.AppendLine($"Stack Trace\n<code>{exception}</code>");
             }
 
