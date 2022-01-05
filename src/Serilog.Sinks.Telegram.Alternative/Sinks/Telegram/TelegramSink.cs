@@ -30,7 +30,7 @@ namespace Serilog.Sinks.Telegram.Alternative
         /// <summary>
         /// The client.
         /// </summary>
-        private static readonly HttpClient Client = new HttpClient();
+        private static readonly HttpClient Client = new();
 
         /// <summary>
         /// The options.
