@@ -25,7 +25,7 @@ The project can be found on [nuget](https://www.nuget.org/packages/Serilog.Sinks
 |failureCallback|Adds an option to add a failure callback action.|`failureCallback: e => Console.WriteLine($"Sink error: {e.Message}")`|`null`|
 |useCustomHtmlFormatting|An option to allow custom HTML formatting inside the message text and the application name (Use only if really needed). Make sure to use the HTML formatting from https://core.telegram.org/bots/api#html-style.|`true`|`false`|
 |botApiUrl|Custom Bot API Url|https://telegram.something.com/bot|
-|customHtmlFormatter|Custom Html Format Function which you can set in addition to `useCustomHtmlFormatting`. See [here](https://github.com/serilog-contrib/Serilog.Sinks.Telegram.Alternative/issues/26)|`(s) => return s.Replace("<", "&lt;").Replace(">", "&gt;").Replace("&", "&amp;").Replace("&lt;tg-spoiler&gt;", "<tg-spoiler>").Replace("&lt;/tg-spoiler&gt;", "</tg-spoiler>");`|
+|customHtmlFormatter|Custom Html Format Function which you can set in addition to `useCustomHtmlFormatting`. See [here](https://github.com/serilog-contrib/Serilog.Sinks.Telegram.Alternative/issues/26)|`(s) => return s.Replace("<", "&lt;").Replace(">", "&gt;").Replace("&", "&amp;").Replace("&amp;lt;tg-spoiler&amp;gt;", "<tg-spoiler>").Replace("&amp;lt;/tg-spoiler&amp;gt;", "</tg-spoiler>");`|
 
 ## Configuration via JSON options
 

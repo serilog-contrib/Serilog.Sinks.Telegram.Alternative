@@ -483,14 +483,14 @@ namespace Serilog.Sinks.Telegram.Alternative.Tests
                             .Replace("<", "&lt;")
                             .Replace(">", "&gt;")
                             .Replace("&", "&amp;")
-                            .Replace("&lt;tg-spoiler&gt;", "<tg-spoiler>")
-                            .Replace("&lt;/tg-spoiler&gt;", "</tg-spoiler>");
+                            .Replace("&amp;lt;tg-spoiler&amp;gt;", "<tg-spoiler>")
+                            .Replace("&amp;lt;/tg-spoiler&amp;gt;", "</tg-spoiler>");
                     }
                 )
                 .CreateLogger();
 
             SelfLog.Enable(Console.WriteLine);
-            logger.Warning("<b>Here comes a spoiler:</b><tg-spoiler>Tadaaa</tg-spoiler>");
+            logger.Warning("Here comes a spoiler: <tg-spoiler>Tadaaa</tg-spoiler>");
 
             Thread.Sleep(1000);
             Log.CloseAndFlush();
