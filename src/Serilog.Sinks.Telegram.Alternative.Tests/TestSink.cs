@@ -464,5 +464,36 @@ namespace Serilog.Sinks.Telegram.Alternative.Tests
             Thread.Sleep(1000);
             Log.CloseAndFlush();
         }
+
+        /// <summary>
+        /// Tests the sink with user defined html escaping according to https://github.com/serilog-contrib/Serilog.Sinks.Telegram.Alternative/issues/26.
+        /// </summary>
+        [TestMethod]
+        // ReSharper disable once StyleCop.SA1650
+        public void TestCustomHtmlFormatter()
+        {
+            var logger = new LoggerConfiguration()
+                .WriteTo.Telegram(
+                    this.telegramBotToken, 
+                    this.telegramChatId, 
+                    useCustomHtmlFormatting: true, 
+                    customHtmlFormatter: (s) => 
+                    {
+                        return s
+                            .Replace("<", "&lt;")
+                            .Replace(">", "&gt;")
+                            .Replace("&", "&amp;")
+                            .Replace("&amp;lt;tg-spoiler&amp;gt;", "<tg-spoiler>")
+                            .Replace("&amp;lt;/tg-spoiler&amp;gt;", "</tg-spoiler>");
+                    }
+                )
+                .CreateLogger();
+
+            SelfLog.Enable(Console.WriteLine);
+            logger.Warning("Here comes a spoiler: <tg-spoiler>Tadaaa</tg-spoiler>");
+
+            Thread.Sleep(1000);
+            Log.CloseAndFlush();
+        }
     }
 }
