@@ -219,16 +219,16 @@ namespace Serilog.Sinks.Telegram.Alternative
         }
 
         /// <summary>
-        /// Correctly escapes strings taking options into consideration
+        /// Correctly escapes strings taking options into consideration.
         /// </summary>
-        /// <param name="options">Options specified by consumer</param>
-        /// <param name="message">string to escape</param>
-        /// <returns>Properly escaped string</returns>
+        /// <param name="options">The options specified by the consumer.</param>
+        /// <param name="message">The string to escape.</param>
+        /// <returns>The properly escaped string.</returns>
         private static string Escape(TelegramSinkOptions options, string message)
         {
             var shouldEscape = !options.UseCustomHtmlFormatting;
 
-            return options.CustomHtmlFormatter == null
+            return options.CustomHtmlFormatter is null
                 ? message.HtmlEscape(shouldEscape)
                 : options.CustomHtmlFormatter.Invoke(message);
         }

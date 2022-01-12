@@ -466,7 +466,7 @@ namespace Serilog.Sinks.Telegram.Alternative.Tests
         }
 
         /// <summary>
-        /// Tests the sink with user defined html escaping according to https://github.com/serilog-contrib/Serilog.Sinks.Telegram.Alternative/issues/26.
+        /// Tests the sink with user defined HTML escaping according to https://github.com/serilog-contrib/Serilog.Sinks.Telegram.Alternative/issues/26.
         /// </summary>
         [TestMethod]
         // ReSharper disable once StyleCop.SA1650
