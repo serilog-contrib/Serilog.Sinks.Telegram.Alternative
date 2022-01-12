@@ -16,7 +16,7 @@
     <RepositoryUrl>https://github.com/serilog-contrib/Serilog.Sinks.Telegram.Alternative</RepositoryUrl>
     <PackageIcon>Icon.png</PackageIcon>
     <RepositoryType>Github</RepositoryType>
-    <PackageReleaseNotes>Version 1.1.4.0 (2021-12-07): NuGet packages updated, added support to suppress the date time in the output (Thanks to @nebula2).</PackageReleaseNotes>
+    <PackageReleaseNotes>Version 1.1.5.0 (2022-01-12): NuGet packages updated, added support for better custom HTML formatting (Thanks to @nebula2, see https://github.com/serilog-contrib/Serilog.Sinks.Telegram.Alternative/issues/26).</PackageReleaseNotes>
     <PackageLicenseFile>License.txt</PackageLicenseFile>
     <LangVersion>latest</LangVersion>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>

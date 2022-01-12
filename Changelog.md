@@ -1,6 +1,7 @@
 Change history
 --------------
 
+* **Version 1.1.5.0 (2022-01-12)** : NuGet packages updated, added support for better custom HTML formatting (Thanks to @nebula2, see https://github.com/serilog-contrib/Serilog.Sinks.Telegram.Alternative/issues/26).
 * **Version 1.1.4.0 (2021-12-07)** : NuGet packages updated, added support to suppress the date time in the output (Thanks to @nebula2).
 * **Version 1.1.3.0 (2021-11-18)** : NuGet packages updated, added support for custom bot API urls (Thanks to @azhdari).
 * **Version 1.1.2.0 (2021-11-09)** : NuGet packages updated, added support for Net6.0.
