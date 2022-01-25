@@ -5,17 +5,26 @@ using Serilog.Sinks.Telegram.Alternative;
 
 namespace Serilog.Sinks.Telegram.Output
 {
+    /// <summary>
+    ///     Renders the Message property of a log event.
+    /// </summary>
     public class MessageRenderer : IPropertyRenderer
     {
         private readonly PropertyToken _propertyToken;
         private readonly TelegramSinkOptions _options;
 
+        /// <summary>
+        ///     Creates a new instance of the renderer.
+        /// </summary>
+        /// <param name="propertyToken">The property token to render.</param>
+        /// <param name="options">The sink options.</param>
         public MessageRenderer(PropertyToken propertyToken, TelegramSinkOptions options)
         {
             _propertyToken = propertyToken;
             _options = options;
         }
 
+        /// <inheritdoc />
         public void Render(ExtendedLogEvent logEvent, TextWriter output)
         {
             using var sw = new StringWriter(new StringBuilder());
@@ -31,7 +40,7 @@ namespace Serilog.Sinks.Telegram.Output
                         break;
                 }
             }
-            output.Write(sw.ToString().HtmlEscape(_options.ShouldEscape));
+            output.Write(HtmlEscaper.Escape(_options, sw.ToString()));
         }
     }
 }

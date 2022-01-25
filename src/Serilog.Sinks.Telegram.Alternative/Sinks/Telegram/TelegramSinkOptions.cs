@@ -46,6 +46,7 @@ namespace Serilog.Sinks.Telegram.Alternative
         /// <param name="failureCallback">The failure callback.</param>
         /// <param name="useCustomHtmlFormatting">A value indicating whether custom HTML formatting in the messages could be used. (Use this carefully and only if really needed).</param>
         /// <param name="botApiUrl">The Telegram bot API url, defaults to https://api.telegram.org/bot.</param>
+        /// <param name="outputTemplate">The template to use for output strings. Optional.</param>
         /// <param name="customHtmlFormatter">
         ///    You can pass a func in addition to <see cref="UseCustomHtmlFormatting"/> to set your custom function for escaping HTML strings.
         ///    This will only be considered if <see cref="UseCustomHtmlFormatting"/> is set to true.
