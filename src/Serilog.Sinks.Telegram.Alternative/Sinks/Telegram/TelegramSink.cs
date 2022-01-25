@@ -171,8 +171,7 @@ namespace Serilog.Sinks.Telegram.Alternative
         {
             var sb = new StringBuilder();
             var emoji = LogLevelRenderer.GetEmoji(extLogEvent.LogEvent);
-            var shouldEscape = !options.UseCustomHtmlFormatting;
-            var renderedMessage = extLogEvent.LogEvent.RenderMessage().HtmlEscape(shouldEscape);
+            var renderedMessage = Escape(options, extLogEvent.LogEvent.RenderMessage());
 
             sb.AppendLine($"{emoji} {renderedMessage}");
             sb.AppendLine(string.Empty);
@@ -181,8 +180,8 @@ namespace Serilog.Sinks.Telegram.Alternative
                 !string.IsNullOrWhiteSpace(options.DateFormat))
             {
                 string applicationNamePart = string.IsNullOrWhiteSpace(options.ApplicationName)
-                    ? string.Empty 
-                    : $"{options.ApplicationName.HtmlEscape(shouldEscape)}: ";
+                    ? string.Empty
+                    : $"{Escape(options, options.ApplicationName)}: ";
 
                 string datePart = string.IsNullOrWhiteSpace(options.DateFormat)
                     ? string.Empty
@@ -198,8 +197,8 @@ namespace Serilog.Sinks.Telegram.Alternative
                 return sb.ToString();
             }
 
-            var message = extLogEvent.LogEvent.Exception.Message.HtmlEscape(shouldEscape);
-            var exceptionType = extLogEvent.LogEvent.Exception.GetType().Name.HtmlEscape(shouldEscape);
+            var message = Escape(options, extLogEvent.LogEvent.Exception.Message);
+            var exceptionType = Escape(options, extLogEvent.LogEvent.Exception.GetType().Name);
 
             sb.AppendLine($"\n<strong>{message}</strong>\n");
             sb.AppendLine($"Message: <code>{message}</code>");
@@ -207,11 +206,26 @@ namespace Serilog.Sinks.Telegram.Alternative
 
             if (extLogEvent.IncludeStackTrace)
             {
-                var exception = $"{extLogEvent.LogEvent.Exception}".HtmlEscape(shouldEscape);
+                var exception = Escape(options, $"{extLogEvent.LogEvent.Exception}");
                 sb.AppendLine($"Stack Trace\n<code>{exception}</code>");
             }
 
             return sb.ToString();
+        }
+
+        /// <summary>
+        /// Correctly escapes strings taking options into consideration.
+        /// </summary>
+        /// <param name="options">The options specified by the consumer.</param>
+        /// <param name="message">The string to escape.</param>
+        /// <returns>The properly escaped string.</returns>
+        private static string Escape(TelegramSinkOptions options, string message)
+        {
+            var shouldEscape = !options.UseCustomHtmlFormatting;
+
+            return options.CustomHtmlFormatter is null
+                ? message.HtmlEscape(shouldEscape)
+                : options.CustomHtmlFormatter.Invoke(message);
         }
 
         /// <summary>

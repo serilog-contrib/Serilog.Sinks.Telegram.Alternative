@@ -47,6 +47,10 @@ namespace Serilog
         /// <param name="useCustomHtmlFormatting">A value indicating whether custom HTML formatting in the messages could be used. (Use this carefully and only if really needed).</param>
         /// <param name="botApiUrl">The Telegram bot API url, defaults to https://api.telegram.org/bot.</param>
         /// <param name="outputTemplate"></param>
+        /// <param name="customHtmlFormatter">
+        ///    You can pass a func in addition to <see cref="TelegramSinkOptions.UseCustomHtmlFormatting"/> to set your custom function for escaping HTML strings.
+        ///    This will only be considered if <see cref="TelegramSinkOptions.UseCustomHtmlFormatting"/> is set to true.
+        /// </param>
         /// <returns>Instance of <see cref="LoggerConfiguration"/> object.</returns>
         public static LoggerConfiguration Telegram(
             this LoggerSinkConfiguration loggerSinkConfiguration,
@@ -63,7 +67,8 @@ namespace Serilog
             Action<Exception> failureCallback = null,
             bool useCustomHtmlFormatting = false,
             string botApiUrl = null,
-            string outputTemplate = null)
+            string outputTemplate = null,
+            Func<string, string> customHtmlFormatter = null)
         {
             var telegramSinkOptions = new TelegramSinkOptions(
                 botToken,
@@ -79,7 +84,8 @@ namespace Serilog
                 failureCallback,
                 useCustomHtmlFormatting,
                 botApiUrl,
-                outputTemplate);
+                outputTemplate,
+                customHtmlFormatter: customHtmlFormatter);
             return loggerSinkConfiguration.Telegram(telegramSinkOptions, restrictedToMinimumLevel);
         }
 

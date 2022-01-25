@@ -46,6 +46,10 @@ namespace Serilog.Sinks.Telegram.Alternative
         /// <param name="failureCallback">The failure callback.</param>
         /// <param name="useCustomHtmlFormatting">A value indicating whether custom HTML formatting in the messages could be used. (Use this carefully and only if really needed).</param>
         /// <param name="botApiUrl">The Telegram bot API url, defaults to https://api.telegram.org/bot.</param>
+        /// <param name="customHtmlFormatter">
+        ///    You can pass a func in addition to <see cref="UseCustomHtmlFormatting"/> to set your custom function for escaping HTML strings.
+        ///    This will only be considered if <see cref="UseCustomHtmlFormatting"/> is set to true.
+        /// </param>
         public TelegramSinkOptions(
             string botToken,
             string chatId,
@@ -60,7 +64,8 @@ namespace Serilog.Sinks.Telegram.Alternative
             Action<Exception> failureCallback = null,
             bool useCustomHtmlFormatting = false,
             string botApiUrl = null,
-            string outputTemplate = null)
+            string outputTemplate = null,
+            Func<string, string> customHtmlFormatter = null)
         {
             if (string.IsNullOrWhiteSpace(botToken))
             {
@@ -79,6 +84,12 @@ namespace Serilog.Sinks.Telegram.Alternative
             this.DateFormat = dateFormat;
             this.ApplicationName = applicationName;
             this.UseCustomHtmlFormatting = useCustomHtmlFormatting;
+
+            if (useCustomHtmlFormatting)
+            {
+                this.CustomHtmlFormatter = customHtmlFormatter;
+            }
+
             this.BotApiUrl = botApiUrl;
             this.OutputTemplate = outputTemplate;
         }
@@ -157,5 +168,10 @@ namespace Serilog.Sinks.Telegram.Alternative
         /// Get the output template.
         /// </summary>
         public string OutputTemplate { get; set; }
+
+        /// <summary>
+        /// Gets the custom html formatting method. You need to also set <see cref="UseCustomHtmlFormatting"/>.
+        /// </summary>
+        public Func<string, string> CustomHtmlFormatter { get; }
     }
 }
