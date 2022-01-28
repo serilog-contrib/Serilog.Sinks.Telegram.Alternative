@@ -46,6 +46,7 @@ namespace Serilog.Sinks.Telegram.Alternative
         /// <param name="failureCallback">The failure callback.</param>
         /// <param name="useCustomHtmlFormatting">A value indicating whether custom HTML formatting in the messages could be used. (Use this carefully and only if really needed).</param>
         /// <param name="botApiUrl">The Telegram bot API url, defaults to https://api.telegram.org/bot.</param>
+        /// <param name="outputTemplate">The template to use for output strings. Optional.</param>
         /// <param name="customHtmlFormatter">
         ///    You can pass a func in addition to <see cref="UseCustomHtmlFormatting"/> to set your custom function for escaping HTML strings.
         ///    This will only be considered if <see cref="UseCustomHtmlFormatting"/> is set to true.
@@ -64,6 +65,7 @@ namespace Serilog.Sinks.Telegram.Alternative
             Action<Exception> failureCallback = null,
             bool useCustomHtmlFormatting = false,
             string botApiUrl = null,
+            string outputTemplate = null,
             Func<string, string> customHtmlFormatter = null)
         {
             if (string.IsNullOrWhiteSpace(botToken))
@@ -90,6 +92,7 @@ namespace Serilog.Sinks.Telegram.Alternative
             }
 
             this.BotApiUrl = botApiUrl;
+            this.OutputTemplate = outputTemplate;
         }
 
         /// <summary>
@@ -156,6 +159,16 @@ namespace Serilog.Sinks.Telegram.Alternative
         /// Gets a value indicating whether custom HTML formatting in the messages could be used. (Use this carefully and only if really needed).
         /// </summary>
         public bool UseCustomHtmlFormatting { get; }
+
+        /// <summary>
+        /// Gets a value whether or not string literals should be escaped.
+        /// </summary>
+        public bool ShouldEscape => !UseCustomHtmlFormatting;
+
+        /// <summary>
+        /// Get the output template.
+        /// </summary>
+        public string OutputTemplate { get; set; }
 
         /// <summary>
         /// Gets the custom html formatting method. You need to also set <see cref="UseCustomHtmlFormatting"/>.

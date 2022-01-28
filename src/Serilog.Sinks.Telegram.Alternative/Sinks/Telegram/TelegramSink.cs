@@ -7,6 +7,9 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using Serilog.Formatting;
+using Serilog.Sinks.Telegram.Output;
+
 namespace Serilog.Sinks.Telegram.Alternative
 {
     using System;
@@ -38,12 +41,21 @@ namespace Serilog.Sinks.Telegram.Alternative
         private readonly TelegramSinkOptions options;
 
         /// <summary>
+        /// The output template renderer.
+        /// </summary>
+        private readonly OutputTemplateRenderer outputTemplateRenderer;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="TelegramSink"/> class.
         /// </summary>
         /// <param name="options">Telegram options object.</param>
         public TelegramSink(TelegramSinkOptions options) : base(options.BatchSizeLimit, options.Period)
         {
             this.options = options;
+            if (!string.IsNullOrEmpty(options.OutputTemplate))
+            {
+                outputTemplateRenderer = new OutputTemplateRenderer(options.OutputTemplate, options);
+            }
         }
 
         /// <inheritdoc cref="PeriodicBatchingSink" />
@@ -63,6 +75,8 @@ namespace Serilog.Sinks.Telegram.Alternative
 
             foreach (var logEvent in events)
             {
+                logEvent.AddPropertyIfAbsent(new LogEventProperty(TelegramPropertyNames.ApplicationName, new ScalarValue(options.ApplicationName)));
+
                 if (logEvent.Level < this.options.MinimumLogEventLevel)
                 {
                     continue;
@@ -101,7 +115,7 @@ namespace Serilog.Sinks.Telegram.Alternative
                 {
                     var message = this.options.FormatProvider != null
                                       ? extendedLogEvent.LogEvent.RenderMessage(this.options.FormatProvider)
-                                      : RenderMessage(extendedLogEvent, options);
+                                      : outputTemplateRenderer == null ? RenderMessage(extendedLogEvent, options) : outputTemplateRenderer.Format(extendedLogEvent);
                     await this.SendMessage(this.options.BotApiUrl, this.options.BotToken, this.options.ChatId, message);
                 }
             }
@@ -115,7 +129,7 @@ namespace Serilog.Sinks.Telegram.Alternative
                 {
                     var message = this.options.FormatProvider != null
                                       ? extendedLogEvent.LogEvent.RenderMessage(this.options.FormatProvider)
-                                      : RenderMessage(extendedLogEvent, options);
+                                      : outputTemplateRenderer == null ? RenderMessage(extendedLogEvent, options) : outputTemplateRenderer.Format(extendedLogEvent);
 
                     if (count == messagesToSend.Count)
                     {
@@ -156,8 +170,8 @@ namespace Serilog.Sinks.Telegram.Alternative
         private static string RenderMessage(ExtendedLogEvent extLogEvent, TelegramSinkOptions options)
         {
             var sb = new StringBuilder();
-            var emoji = GetEmoji(extLogEvent.LogEvent);
-            var renderedMessage = Escape(options, extLogEvent.LogEvent.RenderMessage());
+            var emoji = LogLevelRenderer.GetEmoji(extLogEvent.LogEvent);
+            var renderedMessage = HtmlEscaper.Escape(options, extLogEvent.LogEvent.RenderMessage());
 
             sb.AppendLine($"{emoji} {renderedMessage}");
             sb.AppendLine(string.Empty);
@@ -167,7 +181,7 @@ namespace Serilog.Sinks.Telegram.Alternative
             {
                 string applicationNamePart = string.IsNullOrWhiteSpace(options.ApplicationName)
                     ? string.Empty
-                    : $"{Escape(options, options.ApplicationName)}: ";
+                    : $"{HtmlEscaper.Escape(options, options.ApplicationName)}: ";
 
                 string datePart = string.IsNullOrWhiteSpace(options.DateFormat)
                     ? string.Empty
@@ -183,8 +197,8 @@ namespace Serilog.Sinks.Telegram.Alternative
                 return sb.ToString();
             }
 
-            var message = Escape(options, extLogEvent.LogEvent.Exception.Message);
-            var exceptionType = Escape(options, extLogEvent.LogEvent.Exception.GetType().Name);
+            var message = HtmlEscaper.Escape(options, extLogEvent.LogEvent.Exception.Message);
+            var exceptionType = HtmlEscaper.Escape(options, extLogEvent.LogEvent.Exception.GetType().Name);
 
             sb.AppendLine($"\n<strong>{message}</strong>\n");
             sb.AppendLine($"Message: <code>{message}</code>");
@@ -192,45 +206,11 @@ namespace Serilog.Sinks.Telegram.Alternative
 
             if (extLogEvent.IncludeStackTrace)
             {
-                var exception = Escape(options, $"{extLogEvent.LogEvent.Exception}");
+                var exception = HtmlEscaper.Escape(options, $"{extLogEvent.LogEvent.Exception}");
                 sb.AppendLine($"Stack Trace\n<code>{exception}</code>");
             }
 
             return sb.ToString();
-        }
-
-        /// <summary>
-        /// Gets the emoji.
-        /// </summary>
-        /// <param name="log">The log.</param>
-        /// <returns>The emoji as <see cref="string"/>.</returns>
-        private static string GetEmoji(LogEvent log)
-        {
-            return log.Level switch
-            {
-                LogEventLevel.Debug => "👉",
-                LogEventLevel.Error => "❗",
-                LogEventLevel.Fatal => "‼",
-                LogEventLevel.Information => "ℹ",
-                LogEventLevel.Verbose => "⚡",
-                LogEventLevel.Warning => "⚠",
-                _ => string.Empty
-            };
-        }
-
-        /// <summary>
-        /// Correctly escapes strings taking options into consideration.
-        /// </summary>
-        /// <param name="options">The options specified by the consumer.</param>
-        /// <param name="message">The string to escape.</param>
-        /// <returns>The properly escaped string.</returns>
-        private static string Escape(TelegramSinkOptions options, string message)
-        {
-            var shouldEscape = !options.UseCustomHtmlFormatting;
-
-            return options.CustomHtmlFormatter is null
-                ? message.HtmlEscape(shouldEscape)
-                : options.CustomHtmlFormatter.Invoke(message);
         }
 
         /// <summary>
