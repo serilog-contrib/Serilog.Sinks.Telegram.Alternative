@@ -1,35 +1,44 @@
-﻿using System.IO;
-using Serilog.Events;
-using Serilog.Parsing;
-using Serilog.Sinks.Telegram.Alternative;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="LogLevelRenderer.cs" company="SeppPenner and the Serilog contributors">
+// The project is licensed under the MIT license.
+// </copyright>
+// <summary>
+//   A renderer for the log event levels.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Serilog.Sinks.Telegram.Output
 {
+    using System.IO;
+    using Serilog.Events;
+    using Serilog.Parsing;
+    using Serilog.Sinks.Telegram.Alternative;
+
     /// <summary>
-    /// Formats the log level of a log event for using a property token.
+    /// A renderer for the log event levels.
     /// </summary>
     internal class LogLevelRenderer : IPropertyRenderer
     {
-        private readonly PropertyToken _propertyToken;
+        /// <summary>
+        /// The property token.
+        /// </summary>
+        private readonly PropertyToken propertyToken;
 
         /// <summary>
-        /// Creates a new instance.
+        /// Initializes a new instance of the <see cref="LogLevelRenderer"/> class.
         /// </summary>
         /// <param name="propertyToken">The property token.</param>
         internal LogLevelRenderer(PropertyToken propertyToken)
         {
-            _propertyToken = propertyToken;
+            this.propertyToken = propertyToken;
         }
 
-        /// <summary>
-        /// Renders the given <paramref name="logEvent"/> and writes the results into <paramref name="output"/>.
-        /// </summary>
-        /// <param name="logEvent">The log event.</param>
-        /// <param name="output">The output.</param>
+        /// <inheritdoc cref="IPropertyRenderer"/>
         public void Render(ExtendedLogEvent logEvent, TextWriter output)
         {
             string stringLevel = logEvent.LogEvent.Level.ToString();
-            switch (_propertyToken.Format)
+
+            switch (propertyToken.Format)
             {
                 case "e":
                     stringLevel = GetEmoji(logEvent.LogEvent);
@@ -48,11 +57,11 @@ namespace Serilog.Sinks.Telegram.Output
         /// <summary>
         /// Gets the emoji.
         /// </summary>
-        /// <param name="log">The log.</param>
+        /// <param name="logEvent">The log event.</param>
         /// <returns>The emoji as <see cref="string"/>.</returns>
-        internal static string GetEmoji(LogEvent log)
+        internal static string GetEmoji(LogEvent logEvent)
         {
-            return log.Level switch
+            return logEvent.Level switch
             {
                 LogEventLevel.Debug => "👉",
                 LogEventLevel.Error => "❗",

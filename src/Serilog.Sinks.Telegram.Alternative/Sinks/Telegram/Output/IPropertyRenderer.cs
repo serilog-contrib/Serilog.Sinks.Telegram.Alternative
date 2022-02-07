@@ -1,10 +1,19 @@
-﻿using System.IO;
-using Serilog.Sinks.Telegram.Alternative;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="IPropertyRenderer.cs" company="SeppPenner and the Serilog contributors">
+// The project is licensed under the MIT license.
+// </copyright>
+// <summary>
+//   A contract for property renderers.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Serilog.Sinks.Telegram.Output
 {
+    using System.IO;
+    using Serilog.Sinks.Telegram.Alternative;
+
     /// <summary>
-    /// Contract for property renderers.
+    /// A contract for property renderers.
     /// </summary>
     public interface IPropertyRenderer
     {

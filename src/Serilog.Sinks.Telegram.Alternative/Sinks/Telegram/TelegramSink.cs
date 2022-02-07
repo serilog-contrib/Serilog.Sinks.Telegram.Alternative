@@ -7,14 +7,10 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Serilog.Formatting;
-using Serilog.Sinks.Telegram.Output;
-
 namespace Serilog.Sinks.Telegram.Alternative
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Net.Http;
     using System.Text;
@@ -24,10 +20,11 @@ namespace Serilog.Sinks.Telegram.Alternative
     using Events;
     using PeriodicBatching;
 
+    using Serilog.Sinks.Telegram.Output;
+
     /// <summary>
     /// Implements <see cref="PeriodicBatchingSink"/> and provides means needed for sending Serilog log events to Telegram.
     /// </summary>
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
     public class TelegramSink : PeriodicBatchingSink
     {
         /// <summary>
@@ -84,7 +81,7 @@ namespace Serilog.Sinks.Telegram.Alternative
 
                 var foundSameLogEvent = messagesToSend.FirstOrDefault(l => l.LogEvent.Exception.Message == logEvent.Exception.Message);
 
-                if (foundSameLogEvent == null)
+                if (foundSameLogEvent is null)
                 {
                     messagesToSend.Add(
                         new ExtendedLogEvent
@@ -110,12 +107,11 @@ namespace Serilog.Sinks.Telegram.Alternative
 
             if (this.options.SendBatchesAsSingleMessages)
             {
-                // ReSharper disable once ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
                 foreach (var extendedLogEvent in messagesToSend)
                 {
                     var message = this.options.FormatProvider != null
                                       ? extendedLogEvent.LogEvent.RenderMessage(this.options.FormatProvider)
-                                      : outputTemplateRenderer == null ? RenderMessage(extendedLogEvent, options) : outputTemplateRenderer.Format(extendedLogEvent);
+                                      : outputTemplateRenderer is null ? RenderMessage(extendedLogEvent, options) : outputTemplateRenderer.Format(extendedLogEvent);
                     await this.SendMessage(this.options.BotApiUrl, this.options.BotToken, this.options.ChatId, message);
                 }
             }
@@ -124,12 +120,11 @@ namespace Serilog.Sinks.Telegram.Alternative
                 var sb = new StringBuilder();
                 var count = 0;
 
-                // ReSharper disable once ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
                 foreach (var extendedLogEvent in messagesToSend)
                 {
                     var message = this.options.FormatProvider != null
                                       ? extendedLogEvent.LogEvent.RenderMessage(this.options.FormatProvider)
-                                      : outputTemplateRenderer == null ? RenderMessage(extendedLogEvent, options) : outputTemplateRenderer.Format(extendedLogEvent);
+                                      : outputTemplateRenderer is null ? RenderMessage(extendedLogEvent, options) : outputTemplateRenderer.Format(extendedLogEvent);
 
                     if (count == messagesToSend.Count)
                     {

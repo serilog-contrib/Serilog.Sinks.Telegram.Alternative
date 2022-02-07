@@ -1,35 +1,47 @@
-﻿using System.IO;
-using Serilog.Parsing;
-using Serilog.Sinks.Telegram.Alternative;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="DefaultPropertyRenderer.cs" company="SeppPenner and the Serilog contributors">
+// The project is licensed under the MIT license.
+// </copyright>
+// <summary>
+//   A fallback renderer for log event properties.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Serilog.Sinks.Telegram.Output
 {
+    using System.IO;
+    using Serilog.Parsing;
+    using Serilog.Sinks.Telegram.Alternative;
+
     /// <summary>
-    ///     Fallback renderer for log event properties.
+    /// A fallback renderer for log event properties.
     /// </summary>
     public class DefaultPropertyRenderer : IPropertyRenderer
     {
-        private readonly PropertyToken _propertyToken;
+        /// <summary>
+        /// The property token.
+        /// </summary>
+        private readonly PropertyToken propertyToken;
 
         /// <summary>
-        ///     Instantiates a new default renderer for the given property token.
+        /// Initializes a new instance of the <see cref="DefaultPropertyRenderer"/> class.
         /// </summary>
-        /// <param name="propertyToken"></param>
+        /// <param name="propertyToken">The property token.</param>
         public DefaultPropertyRenderer(PropertyToken propertyToken)
         {
-            _propertyToken = propertyToken;
+            this.propertyToken = propertyToken;
         }
 
-        /// <inheritdoc />
+        /// <inheritdoc cref="IPropertyRenderer"/>
         public void Render(ExtendedLogEvent logEvent, TextWriter output)
         {
-            if (!logEvent.LogEvent.Properties.TryGetValue(_propertyToken.PropertyName, out var propertyValue))
+            if (!logEvent.LogEvent.Properties.TryGetValue(propertyToken.PropertyName, out var propertyValue))
             {
-                output.Write(_propertyToken.ToString());
+                output.Write(propertyToken.ToString());
                 return;
             }
 
-            propertyValue.Render(output, _propertyToken.Format);
+            propertyValue.Render(output, propertyToken.Format);
         }
     }
 }

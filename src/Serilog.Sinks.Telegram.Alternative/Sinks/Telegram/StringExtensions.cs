@@ -12,7 +12,7 @@ namespace Serilog.Sinks.Telegram.Alternative
     /// <summary>
     /// A class containing extension methods for the <see cref="string"/> type.
     /// </summary>
-    public static class StringExtensions
+    internal static class StringExtensions
     {
         /// <summary>
         /// Escapes the invalid chars for Telegram to valid HTML encoded ones.

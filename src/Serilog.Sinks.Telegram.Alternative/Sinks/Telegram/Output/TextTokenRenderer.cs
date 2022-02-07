@@ -1,11 +1,20 @@
-﻿using System.IO;
-using Serilog.Parsing;
-using Serilog.Sinks.Telegram.Alternative;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="TextTokenRenderer.cs" company="SeppPenner and the Serilog contributors">
+// The project is licensed under the MIT license.
+// </copyright>
+// <summary>
+//   A renderer for the text tokens.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Serilog.Sinks.Telegram.Output
 {
+    using System.IO;
+    using Serilog.Parsing;
+    using Serilog.Sinks.Telegram.Alternative;
+
     /// <summary>
-    ///     Renders text tokens.
+    ///     A renderer for the text tokens.
     /// </summary>
     public class TextTokenRenderer
     {

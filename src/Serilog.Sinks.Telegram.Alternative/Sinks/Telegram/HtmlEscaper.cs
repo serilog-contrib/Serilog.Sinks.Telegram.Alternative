@@ -1,7 +1,16 @@
-﻿namespace Serilog.Sinks.Telegram.Alternative;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="HtmlEscaper.cs" company="SeppPenner and the Serilog contributors">
+// The project is licensed under the MIT license.
+// </copyright>
+// <summary>
+//   A class providing HTML escaping functionality.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace Serilog.Sinks.Telegram.Alternative;
 
 /// <summary>
-///     Static class providing HTML escaping functionality.
+/// A class providing HTML escaping functionality.
 /// </summary>
 internal static class HtmlEscaper
 {

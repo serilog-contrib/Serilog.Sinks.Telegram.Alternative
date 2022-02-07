@@ -1,29 +1,39 @@
-﻿using System.IO;
-using Serilog.Parsing;
-using Serilog.Sinks.Telegram.Alternative;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ExceptionRenderer.cs" company="SeppPenner and the Serilog contributors">
+// The project is licensed under the MIT license.
+// </copyright>
+// <summary>
+//   A renderer for exceptions.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Serilog.Sinks.Telegram.Output
 {
+    using System.IO;
+    using Serilog.Parsing;
+    using Serilog.Sinks.Telegram.Alternative;
+
     /// <summary>
-    ///     Renders exceptions.
+    /// A renderer for exceptions.
     /// </summary>
     public class ExceptionRenderer : IPropertyRenderer
     {
-        private readonly PropertyToken _propertyToken;
-        private readonly TelegramSinkOptions _options;
+        /// <summary>
+        /// The Telegram sink options.
+        /// </summary>
+        private readonly TelegramSinkOptions options;
 
         /// <summary>
-        ///     Creates a new instance of the renderer.
+        ///     Initializes a new instance of the <see cref="DefaultPropertyRenderer"/> class.
         /// </summary>
-        /// <param name="propertyToken">The property token to render.</param>
-        /// <param name="options">The sink options.</param>
+        /// <param name="propertyToken">The property token.</param>
+        /// <param name="options">The Telegram sink options.</param>
         public ExceptionRenderer(PropertyToken propertyToken, TelegramSinkOptions options)
         {
-            _propertyToken = propertyToken;
-            _options = options;
+            this.options = options;
         }
 
-        /// <inheritdoc />
+        /// <inheritdoc cref="IPropertyRenderer"/>
         public void Render(ExtendedLogEvent extLogEvent, TextWriter output)
         {
             if (extLogEvent.LogEvent.Exception is null)
@@ -31,8 +41,8 @@ namespace Serilog.Sinks.Telegram.Output
                 return;
             }
 
-            var message = HtmlEscaper.Escape(_options, extLogEvent.LogEvent.Exception.Message);
-            var exceptionType = HtmlEscaper.Escape(_options, extLogEvent.LogEvent.Exception.GetType().Name);
+            var message = HtmlEscaper.Escape(this.options, extLogEvent.LogEvent.Exception.Message);
+            var exceptionType = HtmlEscaper.Escape(this.options, extLogEvent.LogEvent.Exception.GetType().Name);
 
             output.WriteLine($"\n<strong>{message}</strong>\n");
             output.WriteLine($"Message: <code>{message}</code>");
@@ -40,7 +50,7 @@ namespace Serilog.Sinks.Telegram.Output
 
             if (extLogEvent.IncludeStackTrace)
             {
-                var exception = HtmlEscaper.Escape(_options, $"{extLogEvent.LogEvent.Exception}");
+                var exception = HtmlEscaper.Escape(this.options, $"{extLogEvent.LogEvent.Exception}");
                 output.WriteLine($"Stack Trace\n<code>{exception}</code>");
             }
         }

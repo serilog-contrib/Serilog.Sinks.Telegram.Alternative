@@ -1,4 +1,13 @@
-﻿using System.IO;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="TimestampRenderer.cs" company="SeppPenner and the Serilog contributors">
+// The project is licensed under the MIT license.
+// </copyright>
+// <summary>
+//   A renderer for the timestamps.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+using System.IO;
 using Serilog.Events;
 using Serilog.Parsing;
 using Serilog.Sinks.Telegram.Alternative;
@@ -10,22 +19,25 @@ namespace Serilog.Sinks.Telegram.Output
     /// </summary>
     public class TimestampRenderer : IPropertyRenderer
     {
-        private readonly PropertyToken _propertyToken;
+        /// <summary>
+        /// The property token.
+        /// </summary>
+        private readonly PropertyToken propertyToken;
 
         /// <summary>
-        ///     Creates a new instance of the renderer.
+        ///     Initializes a new instance of the <see cref="TimestampRenderer"/> class.
         /// </summary>
-        /// <param name="propertyToken">The property token to render.</param>
+        /// <param name="propertyToken">The property token.</param>
         public TimestampRenderer(PropertyToken propertyToken)
         {
-            _propertyToken = propertyToken;
+            this.propertyToken = propertyToken;
         }
 
-        /// <inheritdoc />
+        /// <inheritdoc cref="IPropertyRenderer"/>
         public void Render(ExtendedLogEvent logEvent, TextWriter output)
         {
-            var sv = new ScalarValue(logEvent.LogEvent.Timestamp);
-            sv.Render(output, _propertyToken.Format);
+            var scalarValue = new ScalarValue(logEvent.LogEvent.Timestamp);
+            scalarValue.Render(output, propertyToken.Format);
         }
     }
 }
