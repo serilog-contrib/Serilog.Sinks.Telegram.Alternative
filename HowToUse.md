@@ -24,7 +24,8 @@ The project can be found on [nuget](https://www.nuget.org/packages/Serilog.Sinks
 |applicationName|The name of the application sending the events in case multiple apps write to the same channel.|`applicationName: "My App"`|`string.Empty`|
 |failureCallback|Adds an option to add a failure callback action.|`failureCallback: e => Console.WriteLine($"Sink error: {e.Message}")`|`null`|
 |useCustomHtmlFormatting|An option to allow custom HTML formatting inside the message text and the application name (Use only if really needed). Make sure to use the HTML formatting from https://core.telegram.org/bots/api#html-style.|`true`|`false`|
-|botApiUrl|Custom Bot API Url|https://telegram.something.com/bot|
+|botApiUrl|A custom bot API url.|`https://telegram.something.com/bot`|`https://api.telegram.org/bot`|
+|outputTemplate|A custom output template following the Serilog standard. Check https://github.com/serilog/serilog/wiki/Formatting-Output.|`"[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}"`|`null`|
 |customHtmlFormatter|A custom HTML format function which you can set in addition to `useCustomHtmlFormatting`. See [here](https://github.com/serilog-contrib/Serilog.Sinks.Telegram.Alternative/issues/26)|`(s) => return s.Replace("<", "&lt;").Replace(">", "&gt;").Replace("&", "&amp;").Replace("&amp;lt;tg-spoiler&amp;gt;", "<tg-spoiler>").Replace("&amp;lt;/tg-spoiler&amp;gt;", "</tg-spoiler>");`|
 
 ## Configuration via JSON options
