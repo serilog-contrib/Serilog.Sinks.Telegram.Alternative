@@ -27,9 +27,8 @@ namespace Serilog.Sinks.Telegram.Output
         /// <summary>
         ///     Creates a new instance of the renderer.
         /// </summary>
-        /// <param name="propertyToken">The property token.</param>
         /// <param name="options">The Telegram sink options.</param>
-        public MessageRenderer(PropertyToken propertyToken, TelegramSinkOptions options)
+        public MessageRenderer(TelegramSinkOptions options)
         {
             this.options = options;
         }

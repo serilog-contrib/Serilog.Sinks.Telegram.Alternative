@@ -35,13 +35,13 @@ namespace Serilog.Sinks.Telegram.Output
         /// <inheritdoc cref="IPropertyRenderer"/>
         public void Render(ExtendedLogEvent logEvent, TextWriter output)
         {
-            if (!logEvent.LogEvent.Properties.TryGetValue(propertyToken.PropertyName, out var propertyValue))
+            if (!logEvent.LogEvent.Properties.TryGetValue(this.propertyToken.PropertyName, out var propertyValue))
             {
-                output.Write(propertyToken.ToString());
+                output.Write(this.propertyToken.ToString());
                 return;
             }
 
-            propertyValue.Render(output, propertyToken.Format);
+            propertyValue.Render(output, this.propertyToken.Format);
         }
     }
 }

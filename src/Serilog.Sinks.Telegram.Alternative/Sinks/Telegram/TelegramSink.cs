@@ -40,7 +40,7 @@ namespace Serilog.Sinks.Telegram.Alternative
         /// <summary>
         /// The output template renderer.
         /// </summary>
-        private readonly OutputTemplateRenderer outputTemplateRenderer;
+        private readonly OutputTemplateRenderer? outputTemplateRenderer;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TelegramSink"/> class.
@@ -49,9 +49,10 @@ namespace Serilog.Sinks.Telegram.Alternative
         public TelegramSink(TelegramSinkOptions options) : base(options.BatchSizeLimit, options.Period)
         {
             this.options = options;
-            if (!string.IsNullOrEmpty(options.OutputTemplate))
+
+            if (!string.IsNullOrWhiteSpace(options.OutputTemplate))
             {
-                outputTemplateRenderer = new OutputTemplateRenderer(options.OutputTemplate, options);
+                outputTemplateRenderer = new OutputTemplateRenderer(options.OutputTemplate!, options);
             }
         }
 
@@ -83,14 +84,7 @@ namespace Serilog.Sinks.Telegram.Alternative
 
                 if (foundSameLogEvent is null)
                 {
-                    messagesToSend.Add(
-                        new ExtendedLogEvent
-                            {
-                                LogEvent = logEvent,
-                                FirstOccurrence = logEvent.Timestamp,
-                                LastOccurrence = logEvent.Timestamp,
-                                IncludeStackTrace = this.options.IncludeStackTrace
-                            });
+                    messagesToSend.Add(new ExtendedLogEvent(logEvent.Timestamp.DateTime, logEvent.Timestamp.DateTime, logEvent, this.options.IncludeStackTrace));
                 }
                 else
                 {
@@ -216,7 +210,7 @@ namespace Serilog.Sinks.Telegram.Alternative
         /// <param name="chatId">The chat identifier.</param>
         /// <param name="message">The message.</param>
         /// <returns>A <see cref="Task"/> representing any asynchronous operation.</returns>
-        private async Task SendMessage(string botApiUrl, string token, string chatId, string message)
+        private async Task SendMessage(string? botApiUrl, string token, string chatId, string message)
         {
             this.TryWriteToSelflog($"Trying to send message to chatId '{chatId}': '{message}'.");
             

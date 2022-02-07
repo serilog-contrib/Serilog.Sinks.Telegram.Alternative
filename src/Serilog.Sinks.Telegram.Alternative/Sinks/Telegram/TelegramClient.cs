@@ -42,7 +42,7 @@ namespace Serilog.Sinks.Telegram.Alternative
         /// <param name="timeoutSeconds">The timeout seconds.</param>
         /// <param name="botApiUrl">The Telegram bot API url.</param>
         /// <exception cref="ArgumentException">Thrown if the bot token is null or empty.</exception>
-        public TelegramClient(string botToken, int timeoutSeconds = 10, string botApiUrl = DefaultTelegramBotApiUrl)
+        public TelegramClient(string botToken, int timeoutSeconds = 10, string? botApiUrl = DefaultTelegramBotApiUrl)
         {
             if (string.IsNullOrWhiteSpace(botToken))
             {

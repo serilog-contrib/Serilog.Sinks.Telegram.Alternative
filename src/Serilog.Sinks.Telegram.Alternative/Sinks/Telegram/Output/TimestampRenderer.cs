@@ -37,7 +37,7 @@ namespace Serilog.Sinks.Telegram.Output
         public void Render(ExtendedLogEvent logEvent, TextWriter output)
         {
             var scalarValue = new ScalarValue(logEvent.LogEvent.Timestamp);
-            scalarValue.Render(output, propertyToken.Format);
+            scalarValue.Render(output, this.propertyToken.Format);
         }
     }
 }

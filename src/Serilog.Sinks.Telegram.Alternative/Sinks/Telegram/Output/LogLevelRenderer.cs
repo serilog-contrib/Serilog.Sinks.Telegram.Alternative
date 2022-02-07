@@ -38,7 +38,7 @@ namespace Serilog.Sinks.Telegram.Output
         {
             string stringLevel = logEvent.LogEvent.Level.ToString();
 
-            switch (propertyToken.Format)
+            switch (this.propertyToken.Format)
             {
                 case "e":
                     stringLevel = GetEmoji(logEvent.LogEvent);

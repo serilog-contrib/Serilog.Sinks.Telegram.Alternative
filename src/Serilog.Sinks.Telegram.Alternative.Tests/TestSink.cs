@@ -25,12 +25,12 @@ namespace Serilog.Sinks.Telegram.Alternative.Tests
         /// <summary>
         /// The Telegram bot token.
         /// </summary>
-        private readonly string telegramBotToken = Environment.GetEnvironmentVariable("TelegramBotToken");
+        private readonly string telegramBotToken = Environment.GetEnvironmentVariable("TelegramBotToken") ?? string.Empty;
 
         /// <summary>
         /// The Telegram bot token.
         /// </summary>
-        private readonly string telegramChatId = Environment.GetEnvironmentVariable("TelegramChatId");
+        private readonly string telegramChatId = Environment.GetEnvironmentVariable("TelegramChatId") ?? string.Empty;
 
         /// <summary>
         /// Tests the sink with different exceptions.

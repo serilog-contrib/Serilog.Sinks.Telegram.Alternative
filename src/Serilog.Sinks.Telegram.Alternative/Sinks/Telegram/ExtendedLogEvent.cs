@@ -21,18 +21,10 @@ namespace Serilog.Sinks.Telegram.Alternative
         /// <summary>
         /// Initializes a new instance of the <see cref="ExtendedLogEvent"/> class.
         /// </summary>
-        public ExtendedLogEvent()
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ExtendedLogEvent"/> class.
-        /// </summary>
         /// <param name="firstOccurrence">The first occurrence.</param>
         /// <param name="lastOccurrence">The last occurrence.</param>
         /// <param name="logEvent">The log event.</param>
         /// <param name="includeStackTrace">A value indicating whether the stack trace should be shown or not.</param>
-        // ReSharper disable once UnusedMember.Global
         public ExtendedLogEvent(DateTime firstOccurrence, DateTime lastOccurrence, LogEvent logEvent, bool? includeStackTrace = true)
         {
             this.FirstOccurrence = firstOccurrence;

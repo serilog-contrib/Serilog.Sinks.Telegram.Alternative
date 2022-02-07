@@ -58,19 +58,19 @@ namespace Serilog.Sinks.Telegram.Alternative
             string applicationName,
             int? batchSizeLimit = null,
             TimeSpan? period = null,
-            IFormatProvider formatProvider = null,
+            IFormatProvider? formatProvider = null,
             LogEventLevel minimumLogEventLevel = LogEventLevel.Verbose,
             bool? sendBatchesAsSingleMessages = true,
             bool? includeStackTrace = true,
-            Action<Exception> failureCallback = null,
+            Action<Exception>? failureCallback = null,
             bool useCustomHtmlFormatting = false,
-            string botApiUrl = null,
-            string outputTemplate = null,
-            Func<string, string> customHtmlFormatter = null)
+            string? botApiUrl = null,
+            string? outputTemplate = null,
+            Func<string, string>? customHtmlFormatter = null)
         {
             if (string.IsNullOrWhiteSpace(botToken))
             {
-                throw new ArgumentException(nameof(botToken));
+                throw new ArgumentException("The bot token is invalid.", nameof(botToken));
             }
 
             this.BotToken = botToken;
@@ -98,7 +98,7 @@ namespace Serilog.Sinks.Telegram.Alternative
         /// <summary>
         /// Gets the Telegram bot API Url
         /// </summary>
-        public string BotApiUrl { get; }
+        public string? BotApiUrl { get; }
 
         /// <summary>
         /// Gets the Telegram bot token.
@@ -133,7 +133,7 @@ namespace Serilog.Sinks.Telegram.Alternative
         /// <summary>
         /// Gets the format provider used for formatting the message.
         /// </summary>
-        public IFormatProvider FormatProvider { get; }
+        public IFormatProvider? FormatProvider { get; }
 
         /// <summary>
         /// Gets the minimum log event level.
@@ -153,7 +153,7 @@ namespace Serilog.Sinks.Telegram.Alternative
         /// <summary>
         /// Gets the failure callback.
         /// </summary>
-        public Action<Exception> FailureCallback { get; }
+        public Action<Exception>? FailureCallback { get; }
 
         /// <summary>
         /// Gets a value indicating whether custom HTML formatting in the messages could be used. (Use this carefully and only if really needed).
@@ -168,11 +168,11 @@ namespace Serilog.Sinks.Telegram.Alternative
         /// <summary>
         /// Gets or sets the output template.
         /// </summary>
-        public string OutputTemplate { get; set; }
+        public string? OutputTemplate { get; set; }
 
         /// <summary>
         /// Gets the custom html formatting method. You need to also set <see cref="UseCustomHtmlFormatting"/>.
         /// </summary>
-        public Func<string, string> CustomHtmlFormatter { get; }
+        public Func<string, string>? CustomHtmlFormatter { get; }
     }
 }

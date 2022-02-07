@@ -55,20 +55,20 @@ namespace Serilog
         public static LoggerConfiguration Telegram(
             this LoggerSinkConfiguration loggerSinkConfiguration,
             string botToken,
-            string chatId = null,
+            string chatId,
             int? batchSizeLimit = null,
             TimeSpan? period = null,
-            IFormatProvider formatProvider = null,
+            IFormatProvider? formatProvider = null,
             LogEventLevel restrictedToMinimumLevel = LevelAlias.Minimum,
             bool? sendBatchesAsSingleMessages = true,
             bool? includeStackTrace = true,
             string dateFormat = "dd.MM.yyyy HH:mm:sszzz",
             string applicationName = "",
-            Action<Exception> failureCallback = null,
+            Action<Exception>? failureCallback = null,
             bool useCustomHtmlFormatting = false,
-            string botApiUrl = null,
-            string outputTemplate = null,
-            Func<string, string> customHtmlFormatter = null)
+            string? botApiUrl = null,
+            string? outputTemplate = null,
+            Func<string, string>? customHtmlFormatter = null)
         {
             var telegramSinkOptions = new TelegramSinkOptions(
                 botToken,
@@ -102,19 +102,19 @@ namespace Serilog
             TelegramSinkOptions telegramSinkOptions,
             LogEventLevel restrictedToMinimumLevel = LevelAlias.Minimum)
         {
-            if (loggerSinkConfiguration == null)
+            if (loggerSinkConfiguration is null)
             {
-                throw new ArgumentNullException(nameof(loggerSinkConfiguration));
+                throw new ArgumentNullException(nameof(loggerSinkConfiguration), "The logger sink configuration is null.");
             }
 
-            if (telegramSinkOptions == null)
+            if (telegramSinkOptions is null)
             {
-                throw new ArgumentNullException(nameof(telegramSinkOptions));
+                throw new ArgumentNullException(nameof(telegramSinkOptions), "The Telegram sink options are null.");
             }
 
             if (string.IsNullOrWhiteSpace(telegramSinkOptions.BotToken))
             {
-                throw new ArgumentNullException(nameof(telegramSinkOptions.BotToken));
+                throw new ArgumentNullException(nameof(telegramSinkOptions.BotToken), "The Telegram bot token is null.");
             }
 
             return loggerSinkConfiguration.Sink(new TelegramSink(telegramSinkOptions), restrictedToMinimumLevel);

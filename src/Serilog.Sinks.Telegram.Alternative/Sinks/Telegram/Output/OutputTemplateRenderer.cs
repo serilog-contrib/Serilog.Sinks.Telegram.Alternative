@@ -60,10 +60,10 @@ namespace Serilog.Sinks.Telegram.Output
                                 renderActions.Add((_,w) => w.WriteLine());
                                 break;
                             case OutputProperties.ExceptionPropertyName:
-                                renderActions.Add(new ExceptionRenderer(propertyToken, options).Render);
+                                renderActions.Add(new ExceptionRenderer(options).Render);
                                 break;
                             case OutputProperties.MessagePropertyName:
-                                renderActions.Add(new MessageRenderer(propertyToken, options).Render);
+                                renderActions.Add(new MessageRenderer(options).Render);
                                 break;
                             case OutputProperties.TimestampPropertyName:
                                 renderActions.Add(new TimestampRenderer(propertyToken).Render);

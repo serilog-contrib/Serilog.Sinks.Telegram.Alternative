@@ -19,6 +19,7 @@
     <PackageReleaseNotes>Version 1.1.5.0 (2022-01-12): NuGet packages updated, added support for better custom HTML formatting (Thanks to @nebula2, see https://github.com/serilog-contrib/Serilog.Sinks.Telegram.Alternative/issues/26).</PackageReleaseNotes>
     <PackageLicenseFile>License.txt</PackageLicenseFile>
     <LangVersion>latest</LangVersion>
+	<Nullable>enable</Nullable>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <IncludeSymbols>true</IncludeSymbols>
