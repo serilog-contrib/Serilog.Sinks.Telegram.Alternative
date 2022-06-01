@@ -1,6 +1,7 @@
 Change history
 --------------
 
+* **Version 1.1.8.0 (2022-06-01)** : Updated NuGet packages.
 * **Version 1.1.7.0 (2022-04-04)** : Updated NuGet packages.
 * **Version 1.1.6.0 (2022-02-16)** : Updated NuGet packages, added nullable checks, added editorconfig, added file scoped namespaces, added global usings, removed native support for Net Framework (Breaking change).
 * **Version 1.1.5.0 (2022-01-12)** : NuGet packages updated, added support for better custom HTML formatting (Thanks to @nebula2, see https://github.com/serilog-contrib/Serilog.Sinks.Telegram.Alternative/issues/26).
