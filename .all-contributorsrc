@@ -82,6 +82,16 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "Azaferany",
+      "name": "Ali Zaferany",
+      "avatar_url": "https://avatars.githubusercontent.com/u/63418929?v=4",
+      "profile": "https://github.com/Azaferany",
+      "contributions": [
+        "code",
+        "test"
+      ]
     }
   ],
   "contributorsPerLine": 7,
