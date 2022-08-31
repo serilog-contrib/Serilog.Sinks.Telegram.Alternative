@@ -1,6 +1,7 @@
 Change history
 --------------
 
+* **Version 1.1.9.0 (2022-08-31)** : Updated NuGet packages, exposed HTTP client to allow e.g. proxy support (Thanks to @Azaferany).
 * **Version 1.1.8.0 (2022-06-01)** : Updated NuGet packages.
 * **Version 1.1.7.0 (2022-04-04)** : Updated NuGet packages.
 * **Version 1.1.6.0 (2022-02-16)** : Updated NuGet packages, added nullable checks, added editorconfig, added file scoped namespaces, added global usings, removed native support for Net Framework (Breaking change).
