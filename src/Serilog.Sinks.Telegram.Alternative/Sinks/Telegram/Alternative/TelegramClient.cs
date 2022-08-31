@@ -32,8 +32,8 @@ public class TelegramClient
     /// <summary>
     /// Initializes a new instance of the <see cref="TelegramClient"/> class.
     /// </summary>
+    /// <param name="httpClient">The HTTP client.</param>
     /// <param name="botToken">The Telegram bot token.</param>
-    /// <param name="httpClient">Http Client.</param>
     /// <param name="botApiUrl">The Telegram bot API url.</param>
     /// <exception cref="ArgumentException">Thrown if the bot token is null or empty.</exception>
     public TelegramClient(HttpClient httpClient, string botToken, string? botApiUrl = DefaultTelegramBotApiUrl)
@@ -48,8 +48,7 @@ public class TelegramClient
             botApiUrl = DefaultTelegramBotApiUrl;
         }
         
-        this.httpClient = httpClient ?? throw new ArgumentException("The httpClient mustn't be null.", nameof(httpClient));
-        
+        this.httpClient = httpClient ?? throw new ArgumentNullException("The http client mustn't be null.");
         this.apiUrl = new Uri($"{botApiUrl}{botToken}/sendMessage");
     }
 

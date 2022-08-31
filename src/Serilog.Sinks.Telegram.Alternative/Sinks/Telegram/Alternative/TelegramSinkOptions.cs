@@ -172,7 +172,7 @@ public class TelegramSinkOptions
     public Func<string, string>? CustomHtmlFormatter { get; }
 
     /// <summary>
-    /// Gets or sets the http client use for send request to telegram.
+    /// Gets or sets the HTTP client used for requests to Telegram.
     /// </summary>
     public HttpClient HttpClient { get; set; } = new HttpClient();
 }

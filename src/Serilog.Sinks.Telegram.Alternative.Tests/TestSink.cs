@@ -9,9 +9,6 @@
 
 namespace Serilog.Sinks.Telegram.Alternative.Tests;
 
-using System.Net;
-using RichardSzalay.MockHttp;
-
 /// <summary>
 /// A class to test the <see cref="TelegramSink"/>.
 /// </summary>
@@ -28,6 +25,9 @@ public class TestSink
     /// </summary>
     private readonly string telegramChatId = Environment.GetEnvironmentVariable("TelegramChatId") ?? string.Empty;
 
+    /// <summary>
+    /// The default Telegram bot API url.
+    /// </summary>
     private const string DefaultTelegramBotApiUrl = "https://api.telegram.org/bot";
 
     /// <summary>
@@ -490,33 +490,32 @@ public class TestSink
         Thread.Sleep(1000);
         Log.CloseAndFlush();
     }
+
     /// <summary>
-    /// test simple log when http client set by user
+    /// Tests the sink with a simple log when the HTTP client is set by the user according to issue https://github.com/serilog-contrib/Serilog.Sinks.Telegram.Alternative/issues/30.
     /// </summary>
     [TestMethod]
     public void TestSimpleErrorLogWithHttpClient()
     {
         var mockHttp = new MockHttpMessageHandler();
 
-        var request = mockHttp.When($"{DefaultTelegramBotApiUrl}{nameof(telegramBotToken)}/sendMessage")
+        var request = mockHttp.When($"{DefaultTelegramBotApiUrl}{nameof(this.telegramBotToken)}/sendMessage")
                               .Respond(HttpStatusCode.OK);
         
         var client = mockHttp.ToHttpClient();
 
         var logger = new LoggerConfiguration()
-                     .WriteTo.Telegram(new TelegramSinkOptions(nameof(telegramBotToken), nameof(telegramChatId),
+                     .WriteTo.Telegram(new TelegramSinkOptions(nameof(this.telegramBotToken), nameof(this.telegramChatId),
                          "dd.MM.yyyy HH:mm:sszzz", "")
                      {
                          HttpClient = client
                      })
                      .CreateLogger();
         
-        logger.Error("test error msg");
-        
+        logger.Error("Test error message");
 
         Thread.Sleep(1000);
         Log.CloseAndFlush();
         Assert.AreEqual(1, mockHttp.GetMatchCount(request));
-
     }
 }

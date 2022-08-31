@@ -185,7 +185,8 @@ public class TelegramSink : IBatchedLogEventSink
     /// <summary>
     /// Sends the message.
     /// </summary>
-    /// <param name="httpClient">The http client</param>
+    /// <param name="httpClient">The HTTP client.</param>
+    /// <param name="botApiUrl">The Telegram bot API url.</param>
     /// <param name="token">The token.</param>
     /// <param name="chatId">The chat identifier.</param>
     /// <param name="message">The message.</param>
