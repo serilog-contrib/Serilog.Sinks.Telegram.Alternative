@@ -88,7 +88,7 @@ public class TelegramSink : IBatchedLogEventSink
                 var message = this.options.FormatProvider != null
                                   ? extendedLogEvent.LogEvent.RenderMessage(this.options.FormatProvider)
                                   : this.outputTemplateRenderer is null ? RenderMessage(extendedLogEvent, this.options) : this.outputTemplateRenderer.Format(extendedLogEvent);
-                await this.SendMessage(this.options.BotApiUrl, this.options.BotToken, this.options.ChatId, message);
+                await this.SendMessage(this.options.HttpClient, this.options.BotApiUrl, this.options.BotToken, this.options.ChatId, message);
             }
         }
         else
@@ -116,7 +116,7 @@ public class TelegramSink : IBatchedLogEventSink
             }
 
             var messageToSend = sb.ToString();
-            await this.SendMessage(this.options.BotApiUrl, this.options.BotToken, this.options.ChatId, messageToSend);
+            await this.SendMessage(this.options.HttpClient, this.options.BotApiUrl,this.options.BotToken, this.options.ChatId, messageToSend);
         }
     }
 
@@ -185,16 +185,16 @@ public class TelegramSink : IBatchedLogEventSink
     /// <summary>
     /// Sends the message.
     /// </summary>
-    /// <param name="botApiUrl">The Telegram bot API url</param>
+    /// <param name="httpClient">The http client</param>
     /// <param name="token">The token.</param>
     /// <param name="chatId">The chat identifier.</param>
     /// <param name="message">The message.</param>
     /// <returns>A <see cref="Task"/> representing any asynchronous operation.</returns>
-    private async Task SendMessage(string? botApiUrl, string token, string chatId, string message)
+    private async Task SendMessage(HttpClient httpClient, string? botApiUrl, string token, string chatId, string message)
     {
         this.TryWriteToSelflog($"Trying to send message to chatId '{chatId}': '{message}'.");
 
-        var client = new TelegramClient(token, 5, botApiUrl);
+        var client = new TelegramClient(httpClient, token, botApiUrl);
 
         try
         {

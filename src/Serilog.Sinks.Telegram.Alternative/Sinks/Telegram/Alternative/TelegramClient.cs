@@ -27,16 +27,16 @@ public class TelegramClient
     /// <summary>
     /// The HTTP client.
     /// </summary>
-    private readonly HttpClient httpClient = new();
+    private readonly HttpClient httpClient;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="TelegramClient"/> class.
     /// </summary>
     /// <param name="botToken">The Telegram bot token.</param>
-    /// <param name="timeoutSeconds">The timeout seconds.</param>
+    /// <param name="httpClient">Http Client.</param>
     /// <param name="botApiUrl">The Telegram bot API url.</param>
     /// <exception cref="ArgumentException">Thrown if the bot token is null or empty.</exception>
-    public TelegramClient(string botToken, int timeoutSeconds = 10, string? botApiUrl = DefaultTelegramBotApiUrl)
+    public TelegramClient(HttpClient httpClient, string botToken, string? botApiUrl = DefaultTelegramBotApiUrl)
     {
         if (string.IsNullOrWhiteSpace(botToken))
         {
@@ -47,9 +47,10 @@ public class TelegramClient
         {
             botApiUrl = DefaultTelegramBotApiUrl;
         }
-
+        
+        this.httpClient = httpClient ?? throw new ArgumentException("The httpClient mustn't be null.", nameof(httpClient));
+        
         this.apiUrl = new Uri($"{botApiUrl}{botToken}/sendMessage");
-        this.httpClient.Timeout = TimeSpan.FromSeconds(timeoutSeconds);
     }
 
     /// <summary>
