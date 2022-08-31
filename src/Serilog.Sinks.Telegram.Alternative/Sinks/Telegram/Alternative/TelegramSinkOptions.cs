@@ -170,4 +170,9 @@ public class TelegramSinkOptions
     /// Gets the custom html formatting method. You need to also set <see cref="UseCustomHtmlFormatting"/>.
     /// </summary>
     public Func<string, string>? CustomHtmlFormatter { get; }
+
+    /// <summary>
+    /// Gets or sets the http client use for send request to telegram.
+    /// </summary>
+    public HttpClient HttpClient { get; set; } = new HttpClient();
 }
