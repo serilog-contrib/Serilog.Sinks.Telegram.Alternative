@@ -16,7 +16,7 @@
     <RepositoryUrl>https://github.com/serilog-contrib/Serilog.Sinks.Telegram.Alternative</RepositoryUrl>
     <PackageIcon>Icon.png</PackageIcon>
     <RepositoryType>Github</RepositoryType>
-    <PackageReleaseNotes>Version 1.1.10.0 (2022-10-30): Updated nuget packages.</PackageReleaseNotes>
+    <PackageReleaseNotes>Version 1.2.0.0 (2022-11-20): Updated nuget packages, removed support for Net5.0, added support for Net7.0.</PackageReleaseNotes>
     <PackageLicenseFile>License.txt</PackageLicenseFile>
     <LangVersion>latest</LangVersion>
 	<Nullable>enable</Nullable>
@@ -28,7 +28,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GitVersion.MsBuild" Version="5.10.3">
+    <PackageReference Include="GitVersion.MsBuild" Version="5.11.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

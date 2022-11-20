@@ -1,6 +1,7 @@
 Change history
 --------------
 
+* **Version 1.2.0.0 (2022-11-20)**: Updated nuget packages, removed support for Net5.0, added support for Net7.0.
 * **Version 1.1.10.0 (2022-10-30)** : Updated nuget packages.
 * **Version 1.1.9.0 (2022-08-31)** : Updated NuGet packages, exposed HTTP client to allow e.g. proxy support (Thanks to @Azaferany).
 * **Version 1.1.8.0 (2022-06-01)** : Updated NuGet packages.
