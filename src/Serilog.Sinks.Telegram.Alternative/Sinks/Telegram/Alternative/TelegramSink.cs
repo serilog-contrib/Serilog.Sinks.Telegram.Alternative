@@ -15,6 +15,11 @@ namespace Serilog.Sinks.Telegram.Alternative;
 public class TelegramSink : IBatchedLogEventSink
 {
     /// <summary>
+    /// Max length of message bot can send to a chat
+    /// </summary>
+    public const int MaxMessageLength = 4096;
+    
+    /// <summary>
     /// The options.
     /// </summary>
     private readonly TelegramSinkOptions options;
@@ -199,11 +204,13 @@ public class TelegramSink : IBatchedLogEventSink
 
         try
         {
-            var result = await client.PostMessage(message, chatId);
-
-            if (result != null)
+            foreach (var messageChunk in GetMessageChunks(message))
             {
-                this.TryWriteToSelflog($"Message sent to chatId '{chatId}': '{result.StatusCode}'.");
+                var response = await client.PostMessage(messageChunk, chatId);
+                if (response != null)
+                {
+                    TryWriteToSelflog($"Message sent to chatId '{chatId}': '{response.StatusCode}'.");
+                }
             }
         }
         catch (Exception ex)
@@ -211,6 +218,24 @@ public class TelegramSink : IBatchedLogEventSink
             SelfLog.WriteLine($"{ex.Message} {ex.StackTrace}");
             this.options.FailureCallback?.Invoke(ex);
         }
+    }
+    
+    private static IEnumerable<string> GetMessageChunks(string message)
+    {
+        if (message.Length <= MaxMessageLength)
+            return new[] { message };
+
+        var chunksCount = (message.Length + MaxMessageLength - 1) / MaxMessageLength;
+        var result = new string[chunksCount];
+        
+        for (var i = 0; i < chunksCount; i++)
+        {
+            var isLastChunk = chunksCount - i == 1;
+            var chunkLength = isLastChunk ? message.Length % MaxMessageLength : MaxMessageLength;
+            result[i] = message.Substring(i * MaxMessageLength, chunkLength);
+        }
+
+        return result;
     }
 
     /// <summary>

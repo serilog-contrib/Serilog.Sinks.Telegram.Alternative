@@ -518,4 +518,25 @@ public class TestSink
         Log.CloseAndFlush();
         Assert.AreEqual(1, mockHttp.GetMatchCount(request));
     }
+    
+    /// <summary>
+    /// Tests the large message sink.
+    /// </summary>
+    [TestMethod]
+    public void TestLargeMessage()
+    {
+        var logger = new LoggerConfiguration()
+            .WriteTo.Telegram(this.telegramBotToken, this.telegramChatId, 1)
+            .CreateLogger();
+
+        var insideLimitMessage = new string('*', 100);
+        logger.Information(insideLimitMessage);
+        
+        // TelegramSink.MaxMessageLength + some additional info (such as datetime and markup symbols) is guaranteed more than max message limit 
+        var outOfLimitMessage = new string('!', TelegramSink.MaxMessageLength); 
+        logger.Information(outOfLimitMessage);
+        
+        Thread.Sleep(1000);
+        Log.CloseAndFlush();
+    }
 }
