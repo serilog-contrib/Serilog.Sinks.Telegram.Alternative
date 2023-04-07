@@ -93,7 +93,7 @@ public class TelegramSink : IBatchedLogEventSink
                 var message = this.options.FormatProvider != null
                                   ? extendedLogEvent.LogEvent.RenderMessage(this.options.FormatProvider)
                                   : this.outputTemplateRenderer is null ? RenderMessage(extendedLogEvent, this.options) : this.outputTemplateRenderer.Format(extendedLogEvent);
-                await this.SendMessage(this.options.HttpClient, this.options.BotApiUrl, this.options.BotToken, this.options.ChatId, message);
+                await this.SendMessage(this.options.HttpClient, this.options.BotApiUrl, this.options.BotToken, this.options.ChatId, message, this.options.TopicId);
             }
         }
         else
@@ -121,7 +121,7 @@ public class TelegramSink : IBatchedLogEventSink
             }
 
             var messageToSend = sb.ToString();
-            await this.SendMessage(this.options.HttpClient, this.options.BotApiUrl,this.options.BotToken, this.options.ChatId, messageToSend);
+            await this.SendMessage(this.options.HttpClient, this.options.BotApiUrl,this.options.BotToken, this.options.ChatId, messageToSend, this.options.TopicId);
         }
     }
 
@@ -195,8 +195,9 @@ public class TelegramSink : IBatchedLogEventSink
     /// <param name="token">The token.</param>
     /// <param name="chatId">The chat identifier.</param>
     /// <param name="message">The message.</param>
+    /// <param name="topicId">The message topic identifier from chat</param>
     /// <returns>A <see cref="Task"/> representing any asynchronous operation.</returns>
-    private async Task SendMessage(HttpClient httpClient, string? botApiUrl, string token, string chatId, string message)
+    private async Task SendMessage(HttpClient httpClient, string? botApiUrl, string token, string chatId, string message, int? topicId = null)
     {
         this.TryWriteToSelflog($"Trying to send message to chatId '{chatId}': '{message}'.");
 
@@ -206,7 +207,7 @@ public class TelegramSink : IBatchedLogEventSink
         {
             foreach (var messageChunk in GetMessageChunks(message))
             {
-                var response = await client.PostMessage(messageChunk, chatId);
+                var response = await client.PostMessage(messageChunk, chatId, topicId);
                 if (response != null)
                 {
                     TryWriteToSelflog($"Message sent to chatId '{chatId}': '{response.StatusCode}'.");

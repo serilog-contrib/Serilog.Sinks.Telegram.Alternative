@@ -31,6 +31,7 @@ public class TelegramSinkOptions
     /// <param name="chatId">The Telegram chat id.</param>
     /// <param name="dateFormat">The date time format showing how the date and time should be formatted.</param>
     /// <param name="applicationName">The name of the application sending the events in case multiple apps write to the same channel.</param>
+    /// <param name="topicId">The Telegram topic id.</param>
     /// <param name="batchSizeLimit">The maximum number of events to post in a single batch; defaults to 1 if
     /// not provided i.e. no batching by default.</param>
     /// <param name="period">The time to wait between checking for event batches; defaults to 1 sec if not
@@ -62,7 +63,8 @@ public class TelegramSinkOptions
         bool useCustomHtmlFormatting = false,
         string? botApiUrl = null,
         string? outputTemplate = null,
-        Func<string, string>? customHtmlFormatter = null)
+        Func<string, string>? customHtmlFormatter = null,
+        int? topicId = null)
     {
         if (string.IsNullOrWhiteSpace(botToken))
         {
@@ -71,6 +73,7 @@ public class TelegramSinkOptions
 
         this.BotToken = botToken;
         this.ChatId = chatId;
+        this.TopicId = topicId;
         this.BatchSizeLimit = batchSizeLimit ?? DefaultBatchSizeLimit;
         this.Period = period ?? DefaultPeriod;
         this.FormatProvider = formatProvider;
@@ -175,4 +178,9 @@ public class TelegramSinkOptions
     /// Gets or sets the HTTP client used for requests to Telegram.
     /// </summary>
     public HttpClient HttpClient { get; set; } = new HttpClient();
+
+    /// <summary>
+    /// Gets the Telegram topic id for selected chat.
+    /// </summary>
+    public int? TopicId { get; set; }
 }

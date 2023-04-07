@@ -26,6 +26,7 @@ public static class LoggerConfigurationTelegramExtensions
     /// <param name="loggerSinkConfiguration">Instance of <see cref="LoggerSinkConfiguration"/> object.</param>
     /// <param name="botToken">The Telegram bot token.</param>
     /// <param name="chatId">The Telegram chat id.</param>
+    /// <param name="topicId">The Telegram topic id.</param>
     /// <param name="batchSizeLimit">The maximum number of events to post in a single batch; defaults to 1 if
     /// not provided i.e. no batching by default.</param>
     /// <param name="period">The time to wait between checking for event batches; defaults to 1 sec if not
@@ -62,7 +63,8 @@ public static class LoggerConfigurationTelegramExtensions
         bool useCustomHtmlFormatting = false,
         string? botApiUrl = null,
         string? outputTemplate = null,
-        Func<string, string>? customHtmlFormatter = null)
+        Func<string, string>? customHtmlFormatter = null,
+        int? topicId = null)
     {
         var telegramSinkOptions = new TelegramSinkOptions(
             botToken,
@@ -79,7 +81,8 @@ public static class LoggerConfigurationTelegramExtensions
             useCustomHtmlFormatting,
             botApiUrl,
             outputTemplate,
-            customHtmlFormatter: customHtmlFormatter);
+            customHtmlFormatter: customHtmlFormatter,
+            topicId: topicId);
         return loggerSinkConfiguration.Telegram(telegramSinkOptions, restrictedToMinimumLevel);
     }
 
