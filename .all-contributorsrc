@@ -92,6 +92,16 @@
         "code",
         "test"
       ]
+    },
+    {
+      "login": "forcewake",
+      "name": "Pavel Nasovich",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1325702?v=4",
+      "profile": "https://forcewake.me/",
+      "contributions": [
+        "code",
+        "test"
+      ]
     }
   ],
   "contributorsPerLine": 7,
@@ -99,5 +109,6 @@
   "projectOwner": "serilog-contrib",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "skipCi": true
+  "skipCi": true,
+  "commitConvention": "angular"
 }
