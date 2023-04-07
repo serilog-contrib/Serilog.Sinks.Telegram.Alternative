@@ -26,7 +26,6 @@ public static class LoggerConfigurationTelegramExtensions
     /// <param name="loggerSinkConfiguration">Instance of <see cref="LoggerSinkConfiguration"/> object.</param>
     /// <param name="botToken">The Telegram bot token.</param>
     /// <param name="chatId">The Telegram chat id.</param>
-    /// <param name="topicId">The Telegram topic id.</param>
     /// <param name="batchSizeLimit">The maximum number of events to post in a single batch; defaults to 1 if
     /// not provided i.e. no batching by default.</param>
     /// <param name="period">The time to wait between checking for event batches; defaults to 1 sec if not
@@ -46,6 +45,7 @@ public static class LoggerConfigurationTelegramExtensions
     ///    You can pass a func in addition to <see cref="TelegramSinkOptions.UseCustomHtmlFormatting"/> to set your custom function for escaping HTML strings.
     ///    This will only be considered if <see cref="TelegramSinkOptions.UseCustomHtmlFormatting"/> is set to true.
     /// </param>
+    /// <param name="topicId">The Telegram topic id.</param>
     /// <returns>Instance of <see cref="LoggerConfiguration"/> object.</returns>
     public static LoggerConfiguration Telegram(
         this LoggerSinkConfiguration loggerSinkConfiguration,

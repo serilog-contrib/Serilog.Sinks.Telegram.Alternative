@@ -15,7 +15,7 @@ namespace Serilog.Sinks.Telegram.Alternative;
 public class TelegramSink : IBatchedLogEventSink
 {
     /// <summary>
-    /// Max length of message bot can send to a chat
+    /// The maximum length of a message a bot can send to a chat.
     /// </summary>
     public const int MaxMessageLength = 4096;
     
@@ -67,7 +67,13 @@ public class TelegramSink : IBatchedLogEventSink
                 continue;
             }
 
-            var foundSameLogEvent = messagesToSend.FirstOrDefault(l => l.LogEvent.Exception.Message == logEvent.Exception.Message);
+            if (logEvent.Exception is null)
+            {
+                messagesToSend.Add(new ExtendedLogEvent(logEvent.Timestamp.DateTime, logEvent.Timestamp.DateTime, logEvent, this.options.IncludeStackTrace));
+                continue;
+            }
+
+            var foundSameLogEvent = messagesToSend.FirstOrDefault(l => l.LogEvent.Exception is not null && l.LogEvent.Exception.Message == logEvent.Exception.Message);
 
             if (foundSameLogEvent is null)
             {
@@ -90,7 +96,7 @@ public class TelegramSink : IBatchedLogEventSink
         {
             foreach (var extendedLogEvent in messagesToSend)
             {
-                var message = this.options.FormatProvider != null
+                var message = this.options.FormatProvider is not null
                                   ? extendedLogEvent.LogEvent.RenderMessage(this.options.FormatProvider)
                                   : this.outputTemplateRenderer is null ? RenderMessage(extendedLogEvent, this.options) : this.outputTemplateRenderer.Format(extendedLogEvent);
                 await this.SendMessage(this.options.HttpClient, this.options.BotApiUrl, this.options.BotToken, this.options.ChatId, message, this.options.TopicId);
@@ -103,7 +109,7 @@ public class TelegramSink : IBatchedLogEventSink
 
             foreach (var extendedLogEvent in messagesToSend)
             {
-                var message = this.options.FormatProvider != null
+                var message = this.options.FormatProvider is not null
                                   ? extendedLogEvent.LogEvent.RenderMessage(this.options.FormatProvider)
                                   : this.outputTemplateRenderer is null ? RenderMessage(extendedLogEvent, this.options) : this.outputTemplateRenderer.Format(extendedLogEvent);
 
@@ -195,7 +201,7 @@ public class TelegramSink : IBatchedLogEventSink
     /// <param name="token">The token.</param>
     /// <param name="chatId">The chat identifier.</param>
     /// <param name="message">The message.</param>
-    /// <param name="topicId">The message topic identifier from chat</param>
+    /// <param name="topicId">The Telegram topic id.</param>
     /// <returns>A <see cref="Task"/> representing any asynchronous operation.</returns>
     private async Task SendMessage(HttpClient httpClient, string? botApiUrl, string token, string chatId, string message, int? topicId = null)
     {
@@ -208,9 +214,10 @@ public class TelegramSink : IBatchedLogEventSink
             foreach (var messageChunk in GetMessageChunks(message))
             {
                 var response = await client.PostMessage(messageChunk, chatId, topicId);
-                if (response != null)
+
+                if (response is not null)
                 {
-                    TryWriteToSelflog($"Message sent to chatId '{chatId}': '{response.StatusCode}'.");
+                    this.TryWriteToSelflog($"Message sent to chatId '{chatId}': '{response.StatusCode}'.");
                 }
             }
         }
@@ -221,10 +228,17 @@ public class TelegramSink : IBatchedLogEventSink
         }
     }
     
+    /// <summary>
+    /// Gets the message chunks.
+    /// </summary>
+    /// <param name="message">The message.</param>
+    /// <returns>A <see cref="IEnumerable{T}"/> of <see cref="string"/> containing the chunks.</returns>
     private static IEnumerable<string> GetMessageChunks(string message)
     {
         if (message.Length <= MaxMessageLength)
+        {
             return new[] { message };
+        }
 
         var chunksCount = (message.Length + MaxMessageLength - 1) / MaxMessageLength;
         var result = new string[chunksCount];

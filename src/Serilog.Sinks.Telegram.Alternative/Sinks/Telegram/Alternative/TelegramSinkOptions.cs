@@ -31,7 +31,6 @@ public class TelegramSinkOptions
     /// <param name="chatId">The Telegram chat id.</param>
     /// <param name="dateFormat">The date time format showing how the date and time should be formatted.</param>
     /// <param name="applicationName">The name of the application sending the events in case multiple apps write to the same channel.</param>
-    /// <param name="topicId">The Telegram topic id.</param>
     /// <param name="batchSizeLimit">The maximum number of events to post in a single batch; defaults to 1 if
     /// not provided i.e. no batching by default.</param>
     /// <param name="period">The time to wait between checking for event batches; defaults to 1 sec if not
@@ -48,6 +47,7 @@ public class TelegramSinkOptions
     ///    You can pass a func in addition to <see cref="UseCustomHtmlFormatting"/> to set your custom function for escaping HTML strings.
     ///    This will only be considered if <see cref="UseCustomHtmlFormatting"/> is set to true.
     /// </param>
+    /// <param name="topicId">The Telegram topic id.</param>
     public TelegramSinkOptions(
         string botToken,
         string chatId,
@@ -180,7 +180,7 @@ public class TelegramSinkOptions
     public HttpClient HttpClient { get; set; } = new HttpClient();
 
     /// <summary>
-    /// Gets the Telegram topic id for selected chat.
+    /// Gets or sets the Telegram topic id.
     /// </summary>
     public int? TopicId { get; set; }
 }

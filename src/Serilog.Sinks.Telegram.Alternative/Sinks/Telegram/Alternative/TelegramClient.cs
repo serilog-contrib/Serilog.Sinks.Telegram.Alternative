@@ -57,11 +57,11 @@ public class TelegramClient
     /// </summary>
     /// <param name="message">The message.</param>
     /// <param name="chatId">The chat identifier.</param>
-    /// <param name="topicId">The topic identifier in chats with topic feature</param>
+    /// <param name="topicId">The topic identifier in chats with topic feature.</param>
     /// <returns>A <see cref="HttpResponseMessage"/>.</returns>
     public async Task<HttpResponseMessage> PostMessage(string message, string chatId, int? topicId = null)
     {
-        var payload = new { chat_id = chatId, text = message, parse_mode = "HTML", message_thread_id = topicId};
+        var payload = new { chat_id = chatId, text = message, parse_mode = "HTML", message_thread_id = topicId };
         var json = JsonConvert.SerializeObject(payload);
         var content = new StringContent(json, Encoding.UTF8, "application/json");
         var response = await this.httpClient.PostAsync(this.apiUrl, content);
