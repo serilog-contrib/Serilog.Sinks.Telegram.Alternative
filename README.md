@@ -22,7 +22,6 @@ Serilog.Sinks.Telegram.Alternative is a library to save logging information from
 * Net 7.0
 
 ## Net Core and Net Framework latest and LTS versions
-* https://dotnet.microsoft.com/download/dotnet-framework
 * https://dotnet.microsoft.com/download/dotnet-core
 * https://dotnet.microsoft.com/download/dotnet
 
