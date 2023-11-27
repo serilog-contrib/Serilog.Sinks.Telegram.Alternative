@@ -16,9 +16,11 @@ FOR /d /r . %%d in (bin,obj) DO (
 
 @ECHO on
 @ECHO.Building solution...
-@dotnet build -c Release -o bin/publish
+@del publish /F /Q
+@dotnet restore
+@dotnet build -c Release --property:OutputPath=../publish
 @ECHO.Deleting *.pdb files...
-@cd bin/publish
+@cd ./publish
 @del *.pdb
 @ECHO.Build successful.
 
