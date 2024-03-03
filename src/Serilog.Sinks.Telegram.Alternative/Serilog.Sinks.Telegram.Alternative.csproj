@@ -16,7 +16,7 @@
     <RepositoryUrl>https://github.com/serilog-contrib/Serilog.Sinks.Telegram.Alternative</RepositoryUrl>
     <PackageIcon>Icon.png</PackageIcon>
     <RepositoryType>Github</RepositoryType>
-    <PackageReleaseNotes>Version 1.4.0.0 (2023-11-21): Updated NuGet packages, removed support for netstandard, added support for Net8.0.</PackageReleaseNotes>
+    <PackageReleaseNotes>Version 1.4.1.0 (2024-03-03): Updated NuGet packages.</PackageReleaseNotes>
     <PackageLicenseFile>License.txt</PackageLicenseFile>
     <LangVersion>latest</LangVersion>
 	<Nullable>enable</Nullable>
@@ -39,7 +39,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Serilog" Version="3.1.1" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
-    <PackageReference Include="Serilog.Sinks.PeriodicBatching" Version="3.1.0" />
+    <PackageReference Include="Serilog.Sinks.PeriodicBatching" Version="4.0.0" />
   </ItemGroup>
 
   <ItemGroup>

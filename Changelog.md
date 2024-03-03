@@ -1,6 +1,7 @@
 Change history
 --------------
 
+* **Version 1.4.1.0 (2024-03-03)**: Updated NuGet packages.
 * **Version 1.4.0.0 (2023-11-21)**: Updated NuGet packages, removed support for netstandard, added support for Net8.0.
 * **Version 1.3.0.0 (2023-04-07)**: Updated NuGet packages, removed support for NetCore3.1, added message chunking, added topic support.
 * **Version 1.2.0.0 (2022-11-20)**: Updated nuget packages, removed support for Net5.0, added support for Net7.0.
