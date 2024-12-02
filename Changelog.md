@@ -1,7 +1,7 @@
 Change history
 --------------
 
-* **Version 1.4.3.0 (2024-12-02)** : Removed support for Net6.0, added support for Net9.0, updated NuGet packages.
+* **Version 1.4.3.0 (2024-12-02)** : Removed support for Net6.0, added support for Net9.0, updated NuGet packages, removed message splitting for large messages (Doesn't work well with HTML formatting), fixes https://github.com/serilog-contrib/Serilog.Sinks.Telegram.Alternative/issues/33.
 * **Version 1.4.2.0 (2024-05-16)** : Removed support for Net7.0.
 * **Version 1.4.1.0 (2024-03-03)**: Updated NuGet packages.
 * **Version 1.4.0.0 (2023-11-21)**: Updated NuGet packages, removed support for netstandard, added support for Net8.0.

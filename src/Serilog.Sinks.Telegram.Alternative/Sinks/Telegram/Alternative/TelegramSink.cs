@@ -211,14 +211,17 @@ public class TelegramSink : IBatchedLogEventSink
 
         try
         {
-            foreach (var messageChunk in GetMessageChunks(message))
+            if (message.Length > MaxMessageLength)
             {
-                var response = await client.PostMessage(messageChunk, chatId, topicId);
+                this.TryWriteToSelflog($"Message is too long to be sent, it must not exceed {MaxMessageLength} characters.");
+                return;
+            }
 
-                if (response is not null)
-                {
-                    this.TryWriteToSelflog($"Message sent to chatId '{chatId}': '{response.StatusCode}'.");
-                }
+            var response = await client.PostMessage(message, chatId, topicId);
+
+            if (response is not null)
+            {
+                this.TryWriteToSelflog($"Message sent to chatId '{chatId}': '{response.StatusCode}'.");
             }
         }
         catch (Exception ex)
@@ -227,31 +230,7 @@ public class TelegramSink : IBatchedLogEventSink
             this.options.FailureCallback?.Invoke(ex);
         }
     }
-    
-    /// <summary>
-    /// Gets the message chunks.
-    /// </summary>
-    /// <param name="message">The message.</param>
-    /// <returns>A <see cref="IEnumerable{T}"/> of <see cref="string"/> containing the chunks.</returns>
-    private static IEnumerable<string> GetMessageChunks(string message)
-    {
-        if (message.Length <= MaxMessageLength)
-        {
-            return new[] { message };
-        }
-
-        var chunksCount = (message.Length + MaxMessageLength - 1) / MaxMessageLength;
-        var result = new string[chunksCount];
-        
-        for (var i = 0; i < chunksCount; i++)
-        {
-            var isLastChunk = chunksCount - i == 1;
-            var chunkLength = isLastChunk ? message.Length % MaxMessageLength : MaxMessageLength;
-            result[i] = message.Substring(i * MaxMessageLength, chunkLength);
-        }
-
-        return result;
-    }
+   
 
     /// <summary>
     /// Tries to write to Selflog and throws an exception if a formatting error occurred.

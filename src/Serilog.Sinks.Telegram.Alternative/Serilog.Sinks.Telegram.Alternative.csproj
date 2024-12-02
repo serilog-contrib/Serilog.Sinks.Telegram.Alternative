@@ -16,7 +16,7 @@
         <RepositoryUrl>https://github.com/serilog-contrib/Serilog.Sinks.Telegram.Alternative</RepositoryUrl>
         <PackageIcon>Icon.png</PackageIcon>
         <RepositoryType>Github</RepositoryType>
-        <PackageReleaseNotes>Version 1.4.3.0 (2024-12-02): Removed support for Net6.0, added support for Net9.0, updated NuGet packages.</PackageReleaseNotes>
+        <PackageReleaseNotes>Version 1.4.3.0 (2024-12-02): Removed support for Net6.0, added support for Net9.0, updated NuGet packages, removed message splitting for large messages (Doesn't work well with HTML formatting), fixes https://github.com/serilog-contrib/Serilog.Sinks.Telegram.Alternative/issues/33.</PackageReleaseNotes>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <LangVersion>latest</LangVersion>
         <Nullable>enable</Nullable>
