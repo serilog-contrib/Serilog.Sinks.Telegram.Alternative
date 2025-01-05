@@ -10,7 +10,7 @@ Serilog.Sinks.Telegram.Alternative is a library to save logging information from
 [![Nuget](https://img.shields.io/badge/Serilog.Sinks.Telegram.Alternative-Nuget-brightgreen.svg)](https://www.nuget.org/packages/Serilog.Sinks.Telegram.Alternative/)
 [![NuGet Downloads](https://img.shields.io/nuget/dt/Serilog.Sinks.Telegram.Alternative.svg)](https://www.nuget.org/packages/Serilog.Sinks.Telegram.Alternative/)
 [![Known Vulnerabilities](https://snyk.io/test/github/serilog-contrib/Serilog.Sinks.Telegram.Alternative/badge.svg)](https://snyk.io/test/github/serilog-contrib/Serilog.Sinks.Telegram.Alternative)
-[![Gitter](https://badges.gitter.im/Serilog-Sinks-Telegram/community.svg)](https://gitter.im/Serilog-Sinks-Telegram/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Gitter](https://img.shields.io/matrix/Serilog-Sinks-Telegram_community%3Agitter.im?server_fqdn=matrix.org)](https://matrix.to/#/#Serilog-Sinks-Telegram_community:gitter.im)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
