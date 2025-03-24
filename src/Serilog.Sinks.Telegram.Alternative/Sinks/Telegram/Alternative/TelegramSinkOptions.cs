@@ -80,7 +80,10 @@ public class TelegramSinkOptions
         this.MinimumLogEventLevel = minimumLogEventLevel;
         this.SendBatchesAsSingleMessages = sendBatchesAsSingleMessages ?? true;
         this.IncludeStackTrace = includeStackTrace ?? true;
+#pragma warning disable CS0618 // Typ oder Element ist veraltet
+        // Todo: Remove this in next version!
         this.FailureCallback = failureCallback;
+#pragma warning restore CS0618 // Typ oder Element ist veraltet
         this.DateFormat = dateFormat;
         this.ApplicationName = applicationName;
         this.UseCustomHtmlFormatting = useCustomHtmlFormatting;
@@ -152,6 +155,7 @@ public class TelegramSinkOptions
     /// <summary>
     /// Gets the failure callback.
     /// </summary>
+    [Obsolete("Use fallback logging instead. Check https://nblumhardt.com/2024/10/fallback-logging/.")]
     public Action<Exception>? FailureCallback { get; }
 
     /// <summary>

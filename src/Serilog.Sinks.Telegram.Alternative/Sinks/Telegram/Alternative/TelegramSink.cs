@@ -226,8 +226,11 @@ public class TelegramSink : IBatchedLogEventSink
         }
         catch (Exception ex)
         {
-            SelfLog.WriteLine($"{ex.Message} {ex.StackTrace}");
+#pragma warning disable CS0618 // Typ oder Element ist veraltet
+            // Todo: Remove this in next version!
             this.options.FailureCallback?.Invoke(ex);
+#pragma warning restore CS0618 // Typ oder Element ist veraltet
+            throw;
         }
     }
    
@@ -244,8 +247,11 @@ public class TelegramSink : IBatchedLogEventSink
         }
         catch (Exception ex)
         {
-            SelfLog.WriteLine($"{ex.Message} {ex.StackTrace}");
+#pragma warning disable CS0618 // Typ oder Element ist veraltet
+            // Todo: Remove this in next version!
             this.options.FailureCallback?.Invoke(ex);
+#pragma warning restore CS0618 // Typ oder Element ist veraltet
+            throw;
         }
     }
 }

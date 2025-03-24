@@ -22,7 +22,7 @@ The project can be found on [nuget](https://www.nuget.org/packages/Serilog.Sinks
 |minimumLogEventLevel|The minimum level of the logging.|`minimumLogEventLevel: LogEventLevel.Verbose`|`LogEventLevel.Verbose`|
 |sendBatchesAsSingleMessages|A value indicating whether the batches are sent as single messages or as one block of messages.|`false`|`true`|
 |includeStackTrace|A value indicating whether the stack trace should be shown or not.|`false`|`true`|
-|failureCallback|Adds an option to add a failure callback action.|`failureCallback: e => Console.WriteLine($"Sink error: {e.Message}")`|`null`|
+|~~failureCallback~~|~~Adds an option to add a failure callback action.~~  (Deprecated, use fallback logging instead.Check https://nblumhardt.com/2024/10/fallback-logging/.)|~~`failureCallback: e => Console.WriteLine($"Sink error: {e.Message}")`~~|~~`null`~~|
 |useCustomHtmlFormatting|An option to allow custom HTML formatting inside the message text and the application name (Use only if really needed). Make sure to use the HTML formatting from https://core.telegram.org/bots/api#html-style.|`true`|`false`|
 |botApiUrl|A custom bot API url.|`https://telegram.something.com/bot`|`https://api.telegram.org/bot`|
 |outputTemplate|A custom output template following the Serilog standard. Check https://github.com/serilog/serilog/wiki/Formatting-Output.|`"[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}"`|`null`|
