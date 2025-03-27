@@ -99,7 +99,7 @@ public class TelegramSink : IBatchedLogEventSink
                 var message = this.options.FormatProvider is not null
                                   ? extendedLogEvent.LogEvent.RenderMessage(this.options.FormatProvider)
                                   : this.outputTemplateRenderer is null ? RenderMessage(extendedLogEvent, this.options) : this.outputTemplateRenderer.Format(extendedLogEvent);
-                await this.SendMessage(this.options.HttpClient, this.options.BotApiUrl, this.options.BotToken, this.options.ChatId, message, this.options.TopicId);
+                await SendMessage(this.options.HttpClient, this.options.BotApiUrl, this.options.BotToken, this.options.ChatId, message, this.options.TopicId);
             }
         }
         else
@@ -127,7 +127,7 @@ public class TelegramSink : IBatchedLogEventSink
             }
 
             var messageToSend = sb.ToString();
-            await this.SendMessage(this.options.HttpClient, this.options.BotApiUrl,this.options.BotToken, this.options.ChatId, messageToSend, this.options.TopicId);
+            await SendMessage(this.options.HttpClient, this.options.BotApiUrl,this.options.BotToken, this.options.ChatId, messageToSend, this.options.TopicId);
         }
     }
 
@@ -203,55 +203,29 @@ public class TelegramSink : IBatchedLogEventSink
     /// <param name="message">The message.</param>
     /// <param name="topicId">The Telegram topic id.</param>
     /// <returns>A <see cref="Task"/> representing any asynchronous operation.</returns>
-    private async Task SendMessage(HttpClient httpClient, string? botApiUrl, string token, string chatId, string message, int? topicId = null)
+    private static async Task SendMessage(
+        HttpClient httpClient,
+        string? botApiUrl,
+        string token,
+        string chatId,
+        string message,
+        int? topicId = null)
     {
-        this.TryWriteToSelflog($"Trying to send message to chatId '{chatId}': '{message}'.");
+        SelfLog.WriteLine($"Trying to send message to chatId '{chatId}': '{message}'.");
 
         var client = new TelegramClient(httpClient, token, botApiUrl);
 
-        try
+        if (message.Length > MaxMessageLength)
         {
-            if (message.Length > MaxMessageLength)
-            {
-                this.TryWriteToSelflog($"Message is too long to be sent, it must not exceed {MaxMessageLength} characters.");
-                return;
-            }
-
-            var response = await client.PostMessage(message, chatId, topicId);
-
-            if (response is not null)
-            {
-                this.TryWriteToSelflog($"Message sent to chatId '{chatId}': '{response.StatusCode}'.");
-            }
+            SelfLog.WriteLine($"Message is too long to be sent, it must not exceed {MaxMessageLength} characters.");
+            return;
         }
-        catch (Exception ex)
-        {
-#pragma warning disable CS0618 // Typ oder Element ist veraltet
-            // Todo: Remove this in next version!
-            this.options.FailureCallback?.Invoke(ex);
-#pragma warning restore CS0618 // Typ oder Element ist veraltet
-            throw;
-        }
-    }
-   
 
-    /// <summary>
-    /// Tries to write to Selflog and throws an exception if a formatting error occurred.
-    /// </summary>
-    /// <param name="messageTemplate">The message template.</param>
-    private void TryWriteToSelflog(string messageTemplate)
-    {
-        try
+        var response = await client.PostMessage(message, chatId, topicId);
+
+        if (response is not null)
         {
-            SelfLog.WriteLine(messageTemplate);
-        }
-        catch (Exception ex)
-        {
-#pragma warning disable CS0618 // Typ oder Element ist veraltet
-            // Todo: Remove this in next version!
-            this.options.FailureCallback?.Invoke(ex);
-#pragma warning restore CS0618 // Typ oder Element ist veraltet
-            throw;
+            SelfLog.WriteLine($"Message sent to chatId '{chatId}': '{response.StatusCode}'.");
         }
     }
 }

@@ -37,7 +37,6 @@ public static class LoggerConfigurationTelegramExtensions
     /// <param name="includeStackTrace">Whether stack traces should be included or not.</param>
     /// <param name="dateFormat">The date time format showing how the date and time should be formatted.</param>
     /// <param name="applicationName">The name of the application sending the events in case multiple apps write to the same channel.</param>
-    /// <param name="failureCallback">The failure callback.</param>
     /// <param name="useCustomHtmlFormatting">A value indicating whether custom HTML formatting in the messages could be used. (Use this carefully and only if really needed).</param>
     /// <param name="botApiUrl">The Telegram bot API url, defaults to https://api.telegram.org/bot.</param>
     /// <param name="outputTemplate">A output template that can be used to format the output data.</param>
@@ -59,7 +58,6 @@ public static class LoggerConfigurationTelegramExtensions
         bool? includeStackTrace = true,
         string dateFormat = "dd.MM.yyyy HH:mm:sszzz",
         string applicationName = "",
-        Action<Exception>? failureCallback = null,
         bool useCustomHtmlFormatting = false,
         string? botApiUrl = null,
         string? outputTemplate = null,
@@ -77,7 +75,6 @@ public static class LoggerConfigurationTelegramExtensions
             restrictedToMinimumLevel,
             sendBatchesAsSingleMessages,
             includeStackTrace,
-            failureCallback,
             useCustomHtmlFormatting,
             botApiUrl,
             outputTemplate,

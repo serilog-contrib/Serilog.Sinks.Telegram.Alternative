@@ -39,7 +39,6 @@ public class TelegramSinkOptions
     /// <param name="minimumLogEventLevel">The minimum log event level to use.</param>
     /// <param name="sendBatchesAsSingleMessages">A value indicating whether the batches are sent as single messages or as one block of messages.</param>
     /// <param name="includeStackTrace">A value indicating whether the stack trace should be shown or not.</param>
-    /// <param name="failureCallback">The failure callback.</param>
     /// <param name="useCustomHtmlFormatting">A value indicating whether custom HTML formatting in the messages could be used. (Use this carefully and only if really needed).</param>
     /// <param name="botApiUrl">The Telegram bot API url, defaults to https://api.telegram.org/bot.</param>
     /// <param name="outputTemplate">The output template.</param>
@@ -59,7 +58,6 @@ public class TelegramSinkOptions
         LogEventLevel minimumLogEventLevel = LogEventLevel.Verbose,
         bool? sendBatchesAsSingleMessages = true,
         bool? includeStackTrace = true,
-        Action<Exception>? failureCallback = null,
         bool useCustomHtmlFormatting = false,
         string? botApiUrl = null,
         string? outputTemplate = null,
@@ -80,10 +78,6 @@ public class TelegramSinkOptions
         this.MinimumLogEventLevel = minimumLogEventLevel;
         this.SendBatchesAsSingleMessages = sendBatchesAsSingleMessages ?? true;
         this.IncludeStackTrace = includeStackTrace ?? true;
-#pragma warning disable CS0618 // Typ oder Element ist veraltet
-        // Todo: Remove this in next version!
-        this.FailureCallback = failureCallback;
-#pragma warning restore CS0618 // Typ oder Element ist veraltet
         this.DateFormat = dateFormat;
         this.ApplicationName = applicationName;
         this.UseCustomHtmlFormatting = useCustomHtmlFormatting;
@@ -151,12 +145,6 @@ public class TelegramSinkOptions
     /// Gets a value indicating whether the stack trace should be shown or not.
     /// </summary>
     public bool IncludeStackTrace { get; }
-
-    /// <summary>
-    /// Gets the failure callback.
-    /// </summary>
-    [Obsolete("Use fallback logging instead. Check https://nblumhardt.com/2024/10/fallback-logging/.")]
-    public Action<Exception>? FailureCallback { get; }
 
     /// <summary>
     /// Gets a value indicating whether custom HTML formatting in the messages could be used. (Use this carefully and only if really needed).
