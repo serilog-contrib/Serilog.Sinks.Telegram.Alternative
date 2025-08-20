@@ -39,9 +39,8 @@ public class ExceptionRenderer : IPropertyRenderer
         var message = HtmlEscaper.Escape(this.options, extLogEvent.LogEvent.Exception.Message);
         var exceptionType = HtmlEscaper.Escape(this.options, extLogEvent.LogEvent.Exception.GetType().Name);
 
-        output.WriteLine($"\n<strong>{message}</strong>\n");
-        output.WriteLine($"Message: <code>{message}</code>");
-        output.WriteLine($"Type: <code>{exceptionType}</code>\n");
+        output.WriteLine($"\nException message: <code>{message}</code>");
+        output.WriteLine($"Exception type: <code>{exceptionType}</code>\n");
 
         if (extLogEvent.IncludeStackTrace)
         {

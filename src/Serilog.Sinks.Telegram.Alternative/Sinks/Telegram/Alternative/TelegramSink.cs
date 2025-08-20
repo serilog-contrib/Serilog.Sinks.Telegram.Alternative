@@ -180,9 +180,8 @@ public class TelegramSink : IBatchedLogEventSink
         var message = HtmlEscaper.Escape(options, extLogEvent.LogEvent.Exception.Message);
         var exceptionType = HtmlEscaper.Escape(options, extLogEvent.LogEvent.Exception.GetType().Name);
 
-        sb.AppendLine($"\n<strong>{message}</strong>\n");
-        sb.AppendLine($"Message: <code>{message}</code>");
-        sb.AppendLine($"Type: <code>{exceptionType}</code>\n");
+        sb.AppendLine($"\nException message: <code>{message}</code>");
+        sb.AppendLine($"Exception type: <code>{exceptionType}</code>\n");
 
         if (extLogEvent.IncludeStackTrace)
         {
