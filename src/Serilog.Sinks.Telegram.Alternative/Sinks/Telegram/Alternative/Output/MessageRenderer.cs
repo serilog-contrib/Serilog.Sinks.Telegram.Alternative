@@ -38,7 +38,7 @@ public class MessageRenderer : IPropertyRenderer
             switch (token)
             {
                 case TextToken textToken:
-                    TextTokenRenderer.Render(textToken, output, options);
+                    TextTokenRenderer.Render(textToken, writer, options);
                     break;
                 case PropertyToken propertyToken:
                     new DefaultPropertyRenderer(propertyToken).Render(logEvent, writer);
