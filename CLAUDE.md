@@ -86,13 +86,23 @@ dotnet test src/Serilog.Sinks.Telegram.Alternative.sln
   `src/Serilog.Sinks.Telegram.Alternative/bin/Release`. Building is harmless, pushing is not, see
   Releasing.
 - The test project holds two kinds of tests and they behave very differently:
-  - `HtmlEscapingTests`, `OutputTemplateRendererTests`, `TelegramClientTests` and
-    `TelegramSinkTests` run offline. They use `RichardSzalay.MockHttp` for everything that would
-    otherwise leave the machine and they assert. New tests belong here.
+  - `TelegramClientTests`, `TelegramSinkTests` and `OutputTemplateTests` run offline, 30 tests
+    in total. `TelegramApiMock` answers every url through `RichardSzalay.MockHttp` and records the
+    requests, `RecordedRequest` decodes the JSON payload, `TestDataProvider` builds the options and
+    the log events. New tests belong here, run them with
+    `dotnet test src/Serilog.Sinks.Telegram.Alternative.sln --filter "FullyQualifiedName!~TestSink"`.
   - `TestSink` is the old test class. Its methods read the environment variables `TelegramBotToken`
     and `TelegramChatId`, post to a real chat and assert nothing, they are eyeball tests. Without
     those variables the sink options constructor throws and the tests fail. Do not add to this
     class and never present a run of it as evidence that anything works.
+- **Never assert that several log events end up in one batch.** `PeriodicBatchingSink` decides that
+  by timing, so a test that logs three events and expects one request fails in maybe one run out of
+  four. Everything about batch behaviour hands the batch to `TelegramSink.EmitBatchAsync` directly,
+  only single events go through a logger. `TelegramSink` and its `EmitBatchAsync` are public, which
+  is what makes that possible.
+- Tests dispose their logger to flush the sink, they do not sleep. `Log.CloseAndFlush` does nothing
+  for a logger that was not assigned to `Log.Logger`, which is why the old tests sleep for a second
+  each.
 - Never claim a test run happened without running it.
 
 ## Code conventions
