@@ -16,7 +16,7 @@
         <RepositoryUrl>https://github.com/serilog-contrib/Serilog.Sinks.Telegram.Alternative</RepositoryUrl>
         <PackageIcon>Icon.png</PackageIcon>
         <RepositoryType>Github</RepositoryType>
-        <PackageReleaseNotes>Version 1.5.0.0 (2025-03-24): Fixes https://github.com/serilog-contrib/Serilog.Sinks.Postgresql.Alternative/issues/83, updates NuGet packages, deprecates `failureCallback`.</PackageReleaseNotes>
+        <PackageReleaseNotes>Version 1.6.0.0 (2026-08-17): Added support for Net10.0, updated NuGet packages, removed the `failureCallback` option and the obsolete `System.Net.Http` reference, fixed the HTML escaping (A `&lt;` arrived as the literal text `&amp;lt;`), fixed the token order of the `outputTemplate` option, fixed the parameter name of the `ArgumentNullException` for a missing HTTP client, added offline tests.</PackageReleaseNotes>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <LangVersion>latest</LangVersion>
         <Nullable>enable</Nullable>
