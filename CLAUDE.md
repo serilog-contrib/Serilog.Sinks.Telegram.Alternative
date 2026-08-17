@@ -65,8 +65,10 @@ dotnet build src/Serilog.Sinks.Telegram.Alternative.sln -c Release
 dotnet test src/Serilog.Sinks.Telegram.Alternative.sln
 ```
 
-- The library multi-targets `net8.0;net9.0;net10.0`, the test project is `net10.0` only. Nothing in
-  the code is platform specific.
+- The library multi-targets `net8.0;net10.0`, the test project is `net10.0` only. Nothing in the
+  code is platform specific. A target framework is dropped from this list once Microsoft stops
+  supporting it, `net9.0` went out in version 1.6.1.0 for that reason. `net8.0` is the LTS release
+  whose support ends in November 2026, it is the next candidate.
 - `src/Directory.Build.props` sets exactly one property, `GenerateDocumentationFile`. Everything
   else lives in the two `.csproj` files and is duplicated there.
 - `TreatWarningsAsErrors` is enabled in both projects, so every warning breaks the build, NuGet
@@ -200,6 +202,11 @@ Do not silently "clean up" these, they are existing behaviour:
    every `bin` and `obj` below `src`, builds Release and pushes both the `.nupkg` and the `.snupkg`
    to nuget.org with `%NUGET_API_KEY%`. A push to nuget.org cannot be taken back, the version is
    burned even after unlisting.
+
+**Never turn `ECHO on` in `BuildAndPushPackage.bat`.** Cmd echoes a command with its variables
+already expanded, so an echoed push line puts `%NUGET_API_KEY%` in plain text into the console and
+into every log or screenshot of it. That was the case until version 1.6.1.0. The same holds for any
+other place the key is passed, never write it into a file and never print it.
 
 The version in `Changelog.md` and in `PackageReleaseNotes` has four parts (`1.6.0.0`), the tag has
 three (`1.6.0`).

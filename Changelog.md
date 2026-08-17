@@ -1,6 +1,7 @@
 Change history
 --------------
 
+* **Version 1.6.1.0 (2026-08-17)** : Removed support for Net9.0 (Out of support since 2026-05-12), hardened the package upload script so that it no longer echoes the NuGet API key.
 * **Version 1.6.0.0 (2026-08-17)** : Added support for Net10.0, updated NuGet packages, removed the `failureCallback` option and the obsolete `System.Net.Http` reference, fixed the HTML escaping (A `<` arrived as the literal text `&lt;`), fixed the token order of the `outputTemplate` option (`Hello {Name}!` arrived as `Hello !"World"`), fixed the parameter name of the `ArgumentNullException` for a missing HTTP client, added offline tests.
 * **Version 1.5.0.0 (2025-03-24)** : Fixes https://github.com/serilog-contrib/Serilog.Sinks.Postgresql.Alternative/issues/83, updates NuGet packages, deprecates `failureCallback`.
 * **Version 1.4.3.0 (2024-12-02)** : Removed support for Net6.0, added support for Net9.0, updated NuGet packages, removed message splitting for large messages (Doesn't work well with HTML formatting), fixes https://github.com/serilog-contrib/Serilog.Sinks.Telegram.Alternative/issues/33.

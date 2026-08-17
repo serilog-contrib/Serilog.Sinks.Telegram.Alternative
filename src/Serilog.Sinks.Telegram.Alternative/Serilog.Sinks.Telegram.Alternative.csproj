@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
+        <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
         <AssemblyName>Serilog.Sinks.Telegram.Alternative</AssemblyName>
         <RootNamespace>Serilog</RootNamespace>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -16,7 +16,7 @@
         <RepositoryUrl>https://github.com/serilog-contrib/Serilog.Sinks.Telegram.Alternative</RepositoryUrl>
         <PackageIcon>Icon.png</PackageIcon>
         <RepositoryType>Github</RepositoryType>
-        <PackageReleaseNotes>Version 1.6.0.0 (2026-08-17): Added support for Net10.0, updated NuGet packages, removed the `failureCallback` option and the obsolete `System.Net.Http` reference, fixed the HTML escaping (A `&lt;` arrived as the literal text `&amp;lt;`), fixed the token order of the `outputTemplate` option, fixed the parameter name of the `ArgumentNullException` for a missing HTTP client, added offline tests.</PackageReleaseNotes>
+        <PackageReleaseNotes>Version 1.6.1.0 (2026-08-17): Removed support for Net9.0 (Out of support since 2026-05-12), added support for Net10.0, updated NuGet packages, removed the `failureCallback` option and the obsolete `System.Net.Http` reference, fixed the HTML escaping (A `&lt;` arrived as the literal text `&amp;lt;`), fixed the token order of the `outputTemplate` option, fixed the parameter name of the `ArgumentNullException` for a missing HTTP client, added offline tests.</PackageReleaseNotes>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <LangVersion>latest</LangVersion>
         <Nullable>enable</Nullable>
