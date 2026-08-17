@@ -154,9 +154,10 @@ Do not silently "clean up" these, they are existing behaviour:
 - **`customHtmlFormatter` is only stored when `useCustomHtmlFormatting` is true.** Passing the
   formatter alone silently does nothing. `ShouldEscape` is nothing but the negation of
   `UseCustomHtmlFormatting`.
-- **`System.Net.Http 4.3.4` is still referenced.** For `net8.0` and newer that package is a legacy
-  shim, the types come from the shared framework. It is kept because removing it changes the
-  dependency list of the published package, which is a breaking change for tooling that pins it.
+- **`System.Net.Http` is gone and must not come back.** The package was a legacy shim, on `net8.0`
+  and newer the types come from the shared framework. Adding the target `net10.0` turned it into
+  `NU1510` ("PackageReference is not trimmed, consider removing"), and warnings are errors here, so
+  it was removed in version 1.6.0.0. That shortened the dependency list of the published package.
 - **The remotes do not match the project url.** `origin` is
   `https://github.com/SeppPenner/Serilog.Sinks.Telegram`, GitHub redirects it to
   `serilog-contrib/Serilog.Sinks.Telegram.Alternative`, which is the url in the `.csproj` and in
