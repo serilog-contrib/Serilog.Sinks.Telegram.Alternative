@@ -29,6 +29,11 @@ public class MessageRenderer : IPropertyRenderer
     }
 
     /// <inheritdoc cref="IPropertyRenderer"/>
+    /// <remarks>
+    /// All tokens are rendered unescaped into one writer and the result is escaped once. Writing the
+    /// text tokens straight to the output and only the properties into a second writer would put every
+    /// rendered property behind the whole text, so "Hello {Name}!" came out as "Hello !John".
+    /// </remarks>
     public void Render(ExtendedLogEvent logEvent, TextWriter output)
     {
         using var writer = new StringWriter(new StringBuilder());
@@ -38,7 +43,7 @@ public class MessageRenderer : IPropertyRenderer
             switch (token)
             {
                 case TextToken textToken:
-                    TextTokenRenderer.Render(textToken, output, options);
+                    writer.Write(textToken.Text);
                     break;
                 case PropertyToken propertyToken:
                     new DefaultPropertyRenderer(propertyToken).Render(logEvent, writer);
@@ -46,6 +51,6 @@ public class MessageRenderer : IPropertyRenderer
             }
         }
 
-        output.Write(HtmlEscaper.Escape(options, writer.ToString()));
+        output.Write(HtmlEscaper.Escape(this.options, writer.ToString()));
     }
 }

@@ -20,8 +20,12 @@ internal static class StringExtensions
     /// <param name="value">The <see cref="string"/> value to escape.</param>
     /// <param name="shouldEscape">A value indicating whether the value should be escaped or not.</param>
     /// <returns>A new escaped <see cref="string"/>.</returns>
+    /// <remarks>
+    /// The ampersand has to be replaced first. Replacing it last would escape the ampersands of the
+    /// entities written just before it, so a single left angle bracket would end up as "&amp;amp;lt;".
+    /// </remarks>
     public static string HtmlEscape(this string value, bool shouldEscape)
     {
-        return shouldEscape ? value.Replace("<", "&lt;").Replace(">", "&gt;").Replace("&", "&amp;") : value;
+        return shouldEscape ? value.Replace("&", "&amp;").Replace("<", "&lt;").Replace(">", "&gt;") : value;
     }
 }

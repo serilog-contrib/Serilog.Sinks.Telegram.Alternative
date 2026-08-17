@@ -105,29 +105,17 @@ public class TelegramSink : IBatchedLogEventSink
         else
         {
             var sb = new StringBuilder();
-            var count = 0;
 
             foreach (var extendedLogEvent in messagesToSend)
             {
                 var message = this.options.FormatProvider is not null
                                   ? extendedLogEvent.LogEvent.RenderMessage(this.options.FormatProvider)
                                   : this.outputTemplateRenderer is null ? RenderMessage(extendedLogEvent, this.options) : this.outputTemplateRenderer.Format(extendedLogEvent);
-
-                if (count == messagesToSend.Count)
-                {
-                    sb.AppendLine(message);
-                    sb.AppendLine(Environment.NewLine);
-                }
-                else
-                {
-                    sb.AppendLine(message);
-                }
-
-                count++;
+                sb.AppendLine(message);
             }
 
             var messageToSend = sb.ToString();
-            await SendMessage(this.options.HttpClient, this.options.BotApiUrl,this.options.BotToken, this.options.ChatId, messageToSend, this.options.TopicId);
+            await SendMessage(this.options.HttpClient, this.options.BotApiUrl, this.options.BotToken, this.options.ChatId, messageToSend, this.options.TopicId);
         }
     }
 
