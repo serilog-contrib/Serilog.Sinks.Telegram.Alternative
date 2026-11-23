@@ -186,23 +186,46 @@ Do not silently "clean up" these, they are existing behaviour:
 
 ## Releasing
 
+**Every new version is released completely.** Changelog, README, nuget.org, GitHub Packages and a
+GitHub release belong to every version, none of these steps is optional and none of them waits for
+a separate request.
+
 1. Make the change.
 2. Add an entry at the top of `Changelog.md` in the existing format:
    `* **Version 1.6.0.0 (2026-08-17)** : Short description.`
 3. Copy the same sentence into `PackageReleaseNotes` in
    `src/Serilog.Sinks.Telegram.Alternative/Serilog.Sinks.Telegram.Alternative.csproj`. The property
    holds only the newest entry, not a history.
-4. If the set of target frameworks changed, update the `## Available for` list in `README.md`. If
-   an option changed, update the table in `HowToUse.md`.
+4. Update `README.md` for every version, the part above `## Contributors`. The `## Available for`
+   list has to match the target frameworks, and nothing there may describe a state the package has
+   left behind. If an option changed, update the table in `HowToUse.md` as well.
 5. Commit that, then tag the commit with the plain version number, no `v` prefix (`1.5.0`, `1.4.3`,
    ...). The existing tags are lightweight tags, create new ones the same way.
 6. Push the commits and the tag. The tag has to be pushed before the package is built, GitVersion
    turns it into the assembly version and an untagged commit produces a prerelease version like
    `1.6.1-1+Branch.master.Sha...` inside the nupkg.
-7. Only then, and only when explicitly asked to publish, run `BuildAndPushPackage.bat`. It deletes
-   every `bin` and `obj` below `src`, builds Release and pushes both the `.nupkg` and the `.snupkg`
-   to nuget.org with `%NUGET_API_KEY%`. A push to nuget.org cannot be taken back, the version is
-   burned even after unlisting.
+7. Publish to nuget.org with `BuildAndPushPackage.bat`. It deletes every `bin` and `obj` below
+   `src`, builds Release and pushes the `.nupkg` and the `.snupkg` with `%NUGET_API_KEY%`. Call it
+   with its full path: the Claude Code shell sets `NoDefaultCurrentDirectoryInExePath=1`, so cmd
+   does not find a bare `BuildAndPushPackage.bat` in the current directory. A push to nuget.org
+   cannot be taken back, the version is burned even after unlisting. nuget.org needs a few minutes
+   to validate a new version before it is listed.
+8. Publish the same `.nupkg` from `src/Serilog.Sinks.Telegram.Alternative/bin/Release` to GitHub
+   Packages, `https://nuget.pkg.github.com/serilog-contrib/index.json`. The script does not do
+   that. The API key is a GitHub token with the scope `write:packages`, for example from
+   `gh auth token`. If `gh auth status` lists no `write:packages`, the user has to run
+   `gh auth refresh -h github.com -s write:packages,read:packages`, it needs a browser login.
+   GitHub Packages takes no symbol packages, push the `.nupkg` only.
+9. Create the GitHub release:
+   `gh release create 1.7.0 -R serilog-contrib/Serilog.Sinks.Telegram.Alternative --verify-tag --latest --title "Version 1.7.0.0 (2026-11-23)" --notes-file <file>`.
+   The notes are the changelog sentence plus the line
+   `NuGet: https://www.nuget.org/packages/Serilog.Sinks.Telegram.Alternative/1.7.0`. Write credits
+   as `` `@name` `` in backticks, a bare `@name` notifies that person again.
+
+Every tag from `1.0.0` on has a GitHub release, the history was completed on 2026-11-23. Versions
+up to 1.0.16, including 1.0.0.1, were published under the former package id
+`HaemmerElectronics.SeppPenner.Serilog.Sinks.Telegram`. They are not missing on nuget.org, they
+must never be pushed under the current id.
 
 **Never turn `ECHO on` in `BuildAndPushPackage.bat`.** Cmd echoes a command with its variables
 already expanded, so an echoed push line puts `%NUGET_API_KEY%` in plain text into the console and
