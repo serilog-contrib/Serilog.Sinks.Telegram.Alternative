@@ -1,6 +1,7 @@
 Change history
 --------------
 
+* **Version 1.7.0.0 (2026-11-23)** : Removed support for Net8.0 (Out of support since 2026-11-10), added support for Net11.0.
 * **Version 1.6.1.0 (2026-08-17)** : Removed support for Net9.0 (Out of support since 2026-05-12), hardened the package upload script so that it no longer echoes the NuGet API key.
 * **Version 1.6.0.0 (2026-08-17)** : Added support for Net10.0, updated NuGet packages, removed the `failureCallback` option and the obsolete `System.Net.Http` reference, fixed the HTML escaping (A `<` arrived as the literal text `&lt;`), fixed the token order of the `outputTemplate` option (`Hello {Name}!` arrived as `Hello !"World"`), fixed the parameter name of the `ArgumentNullException` for a missing HTTP client, added offline tests.
 * **Version 1.5.0.0 (2025-03-24)** : Fixes https://github.com/serilog-contrib/Serilog.Sinks.Postgresql.Alternative/issues/83, updates NuGet packages, deprecates `failureCallback`.

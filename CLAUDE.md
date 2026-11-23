@@ -65,10 +65,11 @@ dotnet build src/Serilog.Sinks.Telegram.Alternative.sln -c Release
 dotnet test src/Serilog.Sinks.Telegram.Alternative.sln
 ```
 
-- The library multi-targets `net8.0;net10.0`, the test project is `net10.0` only. Nothing in the
+- The library multi-targets `net10.0;net11.0`, the test project is `net10.0` only. Nothing in the
   code is platform specific. A target framework is dropped from this list once Microsoft stops
-  supporting it, `net9.0` went out in version 1.6.1.0 for that reason. `net8.0` is the LTS release
-  whose support ends in November 2026, it is the next candidate.
+  supporting it, `net9.0` went out in version 1.6.1.0 and `net8.0` in version 1.7.0.0 for that
+  reason. `net10.0` (LTS) and `net11.0` (STS) are both supported until November 2028. Building
+  `net11.0` needs the .NET 11 SDK.
 - `src/Directory.Build.props` sets exactly one property, `GenerateDocumentationFile`. Everything
   else lives in the two `.csproj` files and is duplicated there.
 - `TreatWarningsAsErrors` is enabled in both projects, so every warning breaks the build, NuGet
